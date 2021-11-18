@@ -12,6 +12,11 @@
 		C26A23E427453BF5005F42E2 /* APIS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26A23E327453BF5005F42E2 /* APIS.swift */; };
 		C26A23E827462169005F42E2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C26A23EA27462169005F42E2 /* Localizable.strings */; };
 		C26A23F027462304005F42E2 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26A23EF27462304005F42E2 /* LocationManager.swift */; };
+		C26A23F227465067005F42E2 /* AddTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26A23F127465067005F42E2 /* AddTravelViewController.swift */; };
+		C26A23F427465074005F42E2 /* AddTravel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C26A23F327465074005F42E2 /* AddTravel.storyboard */; };
+		C26A23F62746549F005F42E2 /* AddPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26A23F52746549F005F42E2 /* AddPinViewController.swift */; };
+		C26A23F8274654B5005F42E2 /* AddPin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C26A23F7274654B5005F42E2 /* AddPin.storyboard */; };
+		C26A23FB27467450005F42E2 /* Extension+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26A23FA27467450005F42E2 /* Extension+UIViewController.swift */; };
 		C27FE55027451BCF00F91946 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27FE54F27451BCF00F91946 /* RealmModel.swift */; };
 		C27FE552274520C600F91946 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27FE551274520C600F91946 /* InitialViewController.swift */; };
 		C27FE5562745218100F91946 /* InitialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27FE5542745218100F91946 /* InitialTableViewCell.swift */; };
@@ -59,6 +64,11 @@
 		C26A23EC27462187005F42E2 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		C26A23ED27462187005F42E2 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C26A23EF27462304005F42E2 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		C26A23F127465067005F42E2 /* AddTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTravelViewController.swift; sourceTree = "<group>"; };
+		C26A23F327465074005F42E2 /* AddTravel.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddTravel.storyboard; sourceTree = "<group>"; };
+		C26A23F52746549F005F42E2 /* AddPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPinViewController.swift; sourceTree = "<group>"; };
+		C26A23F7274654B5005F42E2 /* AddPin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddPin.storyboard; sourceTree = "<group>"; };
+		C26A23FA27467450005F42E2 /* Extension+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIViewController.swift"; sourceTree = "<group>"; };
 		C27FE54F27451BCF00F91946 /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
 		C27FE551274520C600F91946 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		C27FE5542745218100F91946 /* InitialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialTableViewCell.swift; sourceTree = "<group>"; };
@@ -139,6 +149,14 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
+		C26A23F92746743D005F42E2 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				C26A23FA27467450005F42E2 /* Extension+UIViewController.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		C27FE54E2745181A00F91946 /* Realm */ = {
 			isa = PBXGroup;
 			children = (
@@ -181,6 +199,7 @@
 		C2CC523927427AAB00090891 /* Mappin */ = {
 			isa = PBXGroup;
 			children = (
+				C26A23F92746743D005F42E2 /* Extension */,
 				C26A23EE274622F8005F42E2 /* Util */,
 				C26A23E527462147005F42E2 /* Localization */,
 				C27FE5532745216900F91946 /* View */,
@@ -215,6 +234,8 @@
 			children = (
 				C27FE551274520C600F91946 /* InitialViewController.swift */,
 				C27FE558274523D500F91946 /* MapViewController.swift */,
+				C26A23F127465067005F42E2 /* AddTravelViewController.swift */,
+				C26A23F52746549F005F42E2 /* AddPinViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -225,6 +246,8 @@
 				C2CC524027427AAB00090891 /* Main.storyboard */,
 				C2CC524527427AAD00090891 /* LaunchScreen.storyboard */,
 				C27FE55A274523EE00F91946 /* Map.storyboard */,
+				C26A23F327465074005F42E2 /* AddTravel.storyboard */,
+				C26A23F7274654B5005F42E2 /* AddPin.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -362,8 +385,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C26A23F8274654B5005F42E2 /* AddPin.storyboard in Resources */,
 				C2CC524727427AAD00090891 /* LaunchScreen.storyboard in Resources */,
 				C26A23E827462169005F42E2 /* Localizable.strings in Resources */,
+				C26A23F427465074005F42E2 /* AddTravel.storyboard in Resources */,
 				C2CC524427427AAD00090891 /* Assets.xcassets in Resources */,
 				C27FE55B274523EE00F91946 /* Map.storyboard in Resources */,
 				C27FE5572745218100F91946 /* InitialTableViewCell.xib in Resources */,
@@ -530,11 +555,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				C27FE55027451BCF00F91946 /* RealmModel.swift in Sources */,
+				C26A23FB27467450005F42E2 /* Extension+UIViewController.swift in Sources */,
 				C27FE559274523D500F91946 /* MapViewController.swift in Sources */,
 				C27FE5562745218100F91946 /* InitialTableViewCell.swift in Sources */,
 				C2CC523B27427AAB00090891 /* AppDelegate.swift in Sources */,
 				C26A23F027462304005F42E2 /* LocationManager.swift in Sources */,
 				C2CC523D27427AAB00090891 /* SceneDelegate.swift in Sources */,
+				C26A23F62746549F005F42E2 /* AddPinViewController.swift in Sources */,
+				C26A23F227465067005F42E2 /* AddTravelViewController.swift in Sources */,
 				C27FE552274520C600F91946 /* InitialViewController.swift in Sources */,
 				C26A23E427453BF5005F42E2 /* APIS.swift in Sources */,
 			);
