@@ -6,17 +6,31 @@
 //
 
 import UIKit
+import RealmSwift
 
 class InitialViewController: UIViewController {
 
     //MARK: Properties
     
+    let localRealm = try! Realm()
+    
+    var tasks: Results<TravelDocument>! {
+        didSet {
+            if tasks.isEmpty {
+                print("비었네용")
+                self.emptyHandlingView.isHidden = false
+            } else {
+                self.emptyHandlingView.isHidden = true
+            }
+        }
+    }
     
     
     //MARK: UI
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var emptyHandlingView: UIView!
     
     //MARK: Method
     
@@ -25,13 +39,18 @@ class InitialViewController: UIViewController {
         tableView.dataSource = self
         let nib = UINib(nibName: InitialTableViewCell.identifier, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: InitialTableViewCell.identifier)
-        
-        
     }
     
     @IBAction func mapButtonClicked(_ sender: UIBarButtonItem) {
         let sb = UIStoryboard(name: "Map", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
+    @IBAction func addButtonClicked(_ sender: UIButton) {
+        let sb = UIStoryboard(name: "AddTravel", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "AddTravelViewController") as! AddTravelViewController
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -41,8 +60,12 @@ class InitialViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tasks = localRealm.objects(TravelDocument.self)
     }
     
 

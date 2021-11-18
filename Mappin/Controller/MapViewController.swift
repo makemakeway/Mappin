@@ -8,6 +8,7 @@
 import UIKit
 import CoreLocation
 import GoogleMaps
+import RealmSwift
 
 class MapViewController: UIViewController {
 
@@ -26,6 +27,10 @@ class MapViewController: UIViewController {
     
     var locationUpdated = false
     
+    let localRealm = Realm()
+    
+    var tasks: Results<TravelDocument>!
+    
     //MARK: UI
     
     
@@ -42,10 +47,24 @@ class MapViewController: UIViewController {
         
         let newlyTravel = UIAlertAction(title: "새로운 여행에 핀 추가하기", style: .default) { _ in
             print("DEBUG: 새로운 여행 추가 씬으로")
+            let sb = UIStoryboard(name: "AddTravel", bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: "AddTravelViewController") as! AddTravelViewController
+            
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         
         let existingTravel = UIAlertAction(title: "기존 여행에 핀 추가하기", style: .default) { _ in
             print("DEBUG: 핀 추가 씬으로")
+            if tasks.isEmpty {
+                self.presentOkAlert(message: "기존 여행이 존재하지 않습니다. 새로운 여행을 만들어주세요.")
+                return
+            }
+            
+            
+            let sb = UIStoryboard(name: "AddPin", bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: "AddPinViewController") as! AddPinViewController
+            
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
@@ -100,6 +119,8 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         locationManager.delegate = self
         navBarConfig()
+        
+        tasks = localRealm.objects(TravelDocument.self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
