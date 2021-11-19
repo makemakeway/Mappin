@@ -15,6 +15,7 @@ class AddPinViewController: UIViewController {
     //MARK: Properties
     let localRealm = try! Realm()
     
+    var locationAddress = UserDefaults.standard.string(forKey: "userLocation")
     
     //MARK: UI
     
@@ -36,13 +37,19 @@ class AddPinViewController: UIViewController {
         print("DEBUG: 핀 추가")
     }
     
-    func mapViewConfig() {
+    func loadMap(location: CLLocationCoordinate2D) {
+        let camera = GMSCameraPosition.camera(
+            withLatitude: location.latitude,
+            longitude: location.longitude,
+            zoom: 16)
+
         mapView.settings.scrollGestures = false
         mapView.settings.zoomGestures = false
         mapView.settings.tiltGestures = false
         mapView.settings.rotateGestures = false
         
-        mapView.isMyLocationEnabled = true
+        
+        mapView.camera = camera
     }
     
     func navBarConfig() {
@@ -76,9 +83,22 @@ class AddPinViewController: UIViewController {
         super.viewDidLoad()
         navBarConfig()
         collectionViewConfig()
-        mapViewConfig()
+        
+        self.loadMap(location: CLLocationCoordinate2D(latitude: UserDefaults.standard.double(forKey: "userLatitude"), longitude: UserDefaults.standard.double(forKey: "userLongitude")))
+        print(UserDefaults.standard.double(forKey: "userLatitude"))
+        print(UserDefaults.standard.double(forKey: "userLongitude"))
     }
-    
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        guard let address = locationAddress else {
+            return
+        }
+        locationTextField.text = address
+        
+        
+    }
 
 }
 
