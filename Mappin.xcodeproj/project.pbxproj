@@ -17,6 +17,8 @@
 		C26A23F62746549F005F42E2 /* AddPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26A23F52746549F005F42E2 /* AddPinViewController.swift */; };
 		C26A23F8274654B5005F42E2 /* AddPin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C26A23F7274654B5005F42E2 /* AddPin.storyboard */; };
 		C26A23FB27467450005F42E2 /* Extension+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26A23FA27467450005F42E2 /* Extension+UIViewController.swift */; };
+		C26A23FE2746909A005F42E2 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26A23FC2746909A005F42E2 /* PhotoCollectionViewCell.swift */; };
+		C26A23FF2746909A005F42E2 /* PhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26A23FD2746909A005F42E2 /* PhotoCollectionViewCell.xib */; };
 		C27FE55027451BCF00F91946 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27FE54F27451BCF00F91946 /* RealmModel.swift */; };
 		C27FE552274520C600F91946 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27FE551274520C600F91946 /* InitialViewController.swift */; };
 		C27FE5562745218100F91946 /* InitialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27FE5542745218100F91946 /* InitialTableViewCell.swift */; };
@@ -69,6 +71,8 @@
 		C26A23F52746549F005F42E2 /* AddPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPinViewController.swift; sourceTree = "<group>"; };
 		C26A23F7274654B5005F42E2 /* AddPin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddPin.storyboard; sourceTree = "<group>"; };
 		C26A23FA27467450005F42E2 /* Extension+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIViewController.swift"; sourceTree = "<group>"; };
+		C26A23FC2746909A005F42E2 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		C26A23FD2746909A005F42E2 /* PhotoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCollectionViewCell.xib; sourceTree = "<group>"; };
 		C27FE54F27451BCF00F91946 /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
 		C27FE551274520C600F91946 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		C27FE5542745218100F91946 /* InitialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialTableViewCell.swift; sourceTree = "<group>"; };
@@ -170,6 +174,8 @@
 			children = (
 				C27FE5542745218100F91946 /* InitialTableViewCell.swift */,
 				C27FE5552745218100F91946 /* InitialTableViewCell.xib */,
+				C26A23FC2746909A005F42E2 /* PhotoCollectionViewCell.swift */,
+				C26A23FD2746909A005F42E2 /* PhotoCollectionViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -388,6 +394,7 @@
 				C26A23F8274654B5005F42E2 /* AddPin.storyboard in Resources */,
 				C2CC524727427AAD00090891 /* LaunchScreen.storyboard in Resources */,
 				C26A23E827462169005F42E2 /* Localizable.strings in Resources */,
+				C26A23FF2746909A005F42E2 /* PhotoCollectionViewCell.xib in Resources */,
 				C26A23F427465074005F42E2 /* AddTravel.storyboard in Resources */,
 				C2CC524427427AAD00090891 /* Assets.xcassets in Resources */,
 				C27FE55B274523EE00F91946 /* Map.storyboard in Resources */,
@@ -559,6 +566,7 @@
 				C27FE559274523D500F91946 /* MapViewController.swift in Sources */,
 				C27FE5562745218100F91946 /* InitialTableViewCell.swift in Sources */,
 				C2CC523B27427AAB00090891 /* AppDelegate.swift in Sources */,
+				C26A23FE2746909A005F42E2 /* PhotoCollectionViewCell.swift in Sources */,
 				C26A23F027462304005F42E2 /* LocationManager.swift in Sources */,
 				C2CC523D27427AAB00090891 /* SceneDelegate.swift in Sources */,
 				C26A23F62746549F005F42E2 /* AddPinViewController.swift in Sources */,
