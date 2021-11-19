@@ -18,7 +18,9 @@ class MapViewController: UIViewController {
         didSet {
             print("DEBUG: 현재 위치 = \(currentLocation!)")
             if !locationUpdated {
-                loadMap()
+                loadMap(location: currentLocation!)
+                getCurrentAddress(location: CLLocation(latitude: currentLocation!.latitude,
+                                                       longitude: currentLocation!.longitude))
             }
         }
     }
@@ -40,6 +42,39 @@ class MapViewController: UIViewController {
     @objc func addButtonClicked(_ sender: UIBarButtonItem) {
         print("DEBUG: Add button clicked")
         presentActionSheet()
+        
+    }
+    
+    func loadMap(location: CLLocationCoordinate2D) {
+        let camera = GMSCameraPosition.camera(
+            withLatitude: location.latitude,
+            longitude: location.longitude,
+            zoom: 16)
+
+        let mapView = GMSMapView.map(withFrame: view.frame, camera: camera)
+        mapView.settings.scrollGestures = true
+        mapView.settings.zoomGestures = true
+        mapView.isMyLocationEnabled = true
+        mapView.settings.myLocationButton = true
+        view.addSubview(mapView)
+    }
+    
+    func getCurrentAddress(location: CLLocation) {
+        let coder = CLGeocoder()
+        let locale = Locale(identifier: "ko-KR")
+        coder.reverseGeocodeLocation(location, preferredLocale: locale) { (placemark, error) -> Void in
+            guard error == nil, let place = placemark?.first else {
+                print("주소 설정 불가능")
+                return
+            }
+            
+            
+            let address = [place.administrativeArea!, place.locality!, place.thoroughfare!, place.subThoroughfare!]
+            
+            UserDefaults.standard.set(location.coordinate.longitude, forKey: "userLongitude")
+            UserDefaults.standard.set(location.coordinate.latitude, forKey: "userLatitude")
+            UserDefaults.standard.set(address.joined(separator: " "), forKey: "userLocation")
+        }
     }
     
     func presentActionSheet() {
@@ -90,28 +125,6 @@ class MapViewController: UIViewController {
         self.navigationItem.leftBarButtonItem?.tintColor = .label
     }
     
-    func loadMap() {
-        guard let location = currentLocation else {
-            print("DEBUG: 위치 정보 없음")
-            return
-        }
-        
-        let camera = GMSCameraPosition.camera(
-            withLatitude: location.latitude,
-            longitude: location.longitude,
-            zoom: 16)
-
-        let mapView = GMSMapView.map(withFrame: view.frame, camera: camera)
-        mapView.settings.scrollGestures = true
-        mapView.settings.zoomGestures = true
-        mapView.isMyLocationEnabled = true
-        mapView.settings.myLocationButton = true
-        
-        
-        self.view.addSubview(mapView)
-        locationUpdated = true
-    }
-    
     
     //MARK: LifeCycle
     
@@ -126,8 +139,8 @@ class MapViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         locationManager.startUpdatingLocation()
-        if !locationUpdated {
-            loadMap()
+        if !locationUpdated, currentLocation != nil {
+            self.loadMap(location: currentLocation!)
         }
         
     }
