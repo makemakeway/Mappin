@@ -16,13 +16,28 @@
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RQi-QR-wBj" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="RQi-QR-wBj" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="9Q0-vf-kZv"/>
+                            <constraint firstAttribute="trailing" secondItem="RQi-QR-wBj" secondAttribute="trailing" id="TyQ-nH-F9y"/>
+                            <constraint firstAttribute="bottom" secondItem="RQi-QR-wBj" secondAttribute="bottom" id="Xac-F4-Rf3"/>
+                            <constraint firstItem="RQi-QR-wBj" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="oK2-Qe-po9"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mapView" destination="RQi-QR-wBj" id="pc1-04-7fA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="110"/>
+            <point key="canvasLocation" x="131.8840579710145" y="109.82142857142857"/>
         </scene>
     </scenes>
     <resources>

@@ -35,6 +35,7 @@ class MapViewController: UIViewController {
     
     //MARK: UI
     
+    @IBOutlet weak var mapView: GMSMapView!
     
     
     //MARK: Method
@@ -51,13 +52,17 @@ class MapViewController: UIViewController {
             longitude: location.longitude,
             zoom: 16)
 
-        let mapView = GMSMapView.map(withFrame: view.frame, camera: camera)
         mapView.settings.scrollGestures = true
         mapView.settings.zoomGestures = true
         mapView.isMyLocationEnabled = true
         mapView.settings.myLocationButton = true
-        view.addSubview(mapView)
+        mapView.camera = camera
     }
+    
+    func addPin() {
+        
+    }
+    
     
     func getCurrentAddress(location: CLLocation) {
         let coder = CLGeocoder()

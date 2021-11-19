@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SO2-N6-RyK">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="812"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="892"/>
                                         <subviews>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="HL4-to-0HH">
                                                 <rect key="frame" x="0.0" y="20" width="414" height="120"/>
@@ -49,23 +49,23 @@
                                                 </cells>
                                             </collectionView>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="타이틀 선택" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TXx-4J-Nji">
-                                                <rect key="frame" x="20" y="160" width="374" height="44"/>
+                                                <rect key="frame" x="20" y="180" width="374" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="EqN-Db-0eh"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bxc-nR-xhX">
-                                                <rect key="frame" x="20" y="224" width="374" height="44"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bxc-nR-xhX">
+                                                <rect key="frame" x="20" y="264" width="374" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="Na8-O2-iRy"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9bL-U4-xTP">
-                                                <rect key="frame" x="20" y="288" width="374" height="44"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9bL-U4-xTP">
+                                                <rect key="frame" x="20" y="348" width="374" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="B8E-L2-GCa"/>
                                                 </constraints>
@@ -73,20 +73,18 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vZU-Lf-KQR" customClass="GMSMapView">
-                                                <rect key="frame" x="20" y="352" width="374" height="120"/>
+                                                <rect key="frame" x="20" y="412" width="374" height="120"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="120" id="xhQ-O2-H1H"/>
                                                 </constraints>
                                             </view>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="eGD-tU-MIU">
-                                                <rect key="frame" x="20" y="492" width="374" height="300"/>
+                                                <rect key="frame" x="20" y="572" width="374" height="300"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="300" id="KEj-HK-jCy"/>
                                                 </constraints>
-                                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-       Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
                                                 <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -94,19 +92,19 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="9bL-U4-xTP" firstAttribute="top" secondItem="bxc-nR-xhX" secondAttribute="bottom" constant="20" id="23e-lD-ARQ"/>
+                                            <constraint firstItem="9bL-U4-xTP" firstAttribute="top" secondItem="bxc-nR-xhX" secondAttribute="bottom" constant="40" id="23e-lD-ARQ"/>
                                             <constraint firstItem="eGD-tU-MIU" firstAttribute="leading" secondItem="SO2-N6-RyK" secondAttribute="leading" constant="20" id="5gl-j1-k1a"/>
                                             <constraint firstAttribute="trailing" secondItem="eGD-tU-MIU" secondAttribute="trailing" constant="20" id="6wF-Dn-X76"/>
-                                            <constraint firstItem="TXx-4J-Nji" firstAttribute="top" secondItem="HL4-to-0HH" secondAttribute="bottom" constant="20" id="RXu-DD-0i1"/>
+                                            <constraint firstItem="TXx-4J-Nji" firstAttribute="top" secondItem="HL4-to-0HH" secondAttribute="bottom" constant="40" id="RXu-DD-0i1"/>
                                             <constraint firstItem="bxc-nR-xhX" firstAttribute="leading" secondItem="SO2-N6-RyK" secondAttribute="leading" constant="20" id="UWn-bm-E2n"/>
                                             <constraint firstAttribute="trailing" secondItem="HL4-to-0HH" secondAttribute="trailing" id="YIs-jk-MgY"/>
                                             <constraint firstAttribute="bottom" secondItem="eGD-tU-MIU" secondAttribute="bottom" constant="20" id="dfd-sj-DgE"/>
                                             <constraint firstAttribute="trailing" secondItem="9bL-U4-xTP" secondAttribute="trailing" constant="20" id="dke-h7-AO5"/>
                                             <constraint firstItem="HL4-to-0HH" firstAttribute="top" secondItem="SO2-N6-RyK" secondAttribute="top" constant="20" id="dy1-d4-bZs"/>
-                                            <constraint firstItem="bxc-nR-xhX" firstAttribute="top" secondItem="TXx-4J-Nji" secondAttribute="bottom" constant="20" id="fUI-lt-qPM"/>
+                                            <constraint firstItem="bxc-nR-xhX" firstAttribute="top" secondItem="TXx-4J-Nji" secondAttribute="bottom" constant="40" id="fUI-lt-qPM"/>
                                             <constraint firstItem="vZU-Lf-KQR" firstAttribute="top" secondItem="9bL-U4-xTP" secondAttribute="bottom" constant="20" id="fcQ-LT-qno"/>
                                             <constraint firstAttribute="trailing" secondItem="vZU-Lf-KQR" secondAttribute="trailing" constant="20" id="fkF-ch-MJq"/>
-                                            <constraint firstItem="eGD-tU-MIU" firstAttribute="top" secondItem="vZU-Lf-KQR" secondAttribute="bottom" constant="20" id="npc-pV-HK7"/>
+                                            <constraint firstItem="eGD-tU-MIU" firstAttribute="top" secondItem="vZU-Lf-KQR" secondAttribute="bottom" constant="40" id="npc-pV-HK7"/>
                                             <constraint firstAttribute="trailing" secondItem="bxc-nR-xhX" secondAttribute="trailing" constant="20" id="pGo-tt-FqS"/>
                                             <constraint firstItem="9bL-U4-xTP" firstAttribute="leading" secondItem="SO2-N6-RyK" secondAttribute="leading" constant="20" id="reO-wU-dHB"/>
                                             <constraint firstItem="vZU-Lf-KQR" firstAttribute="leading" secondItem="SO2-N6-RyK" secondAttribute="leading" constant="20" id="snN-ky-EGd"/>
@@ -139,9 +137,9 @@
                     <connections>
                         <outlet property="collectionView" destination="HL4-to-0HH" id="MRa-fX-Cqz"/>
                         <outlet property="contentTextView" destination="eGD-tU-MIU" id="71c-Zy-HM8"/>
-                        <outlet property="dateTextField" destination="bxc-nR-xhX" id="hOp-vb-tqr"/>
-                        <outlet property="documentTitleTextField" destination="TXx-4J-Nji" id="Ore-r7-fur"/>
-                        <outlet property="locationTextField" destination="9bL-U4-xTP" id="3hA-lx-KtD"/>
+                        <outlet property="dateTextField" destination="bxc-nR-xhX" id="Ww0-5f-8yU"/>
+                        <outlet property="documentTitleTextField" destination="TXx-4J-Nji" id="kxP-lA-AZa"/>
+                        <outlet property="locationTextField" destination="9bL-U4-xTP" id="sBs-GU-Egp"/>
                         <outlet property="mapView" destination="vZU-Lf-KQR" id="Rnb-TO-0gb"/>
                     </connections>
                 </viewController>

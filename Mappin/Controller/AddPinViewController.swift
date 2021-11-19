@@ -9,6 +9,7 @@ import UIKit
 import RealmSwift
 import GoogleMaps
 
+
 class AddPinViewController: UIViewController {
 
     
@@ -17,9 +18,14 @@ class AddPinViewController: UIViewController {
     
     var locationAddress = UserDefaults.standard.string(forKey: "userLocation")
     
+    var pinLocation = CLLocationCoordinate2D(latitude: UserDefaults.standard.double(forKey: "userLatitude"), longitude: UserDefaults.standard.double(forKey: "userLongitude"))
+    
+    var photoImages: [UIImage] = []
+    
     //MARK: UI
     
     @IBOutlet weak var collectionView: UICollectionView!
+    
     @IBOutlet weak var documentTitleTextField: UITextField!
     
     @IBOutlet weak var dateTextField: UITextField!
@@ -32,10 +38,41 @@ class AddPinViewController: UIViewController {
     
     
     
+    
+    
     //MARK: Method
     @objc func addPin(_ sender: UIBarButtonItem) {
         print("DEBUG: 핀 추가")
     }
+    
+    func titleTextFieldConfig() {
+        documentTitleTextField.placeholder = "타이틀 선택"
+        documentTitleTextField.font = UIFont.systemFont(ofSize: 20)
+        makeUnderLine(view: documentTitleTextField)
+    }
+    
+    func dateTextFieldConfig() {
+        dateTextField.placeholder = "날짜 선택"
+        dateTextField.font = UIFont.systemFont(ofSize: 20)
+        makeUnderLine(view: dateTextField)
+    }
+    
+    func locationTextFieldConfig() {
+        locationTextField.placeholder = "위치 선택"
+        locationTextField.font = UIFont.systemFont(ofSize: 20)
+        
+        makeUnderLine(view: locationTextField)
+    }
+    
+    func makeUnderLine(view: UIView) {
+        let underline = CALayer()
+        
+        underline.frame = CGRect(x: 0, y: view.frame.height + 1, width: view.frame.width - 25, height: 1)
+        underline.backgroundColor = UIColor.lightGray.cgColor
+        view.layer.addSublayer(underline)
+        
+    }
+    
     
     func loadMap(location: CLLocationCoordinate2D) {
         let camera = GMSCameraPosition.camera(
@@ -50,6 +87,11 @@ class AddPinViewController: UIViewController {
         
         
         mapView.camera = camera
+    }
+    
+    func drawPin() {
+        let marker = GMSMarker(position: pinLocation)
+        marker.map = mapView
     }
     
     func navBarConfig() {
@@ -74,7 +116,12 @@ class AddPinViewController: UIViewController {
         flowLayout.scrollDirection = .horizontal
         
         collectionView.collectionViewLayout = flowLayout
-        
+    }
+    
+    func textViewConfig() {
+        contentTextView.showsVerticalScrollIndicator = false
+        contentTextView.autocorrectionType = .no
+        contentTextView.autocapitalizationType = .none
     }
     
     
@@ -83,10 +130,13 @@ class AddPinViewController: UIViewController {
         super.viewDidLoad()
         navBarConfig()
         collectionViewConfig()
+        textViewConfig()
+        dateTextFieldConfig()
+        locationTextFieldConfig()
         
-        self.loadMap(location: CLLocationCoordinate2D(latitude: UserDefaults.standard.double(forKey: "userLatitude"), longitude: UserDefaults.standard.double(forKey: "userLongitude")))
-        print(UserDefaults.standard.double(forKey: "userLatitude"))
-        print(UserDefaults.standard.double(forKey: "userLongitude"))
+        self.loadMap(location: pinLocation)
+        drawPin()
+        titleTextFieldConfig()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -106,7 +156,9 @@ class AddPinViewController: UIViewController {
 
 extension AddPinViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        
+        
+        return photoImages.count < 10 ? photoImages.count + 1 : photoImages.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -116,11 +168,29 @@ extension AddPinViewController: UICollectionViewDelegate, UICollectionViewDataSo
             return UICollectionViewCell()
         }
         
-        cell.photoImageView.image = UIImage(systemName: "camera")
-        cell.photoImageView.backgroundColor = .blue
+        if photoImages.count != 0 {
+            let data = photoImages[indexPath.row]
+            
+            if photoImages.count < 10 && data.size.width != 0 {
+                cell.photoImageView.image = data
+            }
+            else {
+                cell.photoImageView.image = UIImage(systemName: "camera")
+                cell.photoImageView.backgroundColor = .purple
+            }
+        }
+        else {
+            cell.photoImageView.image = UIImage(systemName: "camera")
+            cell.photoImageView.backgroundColor = .purple
+        }
+        
         cell.layer.cornerRadius = 10
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -131,3 +201,4 @@ extension AddPinViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
 }
+
