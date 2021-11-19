@@ -67,7 +67,7 @@ class AddTravelViewController: UIViewController {
     }
     
     func navBarConfig() {
-        let button = UIBarButtonItem(image: UIImage(systemName: "arrowtriangle.right"),
+        let button = UIBarButtonItem(image: UIImage(systemName: "paperplane"),
                                      style: UIBarButtonItem.Style.plain,
                                      target: self,
                                      action: #selector(forwardButtonClicked(_:)))
