@@ -27,7 +27,7 @@ class MapViewController: UIViewController {
     
     var locationUpdated = false
     
-    let localRealm = Realm()
+    let localRealm = try! Realm()
     
     var tasks: Results<TravelDocument>!
     
@@ -53,10 +53,10 @@ class MapViewController: UIViewController {
             self.navigationController?.pushViewController(vc, animated: true)
         }
         
-        let existingTravel = UIAlertAction(title: "기존 여행에 핀 추가하기", style: .default) { _ in
+        let existingTravel = UIAlertAction(title: "기존 여행에 핀 추가하기", style: .default) { [weak self](_) in
             print("DEBUG: 핀 추가 씬으로")
-            if tasks.isEmpty {
-                self.presentOkAlert(message: "기존 여행이 존재하지 않습니다. 새로운 여행을 만들어주세요.")
+            if self!.tasks.isEmpty {
+                self?.presentOkAlert(message: "기존 여행이 존재하지 않습니다. 새로운 여행을 만들어주세요.")
                 return
             }
             
@@ -64,7 +64,7 @@ class MapViewController: UIViewController {
             let sb = UIStoryboard(name: "AddPin", bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "AddPinViewController") as! AddPinViewController
             
-            self.navigationController?.pushViewController(vc, animated: true)
+            self?.navigationController?.pushViewController(vc, animated: true)
         }
         
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)

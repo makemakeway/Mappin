@@ -16,7 +16,7 @@ class InitialViewController: UIViewController {
     
     var tasks: Results<TravelDocument>! {
         didSet {
-            if tasks.isEmpty {
+            if tasks.isEmpty || tasks.filter({ $0.travels.isEmpty == false }).isEmpty {
                 print("비었네용")
                 self.emptyHandlingView.isHidden = false
             } else {
@@ -66,6 +66,7 @@ class InitialViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tasks = localRealm.objects(TravelDocument.self)
+        print("DEBUG: Tasks is \(tasks)")
     }
     
 
