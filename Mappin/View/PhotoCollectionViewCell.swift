@@ -15,10 +15,34 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var photoImageView: UIImageView!
     
+    @IBOutlet weak var cameraImage: UIImageView!
+    
+    @IBOutlet weak var cameraLabel: UILabel!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        photoImageView.image = nil
+        photoImageView.backgroundColor = nil
+        cameraImage.image = nil
+        cameraLabel.isHidden = true
+        layer.borderWidth = 0
+        layer.borderColor = nil
+        
+        guard let gestures = self.gestureRecognizers else {
+            return
+        }
+        
+        for ges in gestures {
+            if ges is CustomGesture {
+                self.removeGestureRecognizer(ges)
+            }
+        }
+    }
+    
 }

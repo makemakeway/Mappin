@@ -8,6 +8,7 @@
 import UIKit
 import RealmSwift
 import GoogleMaps
+import PhotosUI
 
 
 class AddPinViewController: UIViewController {
@@ -20,7 +21,14 @@ class AddPinViewController: UIViewController {
     
     var pinLocation = CLLocationCoordinate2D(latitude: UserDefaults.standard.double(forKey: "userLatitude"), longitude: UserDefaults.standard.double(forKey: "userLongitude"))
     
-    var photoImages: [UIImage] = []
+    var photoImages: [UIImage] = [] {
+        didSet {
+            DispatchQueue.main.async { [weak self] in
+                self?.collectionView.reloadData()
+            }
+            
+        }
+    }
     
     var titleSource = [String]()
     
@@ -88,9 +96,15 @@ class AddPinViewController: UIViewController {
         
         let library = UIAlertAction(title: "갤러리에서 사진 선택", style: .default) { [weak self](_) in
             
-            let picker = self?.makePhotoPicker(type: .photoLibrary)
-            picker?.modalPresentationStyle = .fullScreen
-            self?.present(picker!, animated: true, completion: nil)
+            if #available(iOS 14, *) {
+                let picker = self?.makePHPicker()
+                picker?.modalPresentationStyle = .fullScreen
+                self?.present(picker!, animated: true, completion: nil)
+            } else {
+                let picker = self?.makePhotoPicker(type: .photoLibrary)
+                picker?.modalPresentationStyle = .fullScreen
+                self?.present(picker!, animated: true, completion: nil)
+            }
         }
         
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
@@ -103,12 +117,24 @@ class AddPinViewController: UIViewController {
     }
     
     func makePhotoPicker(type: UIImagePickerController.SourceType) -> UIImagePickerController {
+        
         let picker = UIImagePickerController()
         picker.sourceType = type
         picker.allowsEditing = true
         picker.delegate = self
         
         return picker
+    }
+    
+    @available(iOS 14, *)
+    func makePHPicker() -> PHPickerViewController {
+        var configure = PHPickerConfiguration()
+        configure.selectionLimit = 10
+        configure.filter = .images
+        let picker = PHPickerViewController(configuration: configure)
+        picker.delegate = self
+        return picker
+        
     }
     
     func pickerViewConfig() {
@@ -237,6 +263,7 @@ class AddPinViewController: UIViewController {
         flowLayout.scrollDirection = .horizontal
         
         collectionView.collectionViewLayout = flowLayout
+        collectionView.showsHorizontalScrollIndicator = false
     }
     
     func textViewConfig() {
@@ -313,34 +340,36 @@ extension AddPinViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let gesture = CustomGesture(target: self, action: #selector(cameraImageClicked(_:)))
         gesture.index = indexPath.row
         
+        cell.layer.cornerRadius = 10
+        
         if photoImages.count != 0 && indexPath.row < photoImages.count {
             let data = photoImages[indexPath.row]
             
-            if photoImages.count < 10 && data.size.width != 0 {
+            if photoImages.count <= 10 && data.size.width != 0 {
                 cell.photoImageView.image = data
                 cell.photoImageView.contentMode = .scaleAspectFill
+                cell.cameraLabel.isHidden = true
+                cell.removeGestureRecognizer(gesture)
             }
             else {
-                cell.photoImageView.image = UIImage(systemName: "camera")
-                cell.photoImageView.backgroundColor = .lightGray
-                cell.photoImageView.tintColor = .white
+                cell.cameraImage.image = UIImage(named: "camera")
+                cell.layer.borderColor = UIColor.lightGray.cgColor
+                cell.layer.borderWidth = 1
+                cell.cameraLabel.isHidden = false
                 cell.photoImageView.contentMode = .scaleAspectFit
                 cell.addGestureRecognizer(gesture)
             }
         }
         else {
-            cell.photoImageView.image = UIImage(systemName: "camera")
-            cell.photoImageView.backgroundColor = .lightGray
-            cell.photoImageView.tintColor = .white
+            cell.cameraImage.image = UIImage(named: "camera")
+            cell.layer.borderColor = UIColor.lightGray.cgColor
+            cell.layer.borderWidth = 1
+            cell.cameraLabel.isHidden = false
             cell.photoImageView.contentMode = .scaleAspectFit
             cell.addGestureRecognizer(gesture)
         }
         
         
-        
-        
-        
-        cell.layer.cornerRadius = 10
         
         return cell
     }
@@ -437,5 +466,27 @@ extension AddPinViewController: UIImagePickerControllerDelegate , UINavigationCo
             collectionView.reloadData()
         }
         picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+
+extension AddPinViewController: PHPickerViewControllerDelegate {
+    @available(iOS 14, *)
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true, completion: nil)
+        
+        if !(results.isEmpty)  {
+            photoImages.removeAll()
+            
+            for result in results {
+                let itemProvider = result.itemProvider
+                if itemProvider.canLoadObject(ofClass: UIImage.self) {
+                    itemProvider.loadObject(ofClass: UIImage.self) { [weak self](image, error) in
+                        self?.photoImages.append(image as! UIImage)
+                    }
+                }
+            }
+        }
+        
     }
 }

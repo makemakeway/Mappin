@@ -12,7 +12,6 @@ import RealmSwift
 
 class MapViewController: UIViewController {
 
-    
     //MARK: Properties
     var currentLocation: CLLocationCoordinate2D? {
         didSet {
