@@ -19,6 +19,15 @@ extension UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    func makeUnderLine(view: UIView) {
+        let underline = CALayer()
+        
+        underline.frame = CGRect(x: 0, y: view.frame.height, width: view.frame.width - 25, height: 0.5)
+        underline.backgroundColor = UIColor.lightGray.cgColor
+        view.layer.addSublayer(underline)
+        
+    }
+    
     
     func dateToString(date: Date) -> String {
         let df = DateFormatter()

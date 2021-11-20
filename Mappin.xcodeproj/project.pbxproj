@@ -19,6 +19,7 @@
 		C26A23FB27467450005F42E2 /* Extension+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26A23FA27467450005F42E2 /* Extension+UIViewController.swift */; };
 		C26A23FE2746909A005F42E2 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26A23FC2746909A005F42E2 /* PhotoCollectionViewCell.swift */; };
 		C26A23FF2746909A005F42E2 /* PhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26A23FD2746909A005F42E2 /* PhotoCollectionViewCell.xib */; };
+		C27A902927488F2700CDF3C9 /* CustomGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A902827488F2700CDF3C9 /* CustomGesture.swift */; };
 		C27FE55027451BCF00F91946 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27FE54F27451BCF00F91946 /* RealmModel.swift */; };
 		C27FE552274520C600F91946 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27FE551274520C600F91946 /* InitialViewController.swift */; };
 		C27FE5562745218100F91946 /* InitialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27FE5542745218100F91946 /* InitialTableViewCell.swift */; };
@@ -73,6 +74,7 @@
 		C26A23FA27467450005F42E2 /* Extension+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIViewController.swift"; sourceTree = "<group>"; };
 		C26A23FC2746909A005F42E2 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		C26A23FD2746909A005F42E2 /* PhotoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCollectionViewCell.xib; sourceTree = "<group>"; };
+		C27A902827488F2700CDF3C9 /* CustomGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGesture.swift; sourceTree = "<group>"; };
 		C27FE54F27451BCF00F91946 /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
 		C27FE551274520C600F91946 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		C27FE5542745218100F91946 /* InitialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialTableViewCell.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				C26A23EF27462304005F42E2 /* LocationManager.swift */,
+				C27A902827488F2700CDF3C9 /* CustomGesture.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -571,6 +574,7 @@
 				C2CC523D27427AAB00090891 /* SceneDelegate.swift in Sources */,
 				C26A23F62746549F005F42E2 /* AddPinViewController.swift in Sources */,
 				C26A23F227465067005F42E2 /* AddTravelViewController.swift in Sources */,
+				C27A902927488F2700CDF3C9 /* CustomGesture.swift in Sources */,
 				C27FE552274520C600F91946 /* InitialViewController.swift in Sources */,
 				C26A23E427453BF5005F42E2 /* APIS.swift in Sources */,
 			);

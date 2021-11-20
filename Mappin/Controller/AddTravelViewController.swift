@@ -36,6 +36,7 @@ class AddTravelViewController: UIViewController {
             
             let sb = UIStoryboard(name: "AddPin", bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "AddPinViewController") as! AddPinViewController
+            vc.documentTitle = titleTextField.text!
             
             self.navigationController?.pushViewController(vc, animated: true)
             
@@ -46,22 +47,19 @@ class AddTravelViewController: UIViewController {
     }
     
     func checkTitleIsValid() -> Bool {
+        
         guard let title = titleTextField.text, !(title.isEmpty) else {
             
-            self.presentOkAlert(message: "여행 제목을 입력해주세요.")
+            presentOkAlert(message: "여행 제목을 입력해주세요.")
             return false
         }
         
         
-        //MARK: 여기 중복값 나중에 확인 해봐야함
-        tasks.forEach({
-            if $0.documentTitle == title {
-                print("DEBUG: 중복 타이틀 존재")
-                self.presentOkAlert(message: "이미 존재하는 여행 제목입니다.\n다른 제목을 입력해주세요.")
-                
-                return
-            }
-        })
+        if !(tasks.filter("documentTitle = '\(title)'").isEmpty) {
+            print("쭝복임!")
+            presentOkAlert(message: "이미 존재하는 여행 제목입니다.\n다른 제목을 입력해주세요.")
+            return false
+        }
         
         return true
     }

@@ -28,6 +28,11 @@ class AddPinViewController: UIViewController {
     
     let datePicker = UIDatePicker()
     
+    let titlePickerView = UIPickerView()
+    
+    var pickerIndex = 0
+    
+    var documentTitle: String? = nil
     
     //MARK: UI
     
@@ -61,22 +66,72 @@ class AddPinViewController: UIViewController {
     @objc func selectButtonClicked(_ sender: UIBarButtonItem) {
         print("DEBUG: 선택")
         
-        dateTextField.text = dateToString(date: datePicker.date)
+        if sender.tag == 0 {
+            dateTextField.text = dateToString(date: datePicker.date)
+        } else {
+            print("도큐먼트")
+            documentTitleTextField.text = titleSource[pickerIndex]
+        }
+        
+        view.endEditing(true)
     }
     
+    @objc func cameraImageClicked(_ gesture: CustomGesture) {
+        let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let camera = UIAlertAction(title: "카메라로 사진 찍기", style: .default) { [weak self](_) in
+            let picker = self?.makePhotoPicker(type: .camera)
+            picker?.modalPresentationStyle = .fullScreen
+            self?.present(picker!, animated: true, completion: nil)
+            
+        }
+        
+        let library = UIAlertAction(title: "갤러리에서 사진 선택", style: .default) { [weak self](_) in
+            
+            let picker = self?.makePhotoPicker(type: .photoLibrary)
+            picker?.modalPresentationStyle = .fullScreen
+            self?.present(picker!, animated: true, completion: nil)
+        }
+        
+        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        sheet.addAction(library)
+        sheet.addAction(camera)
+        sheet.addAction(cancel)
+        
+        self.present(sheet, animated: true, completion: nil)
+    }
+    
+    func makePhotoPicker(type: UIImagePickerController.SourceType) -> UIImagePickerController {
+        let picker = UIImagePickerController()
+        picker.sourceType = type
+        picker.allowsEditing = true
+        picker.delegate = self
+        
+        return picker
+    }
+    
+    func pickerViewConfig() {
+        titlePickerView.delegate = self
+        titlePickerView.dataSource = self
+        let toolBar = makeToolBar()
+        toolBar.items?.last?.tag = 1
+        
+        documentTitleTextField.inputAccessoryView = toolBar
+    }
 
     
     func titleTextFieldConfig() {
-        documentTitleTextField.placeholder = "타이틀을 선택해주세요."
+        documentTitleTextField.placeholder = "타이틀"
         documentTitleTextField.font = UIFont.systemFont(ofSize: 18)
-        
-        let titlePickerView = UIPickerView()
-        titlePickerView.delegate = self
-        titlePickerView.dataSource = self
-        
         documentTitleTextField.inputView = titlePickerView
-        
         makeUnderLine(view: titleStackView)
+        
+        guard let title = documentTitle else {
+            return
+        }
+        
+        documentTitleTextField.text = title
     }
     
     func titleSourceUpdate() {
@@ -86,7 +141,7 @@ class AddPinViewController: UIViewController {
     }
     
     func dateTextFieldConfig() {
-        dateTextField.placeholder = "날짜를 선택해주세요."
+        dateTextField.placeholder = "날짜"
         dateTextField.font = UIFont.systemFont(ofSize: 18)
         
         dateTextField.inputView = datePicker
@@ -113,25 +168,28 @@ class AddPinViewController: UIViewController {
         
         toolBar.setItems([space, selectButton], animated: false)
         
-        dateTextField.inputAccessoryView = toolBar
+        dateTextField.inputAccessoryView = makeToolBar()
+    }
+    
+    func makeToolBar() -> UIToolbar {
+        let toolBar = UIToolbar()
+        toolBar.barStyle = UIBarStyle.default
+        toolBar.sizeToFit()
+        
+        let selectButton = UIBarButtonItem(title: "선택", style: .plain, target: self, action: #selector(selectButtonClicked(_:)))
+        
+        let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        
+        toolBar.setItems([space, selectButton], animated: false)
+        return toolBar
     }
     
     func locationLabelConfig() {
-        locationLabel.text = "위치를 선택해주세요."
+        locationLabel.text = "위치"
         locationLabel.font = UIFont.systemFont(ofSize: 18)
         
         makeUnderLine(view: locationStackView)
     }
-    
-    func makeUnderLine(view: UIView) {
-        let underline = CALayer()
-        
-        underline.frame = CGRect(x: 0, y: view.frame.height, width: view.frame.width - 25, height: 0.5)
-        underline.backgroundColor = UIColor.lightGray.cgColor
-        view.layer.addSublayer(underline)
-        
-    }
-    
     
     func loadMap(location: CLLocationCoordinate2D) {
         let camera = GMSCameraPosition.camera(
@@ -208,6 +266,8 @@ class AddPinViewController: UIViewController {
         navBarConfig()
         collectionViewConfig()
         
+        pickerViewConfig()
+        
         textViewConfig()
         
         dateTextFieldConfig()
@@ -250,23 +310,35 @@ extension AddPinViewController: UICollectionViewDelegate, UICollectionViewDataSo
             return UICollectionViewCell()
         }
         
-        if photoImages.count != 0 {
+        let gesture = CustomGesture(target: self, action: #selector(cameraImageClicked(_:)))
+        gesture.index = indexPath.row
+        
+        if photoImages.count != 0 && indexPath.row < photoImages.count {
             let data = photoImages[indexPath.row]
             
             if photoImages.count < 10 && data.size.width != 0 {
                 cell.photoImageView.image = data
+                cell.photoImageView.contentMode = .scaleAspectFill
             }
             else {
                 cell.photoImageView.image = UIImage(systemName: "camera")
                 cell.photoImageView.backgroundColor = .lightGray
                 cell.photoImageView.tintColor = .white
+                cell.photoImageView.contentMode = .scaleAspectFit
+                cell.addGestureRecognizer(gesture)
             }
         }
         else {
             cell.photoImageView.image = UIImage(systemName: "camera")
             cell.photoImageView.backgroundColor = .lightGray
             cell.photoImageView.tintColor = .white
+            cell.photoImageView.contentMode = .scaleAspectFit
+            cell.addGestureRecognizer(gesture)
         }
+        
+        
+        
+        
         
         cell.layer.cornerRadius = 10
         
@@ -313,10 +385,15 @@ extension AddPinViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
         return titleSource[row]
     }
     
+    
+    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        print(component)
+        pickerIndex = row
         self.documentTitleTextField.text = titleSource[row]
     }
     
@@ -343,5 +420,22 @@ extension AddPinViewController: UITextViewDelegate {
             contentTextView.textColor = .darkGray
         }
         removeKeyboardObserver()
+    }
+}
+
+
+//MARK: ImagePickerDelegate
+
+extension AddPinViewController: UIImagePickerControllerDelegate , UINavigationControllerDelegate{
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            photoImages.append(image)
+            collectionView.reloadData()
+        }
+        picker.dismiss(animated: true, completion: nil)
     }
 }
