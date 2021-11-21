@@ -81,7 +81,7 @@
                                                             <constraint firstAttribute="width" constant="10" id="TBf-m0-5Gg"/>
                                                         </constraints>
                                                     </view>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="타이틀 선택" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TXx-4J-Nji">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="타이틀" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TXx-4J-Nji" customClass="CustomTextField" customModule="Mappin" customModuleProvider="target">
                                                         <rect key="frame" x="30" y="0.0" width="344" height="44"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -107,7 +107,7 @@
                                                             <constraint firstAttribute="width" constant="10" id="ZZa-da-V5t"/>
                                                         </constraints>
                                                     </view>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="날짜 선택" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bxc-nR-xhX">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="날짜" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bxc-nR-xhX" customClass="CustomTextField" customModule="Mappin" customModuleProvider="target">
                                                         <rect key="frame" x="30" y="0.0" width="344" height="44"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -133,12 +133,11 @@
                                                             <constraint firstAttribute="width" constant="10" id="usO-in-r0t"/>
                                                         </constraints>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="BrL-ut-5fb">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="위치" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2bi-kA-H3C" customClass="CustomTextField" customModule="Mappin" customModuleProvider="target">
                                                         <rect key="frame" x="30" y="0.0" width="344" height="44"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="voi-fr-EnF"/>
@@ -195,8 +194,8 @@
                         <outlet property="dateStackView" destination="8Jz-Iq-X7P" id="aTG-kC-822"/>
                         <outlet property="dateTextField" destination="bxc-nR-xhX" id="Ww0-5f-8yU"/>
                         <outlet property="documentTitleTextField" destination="TXx-4J-Nji" id="kxP-lA-AZa"/>
-                        <outlet property="locationLabel" destination="BrL-ut-5fb" id="0ew-co-kWp"/>
                         <outlet property="locationStackView" destination="NHr-xj-FSe" id="XHk-Eo-zle"/>
+                        <outlet property="locationTextField" destination="2bi-kA-H3C" id="YKf-Rn-R3K"/>
                         <outlet property="mapView" destination="vZU-Lf-KQR" id="Rnb-TO-0gb"/>
                         <outlet property="scrollView" destination="Ngg-zn-dc2" id="84o-Q0-0rP"/>
                         <outlet property="titleStackView" destination="thz-hx-cd2" id="o5j-ps-1nA"/>

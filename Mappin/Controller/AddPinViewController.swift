@@ -46,11 +46,11 @@ class AddPinViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    @IBOutlet weak var documentTitleTextField: UITextField!
+    @IBOutlet weak var documentTitleTextField: CustomTextField!
     
     @IBOutlet weak var dateTextField: UITextField!
     
-    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var locationTextField: CustomTextField!
     
     @IBOutlet weak var mapView: GMSMapView!
     
@@ -199,7 +199,7 @@ class AddPinViewController: UIViewController {
     
     func makeToolBar() -> UIToolbar {
         let toolBar = UIToolbar()
-        toolBar.barStyle = UIBarStyle.default
+        toolBar.barStyle = UIBarStyle.black
         toolBar.sizeToFit()
         
         let selectButton = UIBarButtonItem(title: "선택", style: .plain, target: self, action: #selector(selectButtonClicked(_:)))
@@ -210,9 +210,9 @@ class AddPinViewController: UIViewController {
         return toolBar
     }
     
-    func locationLabelConfig() {
-        locationLabel.text = "위치"
-        locationLabel.font = UIFont.systemFont(ofSize: 18)
+    func locationTextFieldConfig() {
+        locationTextField.text = "위치"
+        locationTextField.font = UIFont.systemFont(ofSize: 18)
         
         makeUnderLine(view: locationStackView)
     }
@@ -277,6 +277,8 @@ class AddPinViewController: UIViewController {
         contentTextView.text = "내용"
         contentTextView.textColor = .darkGray
         contentTextView.font = UIFont.systemFont(ofSize: 18)
+        
+        contentTextView.layer.cornerRadius = 10
     }
     
     func scrollViewConfig() {
@@ -301,7 +303,7 @@ class AddPinViewController: UIViewController {
         datePickerConfig()
         dateTextField.text = dateToString(date: Date())
         
-        locationLabelConfig()
+        locationTextFieldConfig()
         
         scrollViewConfig()
         self.loadMap(location: pinLocation)
@@ -317,7 +319,7 @@ class AddPinViewController: UIViewController {
             print("DEBUG: 주소 없엉 ㅠㅠ")
             return
         }
-        locationLabel.text = address
+        locationTextField.text = address
     }
 }
 
@@ -391,7 +393,7 @@ extension AddPinViewController: UICollectionViewDelegate, UICollectionViewDataSo
 //MARK: ScrollView Delegate
 extension AddPinViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if dateTextField.isEditing || documentTitleTextField.isEditing {
+        if dateTextField.isEditing || documentTitleTextField.isEditing || locationTextField.isEditing {
             view.endEditing(true)
         }
         
@@ -403,7 +405,7 @@ extension AddPinViewController: UIScrollViewDelegate {
 }
 
 
-//MARK: Picker Delegate
+//MARK: PickerView Delegate
 extension AddPinViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -469,6 +471,8 @@ extension AddPinViewController: UIImagePickerControllerDelegate , UINavigationCo
     }
 }
 
+
+//MARK: PHPicker Delegate
 
 extension AddPinViewController: PHPickerViewControllerDelegate {
     @available(iOS 14, *)

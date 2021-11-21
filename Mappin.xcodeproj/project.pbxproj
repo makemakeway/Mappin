@@ -20,12 +20,15 @@
 		C26A23FE2746909A005F42E2 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26A23FC2746909A005F42E2 /* PhotoCollectionViewCell.swift */; };
 		C26A23FF2746909A005F42E2 /* PhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26A23FD2746909A005F42E2 /* PhotoCollectionViewCell.xib */; };
 		C27A902927488F2700CDF3C9 /* CustomGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A902827488F2700CDF3C9 /* CustomGesture.swift */; };
+		C27A902F274A6F6B00CDF3C9 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A902E274A6F6B00CDF3C9 /* CustomTextField.swift */; };
+		C27A9031274A813A00CDF3C9 /* SelectLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A9030274A813A00CDF3C9 /* SelectLocationViewController.swift */; };
 		C27FE55027451BCF00F91946 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27FE54F27451BCF00F91946 /* RealmModel.swift */; };
 		C27FE552274520C600F91946 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27FE551274520C600F91946 /* InitialViewController.swift */; };
 		C27FE5562745218100F91946 /* InitialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27FE5542745218100F91946 /* InitialTableViewCell.swift */; };
 		C27FE5572745218100F91946 /* InitialTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C27FE5552745218100F91946 /* InitialTableViewCell.xib */; };
 		C27FE559274523D500F91946 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27FE558274523D500F91946 /* MapViewController.swift */; };
 		C27FE55B274523EE00F91946 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C27FE55A274523EE00F91946 /* Map.storyboard */; };
+		C2A80B21274A8D54002E29C9 /* SelectLocation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2A80B20274A8D54002E29C9 /* SelectLocation.storyboard */; };
 		C2CC523B27427AAB00090891 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CC523A27427AAB00090891 /* AppDelegate.swift */; };
 		C2CC523D27427AAB00090891 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CC523C27427AAB00090891 /* SceneDelegate.swift */; };
 		C2CC524227427AAB00090891 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2CC524027427AAB00090891 /* Main.storyboard */; };
@@ -75,12 +78,15 @@
 		C26A23FC2746909A005F42E2 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		C26A23FD2746909A005F42E2 /* PhotoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCollectionViewCell.xib; sourceTree = "<group>"; };
 		C27A902827488F2700CDF3C9 /* CustomGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGesture.swift; sourceTree = "<group>"; };
+		C27A902E274A6F6B00CDF3C9 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		C27A9030274A813A00CDF3C9 /* SelectLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationViewController.swift; sourceTree = "<group>"; };
 		C27FE54F27451BCF00F91946 /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
 		C27FE551274520C600F91946 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		C27FE5542745218100F91946 /* InitialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialTableViewCell.swift; sourceTree = "<group>"; };
 		C27FE5552745218100F91946 /* InitialTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InitialTableViewCell.xib; sourceTree = "<group>"; };
 		C27FE558274523D500F91946 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		C27FE55A274523EE00F91946 /* Map.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
+		C2A80B20274A8D54002E29C9 /* SelectLocation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelectLocation.storyboard; sourceTree = "<group>"; };
 		C2CC523727427AAB00090891 /* Mappin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mappin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2CC523A27427AAB00090891 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C2CC523C27427AAB00090891 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -152,6 +158,7 @@
 			children = (
 				C26A23EF27462304005F42E2 /* LocationManager.swift */,
 				C27A902827488F2700CDF3C9 /* CustomGesture.swift */,
+				C27A902E274A6F6B00CDF3C9 /* CustomTextField.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -245,6 +252,7 @@
 				C27FE558274523D500F91946 /* MapViewController.swift */,
 				C26A23F127465067005F42E2 /* AddTravelViewController.swift */,
 				C26A23F52746549F005F42E2 /* AddPinViewController.swift */,
+				C27A9030274A813A00CDF3C9 /* SelectLocationViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -257,6 +265,7 @@
 				C27FE55A274523EE00F91946 /* Map.storyboard */,
 				C26A23F327465074005F42E2 /* AddTravel.storyboard */,
 				C26A23F7274654B5005F42E2 /* AddPin.storyboard */,
+				C2A80B20274A8D54002E29C9 /* SelectLocation.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -399,6 +408,7 @@
 				C26A23E827462169005F42E2 /* Localizable.strings in Resources */,
 				C26A23FF2746909A005F42E2 /* PhotoCollectionViewCell.xib in Resources */,
 				C26A23F427465074005F42E2 /* AddTravel.storyboard in Resources */,
+				C2A80B21274A8D54002E29C9 /* SelectLocation.storyboard in Resources */,
 				C2CC524427427AAD00090891 /* Assets.xcassets in Resources */,
 				C27FE55B274523EE00F91946 /* Map.storyboard in Resources */,
 				C27FE5572745218100F91946 /* InitialTableViewCell.xib in Resources */,
@@ -564,6 +574,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C27A902F274A6F6B00CDF3C9 /* CustomTextField.swift in Sources */,
 				C27FE55027451BCF00F91946 /* RealmModel.swift in Sources */,
 				C26A23FB27467450005F42E2 /* Extension+UIViewController.swift in Sources */,
 				C27FE559274523D500F91946 /* MapViewController.swift in Sources */,
@@ -571,6 +582,7 @@
 				C2CC523B27427AAB00090891 /* AppDelegate.swift in Sources */,
 				C26A23FE2746909A005F42E2 /* PhotoCollectionViewCell.swift in Sources */,
 				C26A23F027462304005F42E2 /* LocationManager.swift in Sources */,
+				C27A9031274A813A00CDF3C9 /* SelectLocationViewController.swift in Sources */,
 				C2CC523D27427AAB00090891 /* SceneDelegate.swift in Sources */,
 				C26A23F62746549F005F42E2 /* AddPinViewController.swift in Sources */,
 				C26A23F227465067005F42E2 /* AddTravelViewController.swift in Sources */,

@@ -16,6 +16,8 @@ class LocationManager {
     let manager = CLLocationManager()
     
     
+    var currentLocation = CLLocationCoordinate2D(latitude: UserDefaults.standard.double(forKey: "userLatitude"), longitude: UserDefaults.standard.double(forKey: "userLongitude"))
+    
     private init() {
         
     }
