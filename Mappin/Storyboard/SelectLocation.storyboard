@@ -21,18 +21,31 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vt6-0K-doz">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="crX-ca-YAp"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Title" id="XfC-1Z-F63"/>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Vt6-0K-doz" secondAttribute="trailing" id="6sB-w5-ias"/>
                             <constraint firstAttribute="bottom" secondItem="FDX-Xn-ING" secondAttribute="bottom" id="8ZZ-ot-KLh"/>
                             <constraint firstItem="FDX-Xn-ING" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="8in-nt-2SF"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="FDX-Xn-ING" secondAttribute="trailing" id="HKS-wd-rGw"/>
                             <constraint firstItem="FDX-Xn-ING" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Wwm-99-X3C"/>
+                            <constraint firstItem="Vt6-0K-doz" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="eV6-Jf-YWl"/>
+                            <constraint firstItem="Vt6-0K-doz" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="hY5-SD-4E0"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="mapView" destination="FDX-Xn-ING" id="NvM-Lp-8oP"/>
+                        <outlet property="navBar" destination="Vt6-0K-doz" id="gkf-oT-ngU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

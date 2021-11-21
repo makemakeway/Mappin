@@ -15,11 +15,31 @@ class LocationManager {
     
     let manager = CLLocationManager()
     
-    
     var currentLocation = CLLocationCoordinate2D(latitude: UserDefaults.standard.double(forKey: "userLatitude"), longitude: UserDefaults.standard.double(forKey: "userLongitude"))
     
     private init() {
         
+    }
+    
+    func getAddress(location: CLLocation, completion: @escaping ((String) -> ()))  {
+        let coder = CLGeocoder()
+        let locale = Locale(identifier: "ko-KR")
+        
+        coder.reverseGeocodeLocation(location, preferredLocale: locale) { (placemark, error) -> Void in
+            guard error == nil, let place = placemark?.first else {
+                print("주소 설정 불가능")
+                return
+            }
+            
+            
+            
+            let address = [place.administrativeArea ?? "", place.locality ?? "", place.thoroughfare ?? "", place.subThoroughfare ?? ""]
+            
+            let addressQuery = address.joined(separator: " ")
+            
+            completion(addressQuery)
+            return
+        }
     }
     
     func checkUsersLocationServicesAuthorization() {

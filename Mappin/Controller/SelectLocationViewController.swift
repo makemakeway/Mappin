@@ -13,12 +13,14 @@ class SelectLocationViewController: UIViewController {
     
     //MARK: Properties
     
+    var location: CLLocationCoordinate2D?
     
     
     //MARK: UI
     
     @IBOutlet weak var mapView: GMSMapView!
     
+    @IBOutlet weak var navBar: UINavigationBar!
     
     //MARK: Method
     
@@ -27,6 +29,20 @@ class SelectLocationViewController: UIViewController {
     }
     
     @objc func completeButtonClicked(_ sender: UIBarButtonItem) {
+        
+        if let nvc = self.presentingViewController as? UINavigationController {
+            guard let vc = nvc.topViewController as? AddPinViewController else {
+                print("DEBUG: presentingViewController 변환 못하는데??")
+                return
+            }
+            
+            vc.pinLocation = mapView.camera.target
+            LocationManager.shared.getAddress(location: CLLocation(latitude: mapView.camera.target.latitude,
+                                                                   longitude: mapView.camera.target.longitude),
+                                              completion: { address in
+                vc.locationAddress = address
+            })
+        }
         dismiss(animated: true, completion: nil)
     }
     
@@ -37,15 +53,23 @@ class SelectLocationViewController: UIViewController {
         mapView.settings.scrollGestures = true
         mapView.settings.zoomGestures = true
         mapView.settings.myLocationButton = true
+        mapView.isMyLocationEnabled = true
         mapView.camera = camera
+        mapView.delegate = self
         
         let pinImageView = UIImageView(image: UIImage(named: "pin"))
         
         self.view.addSubview(pinImageView)
+        pinImageView.frame.size = CGSize(width: 40, height: 40)
         pinImageView.center = view.center
+        pinImageView.center.y -= 10
     }
     
     func navBarConfig() {
+        
+        
+        let navItem = UINavigationItem(title: "위치 설정")
+        
         let dismissButton = UIBarButtonItem(image: UIImage(systemName: "xmark"),
                                             style: .plain,
                                             target: self,
@@ -55,8 +79,11 @@ class SelectLocationViewController: UIViewController {
                                              target: self,
                                              action: #selector(completeButtonClicked(_:)))
         
-        self.navigationItem.leftBarButtonItem = dismissButton
-        self.navigationItem.rightBarButtonItem = completeButton
+        navItem.leftBarButtonItem = dismissButton
+        navItem.rightBarButtonItem = completeButton
+        
+        navBar.setItems([navItem], animated: false)
+        navBar.setBackgroundImage(UIImage(), for: .default)
     }
     
     
@@ -64,6 +91,22 @@ class SelectLocationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navBarConfig()
-        mapViewConfig(location: LocationManager.shared.currentLocation)
+        
+        if location != nil {
+            mapViewConfig(location: location!)
+        } else  {
+            mapViewConfig(location: LocationManager.shared.currentLocation)
+        }
+        
+    }
+}
+
+//MARK: MapView Delegate
+extension SelectLocationViewController: GMSMapViewDelegate {
+    func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
+        print(mapView.camera.target)
+        
+        // 핀 위치: 37.4987508201444
+        // 실제 위치: 37.4987358201444
     }
 }

@@ -17,9 +17,19 @@ class AddPinViewController: UIViewController {
     //MARK: Properties
     let localRealm = try! Realm()
     
-    var locationAddress = UserDefaults.standard.string(forKey: "userLocation")
+    var locationAddress = UserDefaults.standard.string(forKey: "userLocation") {
+        didSet {
+            locationTextField.text = locationAddress
+        }
+    }
     
-    var pinLocation = CLLocationCoordinate2D(latitude: UserDefaults.standard.double(forKey: "userLatitude"), longitude: UserDefaults.standard.double(forKey: "userLongitude"))
+    var pinLocation = CLLocationCoordinate2D(latitude: UserDefaults.standard.double(forKey: "userLatitude"), longitude: UserDefaults.standard.double(forKey: "userLongitude")) {
+        didSet {
+            mapView.clear()
+            loadMap(location: pinLocation)
+            drawPin()
+        }
+    }
     
     var photoImages: [UIImage] = [] {
         didSet {
@@ -69,6 +79,7 @@ class AddPinViewController: UIViewController {
     //MARK: Method
     @objc func addPin(_ sender: UIBarButtonItem) {
         print("DEBUG: 핀 추가")
+        print(locationTextField.text)
     }
     
     @objc func selectButtonClicked(_ sender: UIBarButtonItem) {
@@ -114,6 +125,15 @@ class AddPinViewController: UIViewController {
         sheet.addAction(cancel)
         
         self.present(sheet, animated: true, completion: nil)
+    }
+    
+    @objc func mapViewClicked(gesture: UITapGestureRecognizer) {
+        let sb = UIStoryboard(name: "SelectLocation", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "SelectLocationViewController") as! SelectLocationViewController
+        vc.modalPresentationStyle = .fullScreen
+        vc.location = pinLocation
+        
+        self.present(vc, animated: true, completion: nil)
     }
     
     func makePhotoPicker(type: UIImagePickerController.SourceType) -> UIImagePickerController {
@@ -228,6 +248,9 @@ class AddPinViewController: UIViewController {
         mapView.settings.tiltGestures = false
         mapView.settings.rotateGestures = false
         
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(mapViewClicked(gesture:)))
+        
+        mapView.addGestureRecognizer(gesture)
         
         mapView.camera = camera
     }
@@ -306,19 +329,24 @@ class AddPinViewController: UIViewController {
         locationTextFieldConfig()
         
         scrollViewConfig()
-        self.loadMap(location: pinLocation)
+        loadMap(location: pinLocation)
         
         titleTextFieldConfig()
+        drawPin()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        drawPin()
+        
+        print("DEBUG: ViewWillAppear")
+        
+        
         
         guard let address = locationAddress else {
             print("DEBUG: 주소 없엉 ㅠㅠ")
             return
         }
+        
         locationTextField.text = address
     }
 }
