@@ -142,7 +142,7 @@ class AddPinViewController: UIViewController {
     
     //MARK: functions
     
-    func addDataToRealm() {
+    func addDataToRealm() -> Bool {
         if dataValidCheck() {
             let task = Travel(title: documentTitle!,
                               date: datePicker.date,
@@ -160,11 +160,19 @@ class AddPinViewController: UIViewController {
             task.travelLocation.append(pinLocation.latitude)
             task.travelLocation.append(pinLocation.longitude)
             
+            guard let currentTasks = localRealm.object(ofType: TravelDocument.self, forPrimaryKey: documentTitle!) else {
+                print("DEBUG: Tasks 불러오기 실패")
+                return false
+            }
 
             try! localRealm.write {
+                currentTasks.travels.append(task)
                 localRealm.add(task)
             }
+            
+            return true
         }
+        return false
     }
     
     func dataValidCheck() -> Bool {

@@ -12,7 +12,13 @@ class InitialTableViewCell: UITableViewCell {
     static let identifier = "InitialTableViewCell"
     
     
+    @IBOutlet weak var photoImageView: UIImageView!
     
+    @IBOutlet weak var documentTitleLabel: UILabel!
+    
+    @IBOutlet weak var dateLabel: UILabel!
+    
+    @IBOutlet weak var opacityView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
