@@ -9,6 +9,7 @@ import UIKit
 import RealmSwift
 import GoogleMaps
 import PhotosUI
+import SwiftUI
 
 
 class AddPinViewController: UIViewController {
@@ -79,7 +80,8 @@ class AddPinViewController: UIViewController {
     //MARK: Method
     @objc func addPin(_ sender: UIBarButtonItem) {
         print("DEBUG: 핀 추가")
-        print(locationTextField.text)
+        addDataToRealm()
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     @objc func selectButtonClicked(_ sender: UIBarButtonItem) {
@@ -90,6 +92,7 @@ class AddPinViewController: UIViewController {
         } else {
             print("도큐먼트")
             documentTitleTextField.text = titleSource[pickerIndex]
+            documentTitle = titleSource[pickerIndex]
         }
         
         view.endEditing(true)
@@ -134,6 +137,81 @@ class AddPinViewController: UIViewController {
         vc.location = pinLocation
         
         self.present(vc, animated: true, completion: nil)
+    }
+    
+    
+    //MARK: functions
+    
+    func addDataToRealm() {
+        if dataValidCheck() {
+            let task = Travel(title: documentTitle!,
+                              date: datePicker.date,
+                              picture: RealmSwift.List<String>(),
+                              content: contentTextView.text!,
+                              location: RealmSwift.List<Double>(),
+                              locationDescription: locationAddress ?? "")
+
+            for (index, image) in photoImages.enumerated() {
+                let imageName = "\(task._id)_\(index).jpeg"
+                saveImageToDocumentDirectory(imageName: imageName, image: image)
+                task.travelPicture.append(imageName)
+            }
+            
+            task.travelLocation.append(pinLocation.latitude)
+            task.travelLocation.append(pinLocation.longitude)
+            
+
+            try! localRealm.write {
+                localRealm.add(task)
+            }
+        }
+    }
+    
+    func dataValidCheck() -> Bool {
+        if documentTitle == nil {
+            presentOkAlert(message: "타이틀을 설정해주세요.")
+            return false
+        }
+        
+        if contentTextView.textColor == .darkGray {
+            presentOkAlert(message: "내용을 입력해주세요.")
+            return false
+        }
+        
+        if photoImages.isEmpty {
+            presentOkAlert(message: "사진을 추가해주세요.")
+            return false
+        }
+        
+        return true
+    }
+    
+    func saveImageToDocumentDirectory(imageName: String, image: UIImage) {
+        guard let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            return
+        }
+        
+        let imageURL = documentDirectory.appendingPathComponent(imageName)
+        
+        guard let data = image.jpegData(compressionQuality: 0.7) else {
+            return
+        }
+        
+        if FileManager.default.fileExists(atPath: imageURL.path) {
+            do {
+                try FileManager.default.removeItem(at: imageURL)
+                print("DEBUG: 기존 이미지 삭제 완료")
+            } catch {
+                print("DEBUG: 기존 이미지 삭제 실패")
+            }
+        }
+        
+        do {
+            try data.write(to: imageURL)
+            print("DEBUG: 이미지 저장 완료")
+        } catch {
+            print("DEBUG: 이미지 저장 실패")
+        }
     }
     
     func makePhotoPicker(type: UIImagePickerController.SourceType) -> UIImagePickerController {
@@ -231,8 +309,9 @@ class AddPinViewController: UIViewController {
     }
     
     func locationTextFieldConfig() {
-        locationTextField.text = "위치"
+        locationTextField.text = "장소 설명"
         locationTextField.font = UIFont.systemFont(ofSize: 18)
+        locationTextField.clearButtonMode = .whileEditing
         
         makeUnderLine(view: locationStackView)
     }

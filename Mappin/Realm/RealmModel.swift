@@ -28,9 +28,10 @@ class Travel: Object {
     @Persisted var travelPicture: List<String>
     @Persisted var travelContent: String
     @Persisted var travelLocation: List<Double>
+    @Persisted var locationDescription: String
     @Persisted(primaryKey: true) var _id: ObjectId
     
-    convenience init(title: String, date: Date, picture: List<String>, content: String, location: List<Double>) {
+    convenience init(title: String, date: Date, picture: List<String>, content: String, location: List<Double>, locationDescription: String) {
         self.init()
         
         self.travelTitle = title
@@ -38,6 +39,7 @@ class Travel: Object {
         self.travelPicture = picture
         self.travelContent = content
         self.travelLocation = location
+        self.locationDescription = locationDescription
     }
 }
 
