@@ -21,6 +21,7 @@ class InitialViewController: UIViewController {
                 self.emptyHandlingView.isHidden = false
             } else {
                 self.emptyHandlingView.isHidden = true
+                tableView.reloadSections(IndexSet(0...0), with: .automatic)
             }
         }
     }
@@ -113,7 +114,7 @@ extension InitialViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return tasks.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -142,6 +142,54 @@ class AddPinViewController: UIViewController {
     
     //MARK: functions
     
+    func presentDatePickerInActionSheet(message: String) {
+        let actionSheet = UIAlertController(title: nil, message: message, preferredStyle: .actionSheet)
+        actionSheet.view.addSubview(datePicker)
+        
+        actionSheet.view.heightAnchor.constraint(equalToConstant: 350).isActive = true
+        
+        datePicker.translatesAutoresizingMaskIntoConstraints = false
+        datePicker.trailingAnchor.constraint(equalTo: actionSheet.view.trailingAnchor).isActive = true
+        datePicker.leadingAnchor.constraint(equalTo: actionSheet.view.leadingAnchor).isActive = true
+        datePicker.topAnchor.constraint(equalTo: actionSheet.view.topAnchor, constant: 20).isActive = true
+        
+        let okButton = UIAlertAction(title: "선택", style: .default) { _ in
+            self.dateTextField.text = self.dateToString(date: self.datePicker.date)
+        }
+        
+        
+        let cancelButton = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        actionSheet.addAction(okButton)
+        actionSheet.addAction(cancelButton)
+        
+        present(actionSheet, animated: true, completion: nil)
+    }
+    
+    func presentPickerInActionSheet(message: String) {
+        let actionSheet = UIAlertController(title: nil, message: message, preferredStyle: .actionSheet)
+        actionSheet.view.addSubview(titlePickerView)
+        actionSheet.view.heightAnchor.constraint(equalToConstant: 350).isActive = true
+        
+        titlePickerView.translatesAutoresizingMaskIntoConstraints = false
+        titlePickerView.trailingAnchor.constraint(equalTo: actionSheet.view.trailingAnchor).isActive = true
+        titlePickerView.leadingAnchor.constraint(equalTo: actionSheet.view.leadingAnchor).isActive = true
+        titlePickerView.topAnchor.constraint(equalTo: actionSheet.view.topAnchor, constant: 20).isActive = true
+        
+        
+        let okButton = UIAlertAction(title: "선택", style: .default) { _ in
+            self.documentTitleTextField.text = self.titleSource[self.pickerIndex]
+            self.documentTitle = self.titleSource[self.pickerIndex]
+        }
+        
+        let cancelButton = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        actionSheet.addAction(okButton)
+        actionSheet.addAction(cancelButton)
+        
+        present(actionSheet, animated: true, completion: nil)
+    }
+    
     func addDataToRealm() -> Bool {
         if dataValidCheck() {
             let task = Travel(title: documentTitle!,
@@ -246,17 +294,14 @@ class AddPinViewController: UIViewController {
     func pickerViewConfig() {
         titlePickerView.delegate = self
         titlePickerView.dataSource = self
-        let toolBar = makeToolBar()
-        toolBar.items?.last?.tag = 1
-        
-        documentTitleTextField.inputAccessoryView = toolBar
     }
 
     
     func titleTextFieldConfig() {
         documentTitleTextField.placeholder = "타이틀"
         documentTitleTextField.font = UIFont.systemFont(ofSize: 18)
-        documentTitleTextField.inputView = titlePickerView
+        documentTitleTextField.delegate = self
+        
         makeUnderLine(view: titleStackView)
         
         guard let title = documentTitle else {
@@ -275,8 +320,7 @@ class AddPinViewController: UIViewController {
     func dateTextFieldConfig() {
         dateTextField.placeholder = "날짜"
         dateTextField.font = UIFont.systemFont(ofSize: 18)
-        
-        dateTextField.inputView = datePicker
+        dateTextField.delegate = self
         
         makeUnderLine(view: dateStackView)
     }
@@ -289,35 +333,10 @@ class AddPinViewController: UIViewController {
         if #available(iOS 13.4, *) {
             datePicker.preferredDatePickerStyle = .wheels
         }
-        
-        let toolBar = UIToolbar()
-        toolBar.barStyle = UIBarStyle.default
-        toolBar.sizeToFit()
-        
-        let selectButton = UIBarButtonItem(title: "선택", style: .plain, target: self, action: #selector(selectButtonClicked(_:)))
-        
-        let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-        
-        toolBar.setItems([space, selectButton], animated: false)
-        
-        dateTextField.inputAccessoryView = makeToolBar()
-    }
-    
-    func makeToolBar() -> UIToolbar {
-        let toolBar = UIToolbar()
-        toolBar.barStyle = UIBarStyle.black
-        toolBar.sizeToFit()
-        
-        let selectButton = UIBarButtonItem(title: "선택", style: .plain, target: self, action: #selector(selectButtonClicked(_:)))
-        
-        let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-        
-        toolBar.setItems([space, selectButton], animated: false)
-        return toolBar
     }
     
     func locationTextFieldConfig() {
-        locationTextField.text = "장소 설명"
+        locationTextField.placeholder = "장소 설명"
         locationTextField.font = UIFont.systemFont(ofSize: 18)
         locationTextField.clearButtonMode = .whileEditing
         
@@ -388,7 +407,7 @@ class AddPinViewController: UIViewController {
         contentTextView.textColor = .darkGray
         contentTextView.font = UIFont.systemFont(ofSize: 18)
         
-        contentTextView.layer.cornerRadius = 10
+        contentTextView.layer.cornerRadius = 5
     }
     
     func scrollViewConfig() {
@@ -607,5 +626,21 @@ extension AddPinViewController: PHPickerViewControllerDelegate {
             }
         }
         
+    }
+}
+
+
+//MARK: TextField delegate
+
+extension AddPinViewController: UITextFieldDelegate {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField == dateTextField {
+            presentDatePickerInActionSheet(message: "날짜 선택")
+            return false
+        } else if textField == documentTitleTextField {
+            presentPickerInActionSheet(message: "여행 선택")
+            return false
+        }
+        return true
     }
 }
