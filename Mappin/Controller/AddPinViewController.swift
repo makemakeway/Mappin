@@ -142,52 +142,42 @@ class AddPinViewController: UIViewController {
     
     //MARK: functions
     
-    func presentDatePickerInActionSheet(message: String) {
-        let actionSheet = UIAlertController(title: nil, message: message, preferredStyle: .actionSheet)
-        actionSheet.view.addSubview(datePicker)
+    func presentActionSheetInsteadKeyboard(message: String, picker: UIView) {
         
+        let actionSheet = UIAlertController(title: nil, message: message, preferredStyle: .actionSheet)
+        actionSheet.view.addSubview(picker)
         actionSheet.view.heightAnchor.constraint(equalToConstant: 350).isActive = true
         
-        datePicker.translatesAutoresizingMaskIntoConstraints = false
-        datePicker.trailingAnchor.constraint(equalTo: actionSheet.view.trailingAnchor).isActive = true
-        datePicker.leadingAnchor.constraint(equalTo: actionSheet.view.leadingAnchor).isActive = true
-        datePicker.topAnchor.constraint(equalTo: actionSheet.view.topAnchor, constant: 20).isActive = true
-        
-        let okButton = UIAlertAction(title: "선택", style: .default) { _ in
-            self.dateTextField.text = self.dateToString(date: self.datePicker.date)
-        }
-        
+        picker.translatesAutoresizingMaskIntoConstraints = false
+        picker.trailingAnchor.constraint(equalTo: actionSheet.view.trailingAnchor).isActive = true
+        picker.leadingAnchor.constraint(equalTo: actionSheet.view.leadingAnchor).isActive = true
+        picker.topAnchor.constraint(equalTo: actionSheet.view.topAnchor, constant: 20).isActive = true
         
         let cancelButton = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
-        actionSheet.addAction(okButton)
         actionSheet.addAction(cancelButton)
         
-        present(actionSheet, animated: true, completion: nil)
-    }
+        if picker is UIPickerView {
+            
+            let okButton = UIAlertAction(title: "선택", style: .default) { _ in
+                self.documentTitleTextField.text = self.titleSource[self.pickerIndex]
+                self.documentTitle = self.titleSource[self.pickerIndex]
+            }
+            
+            actionSheet.addAction(okButton)
     
-    func presentPickerInActionSheet(message: String) {
-        let actionSheet = UIAlertController(title: nil, message: message, preferredStyle: .actionSheet)
-        actionSheet.view.addSubview(titlePickerView)
-        actionSheet.view.heightAnchor.constraint(equalToConstant: 350).isActive = true
-        
-        titlePickerView.translatesAutoresizingMaskIntoConstraints = false
-        titlePickerView.trailingAnchor.constraint(equalTo: actionSheet.view.trailingAnchor).isActive = true
-        titlePickerView.leadingAnchor.constraint(equalTo: actionSheet.view.leadingAnchor).isActive = true
-        titlePickerView.topAnchor.constraint(equalTo: actionSheet.view.topAnchor, constant: 20).isActive = true
-        
-        
-        let okButton = UIAlertAction(title: "선택", style: .default) { _ in
-            self.documentTitleTextField.text = self.titleSource[self.pickerIndex]
-            self.documentTitle = self.titleSource[self.pickerIndex]
+            present(actionSheet, animated: true, completion: nil)
+            
+        } else {
+            
+            let okButton = UIAlertAction(title: "선택", style: .default) { _ in
+                self.dateTextField.text = self.dateToString(date: self.datePicker.date)
+            }
+            
+            actionSheet.addAction(okButton)
+            
+            present(actionSheet, animated: true, completion: nil)
         }
-        
-        let cancelButton = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-        
-        actionSheet.addAction(okButton)
-        actionSheet.addAction(cancelButton)
-        
-        present(actionSheet, animated: true, completion: nil)
     }
     
     func addDataToRealm() -> Bool {
@@ -635,10 +625,10 @@ extension AddPinViewController: PHPickerViewControllerDelegate {
 extension AddPinViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == dateTextField {
-            presentDatePickerInActionSheet(message: "날짜 선택")
+            presentActionSheetInsteadKeyboard(message: "날짜 선택", picker: datePicker)
             return false
         } else if textField == documentTitleTextField {
-            presentPickerInActionSheet(message: "여행 선택")
+            presentActionSheetInsteadKeyboard(message: "여행 선택", picker: titlePickerView)
             return false
         }
         return true

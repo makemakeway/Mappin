@@ -42,20 +42,7 @@ class InitialViewController: UIViewController {
         tableView.register(nib, forCellReuseIdentifier: InitialTableViewCell.identifier)
         tableView.register(InitialTableViewHeader.self, forHeaderFooterViewReuseIdentifier: InitialTableViewHeader.identifier)
         tableView.separatorStyle = .none
-    }
-    
-    func loadImageFromDocumentDirectory(imageName: String) -> UIImage? {
-        let documentDirectory = FileManager.SearchPathDirectory.documentDirectory
-        let userDomain = FileManager.SearchPathDomainMask.userDomainMask
-        let path = NSSearchPathForDirectoriesInDomains(documentDirectory, userDomain, true)
-        
-        if let directoryPath = path.first {
-            let imageURL = URL(fileURLWithPath: directoryPath).appendingPathComponent(imageName)
-            return UIImage(contentsOfFile: imageURL.path)
-        }
-        
-        print("DEBUG: 이미지 불러오기 실패")
-        return nil
+        tableView.showsVerticalScrollIndicator = false
     }
     
     @IBAction func mapButtonClicked(_ sender: UIBarButtonItem) {
@@ -98,10 +85,12 @@ extension InitialViewController: UITableViewDelegate, UITableViewDataSource {
         
         let task = tasks[indexPath.row]
         
+        cell.backgroundColor = .systemBackground
+        
         cell.documentTitleLabel.text = task.documentTitle
         cell.dateLabel.text = dateToString(date: task.travels.first!.travelDate)
         
-        cell.photoImageView.image = loadImageFromDocumentDirectory(imageName: "\(task.travels.first!._id)_0.jpeg")
+        cell.photoImageView.image = ImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(task.travels.first!._id)_0.jpeg")
         
         cell.photoImageView.contentMode = .scaleAspectFill
         
@@ -123,8 +112,12 @@ extension InitialViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let sb = UIStoryboard(name: "TravelList", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "TravelListViewController") as! TravelListViewController
         
+        vc.travelDocument = tasks[indexPath.row]
         
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
