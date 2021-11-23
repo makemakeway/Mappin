@@ -30,6 +30,8 @@
 		C2715C78274CEEE9001D5286 /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2715C77274CEEE9001D5286 /* Detail.storyboard */; };
 		C2715C7B274CFD32001D5286 /* TravelDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2715C79274CFD32001D5286 /* TravelDetailCollectionViewCell.swift */; };
 		C2715C7C274CFD32001D5286 /* TravelDetailCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2715C7A274CFD32001D5286 /* TravelDetailCollectionViewCell.xib */; };
+		C2715C7E274D3731001D5286 /* MarkerInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2715C7D274D3730001D5286 /* MarkerInfoView.swift */; };
+		C2715C80274D375A001D5286 /* MarkerInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2715C7F274D375A001D5286 /* MarkerInfoView.xib */; };
 		C27A902927488F2700CDF3C9 /* CustomGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A902827488F2700CDF3C9 /* CustomGesture.swift */; };
 		C27A902F274A6F6B00CDF3C9 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A902E274A6F6B00CDF3C9 /* CustomTextField.swift */; };
 		C27A9031274A813A00CDF3C9 /* SelectLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A9030274A813A00CDF3C9 /* SelectLocationViewController.swift */; };
@@ -99,6 +101,8 @@
 		C2715C77274CEEE9001D5286 /* Detail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Detail.storyboard; sourceTree = "<group>"; };
 		C2715C79274CFD32001D5286 /* TravelDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		C2715C7A274CFD32001D5286 /* TravelDetailCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TravelDetailCollectionViewCell.xib; sourceTree = "<group>"; };
+		C2715C7D274D3730001D5286 /* MarkerInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerInfoView.swift; sourceTree = "<group>"; };
+		C2715C7F274D375A001D5286 /* MarkerInfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarkerInfoView.xib; sourceTree = "<group>"; };
 		C27A902827488F2700CDF3C9 /* CustomGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGesture.swift; sourceTree = "<group>"; };
 		C27A902E274A6F6B00CDF3C9 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		C27A9030274A813A00CDF3C9 /* SelectLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationViewController.swift; sourceTree = "<group>"; };
@@ -215,6 +219,8 @@
 				C2715C70274CE3F3001D5286 /* TravelListTableViewCell.xib */,
 				C2715C79274CFD32001D5286 /* TravelDetailCollectionViewCell.swift */,
 				C2715C7A274CFD32001D5286 /* TravelDetailCollectionViewCell.xib */,
+				C2715C7D274D3730001D5286 /* MarkerInfoView.swift */,
+				C2715C7F274D375A001D5286 /* MarkerInfoView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -443,6 +449,7 @@
 				C26A23E827462169005F42E2 /* Localizable.strings in Resources */,
 				C26A23FF2746909A005F42E2 /* PhotoCollectionViewCell.xib in Resources */,
 				C26A23F427465074005F42E2 /* AddTravel.storyboard in Resources */,
+				C2715C80274D375A001D5286 /* MarkerInfoView.xib in Resources */,
 				C2A80B21274A8D54002E29C9 /* SelectLocation.storyboard in Resources */,
 				C2CC524427427AAD00090891 /* Assets.xcassets in Resources */,
 				C27FE55B274523EE00F91946 /* Map.storyboard in Resources */,
@@ -618,6 +625,7 @@
 				C27FE5562745218100F91946 /* InitialTableViewCell.swift in Sources */,
 				C2715C7B274CFD32001D5286 /* TravelDetailCollectionViewCell.swift in Sources */,
 				C2CC523B27427AAB00090891 /* AppDelegate.swift in Sources */,
+				C2715C7E274D3731001D5286 /* MarkerInfoView.swift in Sources */,
 				C2715C6C274BECB6001D5286 /* TravelListViewController.swift in Sources */,
 				C26A23FE2746909A005F42E2 /* PhotoCollectionViewCell.swift in Sources */,
 				C26A23F027462304005F42E2 /* LocationManager.swift in Sources */,

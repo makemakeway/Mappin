@@ -56,10 +56,24 @@ class MapViewController: UIViewController {
         mapView.isMyLocationEnabled = true
         mapView.settings.myLocationButton = true
         mapView.camera = camera
+        mapView.delegate = self
     }
     
     func addPin() {
-        
+        for task in tasks {
+            for travel in task.travels {
+                let latitude = travel.travelLocation[0]
+                let longitude = travel.travelLocation[1]
+                
+                let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: latitude,
+                                                                        longitude: longitude))
+                marker.map = mapView
+                marker.title = travel.travelTitle
+                marker.snippet = dateToString(date: travel.travelDate)
+                
+                
+            }
+        }
     }
     
     
@@ -148,7 +162,7 @@ class MapViewController: UIViewController {
         if !locationUpdated, currentLocation != nil {
             self.loadMap(location: currentLocation!)
         }
-        
+        addPin()
     }
     
 
@@ -177,5 +191,16 @@ extension MapViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         print(#function)
         LocationManager.shared.checkUsersLocationServicesAuthorization()
+    }
+}
+
+//MARK: GMSMapView delegate
+extension MapViewController: GMSMapViewDelegate {
+    func mapView(_ mapView: GMSMapView, markerInfoContents marker: GMSMarker) -> UIView? {
+        let infoView = MarkerInfoView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        
+        infoView.tempLabel.text = "zz"
+        
+        return infoView
     }
 }
