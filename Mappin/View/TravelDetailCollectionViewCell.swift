@@ -11,6 +11,9 @@ class TravelDetailCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "TravelDetailCollectionViewCell"
 
+    @IBOutlet weak var photoImage: UIImageView!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
