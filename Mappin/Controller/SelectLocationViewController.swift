@@ -31,17 +31,17 @@ class SelectLocationViewController: UIViewController {
     @objc func completeButtonClicked(_ sender: UIBarButtonItem) {
         
         if let nvc = self.presentingViewController as? UINavigationController {
-            guard let vc = nvc.topViewController as? AddPinViewController else {
+            guard let vc = nvc.topViewController as? AddTravelViewController else {
                 print("DEBUG: presentingViewController 변환 못하는데??")
                 return
             }
             
             vc.pinLocation = mapView.camera.target
-            LocationManager.shared.getAddress(location: CLLocation(latitude: mapView.camera.target.latitude,
-                                                                   longitude: mapView.camera.target.longitude),
-                                              completion: { address in
-                vc.locationAddress = address
-            })
+//            LocationManager.shared.getAddress(location: CLLocation(latitude: mapView.camera.target.latitude,
+//                                                                   longitude: mapView.camera.target.longitude),
+//                                              completion: { _ in
+//                // 주소 쓸 일 있을 때 추가하면 됨
+//            })
         }
         dismiss(animated: true, completion: nil)
     }

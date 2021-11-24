@@ -22,13 +22,13 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SO2-N6-RyK">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="812"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1006"/>
                                         <subviews>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="HL4-to-0HH">
-                                                <rect key="frame" x="0.0" y="20" width="414" height="120"/>
+                                                <rect key="frame" x="0.0" y="20" width="414" height="414"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="120" id="Oe7-KL-W8j"/>
+                                                    <constraint firstAttribute="width" secondItem="HL4-to-0HH" secondAttribute="height" multiplier="1:1" id="3tJ-EO-qpE"/>
                                                 </constraints>
                                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="JJG-eZ-854">
                                                     <size key="itemSize" width="128" height="128"/>
@@ -48,15 +48,8 @@
                                                     </collectionViewCell>
                                                 </cells>
                                             </collectionView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vZU-Lf-KQR" customClass="GMSMapView">
-                                                <rect key="frame" x="20" y="352" width="374" height="120"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="120" id="xhQ-O2-H1H"/>
-                                                </constraints>
-                                            </view>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="eGD-tU-MIU">
-                                                <rect key="frame" x="20" y="492" width="374" height="300"/>
+                                                <rect key="frame" x="20" y="666" width="374" height="300"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="300" id="KEj-HK-jCy"/>
@@ -66,7 +59,7 @@
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="thz-hx-cd2">
-                                                <rect key="frame" x="20" y="160" width="374" height="44"/>
+                                                <rect key="frame" x="20" y="454" width="374" height="44"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="doc" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="RVE-un-mHA">
                                                         <rect key="frame" x="0.0" y="0.0" width="20" height="44"/>
@@ -92,7 +85,7 @@
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Jz-Iq-X7P">
-                                                <rect key="frame" x="20" y="224" width="374" height="44"/>
+                                                <rect key="frame" x="20" y="518" width="374" height="44"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendar" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="6XP-x8-6I0">
                                                         <rect key="frame" x="0.0" y="1" width="20" height="41.5"/>
@@ -118,7 +111,7 @@
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NHr-xj-FSe">
-                                                <rect key="frame" x="20" y="288" width="374" height="44"/>
+                                                <rect key="frame" x="20" y="582" width="374" height="44"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="barometer" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="umR-Bo-we8">
                                                         <rect key="frame" x="0.0" y="0.5" width="20" height="43"/>
@@ -149,16 +142,13 @@
                                             <constraint firstItem="eGD-tU-MIU" firstAttribute="leading" secondItem="SO2-N6-RyK" secondAttribute="leading" constant="20" id="5gl-j1-k1a"/>
                                             <constraint firstAttribute="trailing" secondItem="eGD-tU-MIU" secondAttribute="trailing" constant="20" id="6wF-Dn-X76"/>
                                             <constraint firstItem="8Jz-Iq-X7P" firstAttribute="trailing" secondItem="thz-hx-cd2" secondAttribute="trailing" id="Csd-KD-pxt"/>
+                                            <constraint firstItem="eGD-tU-MIU" firstAttribute="top" secondItem="NHr-xj-FSe" secondAttribute="bottom" constant="40" id="FfP-sn-1KD"/>
                                             <constraint firstItem="8Jz-Iq-X7P" firstAttribute="leading" secondItem="thz-hx-cd2" secondAttribute="leading" id="Pfn-67-X4U"/>
                                             <constraint firstAttribute="trailing" secondItem="HL4-to-0HH" secondAttribute="trailing" id="YIs-jk-MgY"/>
-                                            <constraint firstAttribute="bottom" secondItem="eGD-tU-MIU" secondAttribute="bottom" constant="20" id="dfd-sj-DgE"/>
+                                            <constraint firstAttribute="bottom" secondItem="eGD-tU-MIU" secondAttribute="bottom" constant="40" id="dfd-sj-DgE"/>
                                             <constraint firstItem="HL4-to-0HH" firstAttribute="top" secondItem="SO2-N6-RyK" secondAttribute="top" constant="20" id="dy1-d4-bZs"/>
-                                            <constraint firstAttribute="trailing" secondItem="vZU-Lf-KQR" secondAttribute="trailing" constant="20" id="fkF-ch-MJq"/>
                                             <constraint firstItem="thz-hx-cd2" firstAttribute="top" secondItem="HL4-to-0HH" secondAttribute="bottom" constant="20" id="geL-6P-ntl"/>
                                             <constraint firstItem="NHr-xj-FSe" firstAttribute="top" secondItem="8Jz-Iq-X7P" secondAttribute="bottom" constant="20" id="kiM-RW-gWb"/>
-                                            <constraint firstItem="eGD-tU-MIU" firstAttribute="top" secondItem="vZU-Lf-KQR" secondAttribute="bottom" constant="20" id="npc-pV-HK7"/>
-                                            <constraint firstItem="vZU-Lf-KQR" firstAttribute="top" secondItem="NHr-xj-FSe" secondAttribute="bottom" constant="20" id="sMF-xC-na6"/>
-                                            <constraint firstItem="vZU-Lf-KQR" firstAttribute="leading" secondItem="SO2-N6-RyK" secondAttribute="leading" constant="20" id="snN-ky-EGd"/>
                                             <constraint firstAttribute="trailing" secondItem="NHr-xj-FSe" secondAttribute="trailing" constant="20" id="vhd-CJ-ESG"/>
                                             <constraint firstItem="NHr-xj-FSe" firstAttribute="leading" secondItem="SO2-N6-RyK" secondAttribute="leading" constant="20" id="wNG-nM-ue5"/>
                                             <constraint firstItem="8Jz-Iq-X7P" firstAttribute="top" secondItem="thz-hx-cd2" secondAttribute="bottom" constant="20" id="xZF-Cc-wzv"/>
@@ -196,7 +186,6 @@
                         <outlet property="documentTitleTextField" destination="TXx-4J-Nji" id="kxP-lA-AZa"/>
                         <outlet property="locationStackView" destination="NHr-xj-FSe" id="XHk-Eo-zle"/>
                         <outlet property="locationTextField" destination="2bi-kA-H3C" id="YKf-Rn-R3K"/>
-                        <outlet property="mapView" destination="vZU-Lf-KQR" id="Rnb-TO-0gb"/>
                         <outlet property="scrollView" destination="Ngg-zn-dc2" id="84o-Q0-0rP"/>
                         <outlet property="titleStackView" destination="thz-hx-cd2" id="o5j-ps-1nA"/>
                     </connections>

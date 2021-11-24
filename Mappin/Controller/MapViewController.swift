@@ -30,7 +30,7 @@ class MapViewController: UIViewController {
     
     let localRealm = try! Realm()
     
-    var tasks: Results<TravelDocument>!
+    var tasks: Results<LocationDocument>!
     
     //MARK: UI
     
@@ -61,7 +61,7 @@ class MapViewController: UIViewController {
     
     func addPin() {
         for task in tasks {
-            for travel in task.travels {
+            for travel in task.memoryList {
                 let latitude = travel.travelLocation[0]
                 let longitude = travel.travelLocation[1]
                 
@@ -98,20 +98,20 @@ class MapViewController: UIViewController {
     
     
     func presentActionSheet() {
-        let sheet = UIAlertController(title: "핀 추가", message: nil, preferredStyle: .actionSheet)
+        let sheet = UIAlertController(title: "기록 추가", message: nil, preferredStyle: .actionSheet)
         
-        let newlyTravel = UIAlertAction(title: "새로운 여행에 핀 추가하기", style: .default) { _ in
-            print("DEBUG: 새로운 여행 추가 씬으로")
+        let newlyTravel = UIAlertAction(title: "새로운 장소에 기록 추가하기", style: .default) { _ in
+            print("DEBUG: 새로운 장소 추가 씬으로")
             let sb = UIStoryboard(name: "AddTravel", bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "AddTravelViewController") as! AddTravelViewController
             
             self.navigationController?.pushViewController(vc, animated: true)
         }
         
-        let existingTravel = UIAlertAction(title: "기존 여행에 핀 추가하기", style: .default) { [weak self](_) in
-            print("DEBUG: 핀 추가 씬으로")
+        let existingTravel = UIAlertAction(title: "기존 장소에 기록 추가하기", style: .default) { [weak self](_) in
+            print("DEBUG: 기록 추가 씬으로")
             if self!.tasks.isEmpty {
-                self?.presentOkAlert(message: "기존 여행이 존재하지 않습니다. 새로운 여행을 만들어주세요.")
+                self?.presentOkAlert(message: "기존 장소가 존재하지 않습니다. 새로운 장소를 만들어주세요.")
                 return
             }
             
@@ -152,8 +152,8 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         locationManager.delegate = self
         navBarConfig()
-        
-        tasks = localRealm.objects(TravelDocument.self)
+        print("viewDidload")
+        tasks = localRealm.objects(LocationDocument.self)
     }
     
     override func viewWillAppear(_ animated: Bool) {

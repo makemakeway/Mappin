@@ -31,21 +31,30 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="사진 추가" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gAq-DV-bFT">
-                                <rect key="frame" x="10" y="201.5" width="316" height="14.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <rect key="frame" x="10" y="206.5" width="316" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QbQ-5f-O1k">
+                                <rect key="frame" x="20" y="237" width="296" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="QbQ-5f-O1k" secondAttribute="trailing" constant="20" id="GmP-TQ-UX0"/>
                             <constraint firstItem="lwn-gL-cyx" firstAttribute="centerY" secondItem="Oi0-4O-unJ" secondAttribute="centerY" multiplier="0.75" id="J5R-9v-hls"/>
                             <constraint firstAttribute="trailing" secondItem="DXj-EB-K3V" secondAttribute="trailing" id="Jya-Pd-8wf"/>
                             <constraint firstItem="lwn-gL-cyx" firstAttribute="centerX" secondItem="Oi0-4O-unJ" secondAttribute="centerX" id="N0G-fm-bTa"/>
+                            <constraint firstItem="QbQ-5f-O1k" firstAttribute="leading" secondItem="Oi0-4O-unJ" secondAttribute="leading" constant="20" id="P7L-ql-jPm"/>
                             <constraint firstAttribute="bottom" secondItem="DXj-EB-K3V" secondAttribute="bottom" id="PZv-yA-l6m"/>
                             <constraint firstItem="lwn-gL-cyx" firstAttribute="height" secondItem="DXj-EB-K3V" secondAttribute="height" multiplier="0.4" id="Ruf-Zy-3oL"/>
                             <constraint firstItem="DXj-EB-K3V" firstAttribute="leading" secondItem="Oi0-4O-unJ" secondAttribute="leading" id="dqX-eS-xaS"/>
-                            <constraint firstItem="gAq-DV-bFT" firstAttribute="top" secondItem="lwn-gL-cyx" secondAttribute="bottom" constant="5" id="iOI-B7-BH9"/>
+                            <constraint firstItem="gAq-DV-bFT" firstAttribute="top" secondItem="lwn-gL-cyx" secondAttribute="bottom" constant="10" id="iOI-B7-BH9"/>
+                            <constraint firstItem="QbQ-5f-O1k" firstAttribute="top" secondItem="gAq-DV-bFT" secondAttribute="bottom" constant="10" id="iPg-i8-U0t"/>
                             <constraint firstItem="gAq-DV-bFT" firstAttribute="leading" secondItem="Oi0-4O-unJ" secondAttribute="leading" constant="10" id="mHe-ui-6WM"/>
                             <constraint firstItem="DXj-EB-K3V" firstAttribute="top" secondItem="Oi0-4O-unJ" secondAttribute="top" id="n1G-fE-64G"/>
                             <constraint firstAttribute="trailing" secondItem="gAq-DV-bFT" secondAttribute="trailing" constant="10" id="yeQ-vj-aci"/>
@@ -65,6 +74,7 @@
                 <outlet property="cameraImage" destination="lwn-gL-cyx" id="DvQ-np-UAe"/>
                 <outlet property="cameraLabel" destination="gAq-DV-bFT" id="hVv-zo-Y7g"/>
                 <outlet property="container" destination="Oi0-4O-unJ" id="91s-M7-kCB"/>
+                <outlet property="photoCountLabel" destination="QbQ-5f-O1k" id="Vdd-Wu-ZRU"/>
                 <outlet property="photoImageView" destination="DXj-EB-K3V" id="OiE-gN-XTD"/>
             </connections>
             <point key="canvasLocation" x="91.304347826086968" y="107.8125"/>

@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreLocation
+import UIKit
 
 
 class LocationManager {
@@ -15,7 +16,22 @@ class LocationManager {
     
     let manager = CLLocationManager()
     
-    var currentLocation = CLLocationCoordinate2D(latitude: UserDefaults.standard.double(forKey: "userLatitude"), longitude: UserDefaults.standard.double(forKey: "userLongitude"))
+    var currentLocation: CLLocationCoordinate2D = {
+        var latitude = UserDefaults.standard.double(forKey: "userLatitude")
+        var longitude = UserDefaults.standard.double(forKey: "userLongitude")
+        
+        print(latitude, longitude)
+        
+        if latitude == 0.0 && longitude == 0.0 {
+            let location = CLLocationCoordinate2D(latitude: 37.56636813704404,
+                                                  longitude: 126.97795811732428)
+            return location
+        } else {
+            let location = CLLocationCoordinate2D(latitude: UserDefaults.standard.double(forKey: "userLatitude"),
+                                                  longitude: UserDefaults.standard.double(forKey: "userLongitude"))
+            return location
+        }
+    }()
     
     private init() {
         
@@ -70,6 +86,9 @@ class LocationManager {
         case .authorizedAlways, .authorizedWhenInUse:
             print("DEBUG: 사용자의 위치 권한 사용 가능.")
             manager.startUpdatingLocation()
+            if let location = manager.location {
+                currentLocation = location.coordinate
+            }
         @unknown default:
             print("DEBUG: 아 에러임 ㅋㅋ")
         }
@@ -86,8 +105,6 @@ class LocationManager {
                 print("DEBUG: 아 언노운 ㅋㅋ")
             }
         }
-        
-        
     }
     
     

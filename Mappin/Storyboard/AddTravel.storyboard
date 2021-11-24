@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="여행 제목을 입력해주세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RSr-7u-R5k">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="장소 입력" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RSr-7u-R5k">
                                 <rect key="frame" x="20" y="64" width="374" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="6VR-Q9-Glf"/>
@@ -25,16 +25,25 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h7w-2Z-JsM" customClass="GMSMapView">
+                                <rect key="frame" x="20" y="128" width="374" height="179"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="RSr-7u-R5k" secondAttribute="trailing" constant="20" id="EMr-Qa-ydf"/>
+                            <constraint firstItem="h7w-2Z-JsM" firstAttribute="top" secondItem="RSr-7u-R5k" secondAttribute="bottom" constant="20" id="IDu-x7-Uqv"/>
+                            <constraint firstItem="h7w-2Z-JsM" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="M86-5F-FiS"/>
                             <constraint firstItem="RSr-7u-R5k" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="NfA-Og-RQm"/>
                             <constraint firstItem="RSr-7u-R5k" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="Qkk-Wl-fqH"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="h7w-2Z-JsM" secondAttribute="trailing" constant="20" id="pCG-mq-vy4"/>
+                            <constraint firstItem="h7w-2Z-JsM" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.2" id="vpr-ky-bIz"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="mapView" destination="h7w-2Z-JsM" id="zXA-gb-y8c"/>
                         <outlet property="titleTextField" destination="RSr-7u-R5k" id="baR-Yu-Fdh"/>
                     </connections>
                 </viewController>

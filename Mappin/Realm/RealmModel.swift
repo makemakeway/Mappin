@@ -7,39 +7,39 @@
 
 import Foundation
 import RealmSwift
+import CoreLocation
 
-class TravelDocument: Object {
+class LocationDocument: Object {
     @Persisted(primaryKey: true) var documentTitle: String
-    @Persisted var travels: List<Travel>
+    @Persisted var memoryList: List<MemoryData>
     @Persisted var pinColor: String = "red"
+    @Persisted var locationCoordinate: List<Double>
+    @Persisted var stared: Bool = false
     
-    convenience init(title: String, travel: List<Travel>) {
+    convenience init(title: String, memoryList: List<MemoryData>, location: List<Double>) {
         self.init()
         
         self.documentTitle = title
-        self.travels = travel
+        self.memoryList = memoryList
+        self.locationCoordinate = location
     }
 }
 
 
-class Travel: Object {
-    @Persisted var travelTitle: String
-    @Persisted var travelDate: Date
-    @Persisted var travelPicture: List<String>
-    @Persisted var travelContent: String
-    @Persisted var travelLocation: List<Double>
-    @Persisted var locationDescription: String
+class MemoryData: Object {
+    @Persisted var memoryDate: Date
+    @Persisted var memoryPicture: List<String>
+    @Persisted var memoryContent: String
+    @Persisted var memoryDescription: String
     @Persisted(primaryKey: true) var _id: ObjectId
     
-    convenience init(title: String, date: Date, picture: List<String>, content: String, location: List<Double>, locationDescription: String) {
+    convenience init(date: Date, picture: List<String>, content: String, description: String) {
         self.init()
         
-        self.travelTitle = title
-        self.travelDate = date
-        self.travelPicture = picture
-        self.travelContent = content
-        self.travelLocation = location
-        self.locationDescription = locationDescription
+        self.memoryDate = date
+        self.memoryPicture = picture
+        self.memoryContent = content
+        self.memoryDescription = description
     }
 }
 

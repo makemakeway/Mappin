@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import GoogleMaps
 
 class AddTravelViewController: UIViewController {
 
@@ -15,12 +16,21 @@ class AddTravelViewController: UIViewController {
     
     let localRealm = try! Realm()
     
-    var tasks: Results<TravelDocument>!
+    var tasks: Results<LocationDocument>!
+    
+    var pinLocation = LocationManager.shared.currentLocation {
+        didSet {
+            mapView.clear()
+            loadMap(location: pinLocation)
+            drawPin()
+        }
+    }
     
     //MARK: UI
     
     @IBOutlet weak var titleTextField: UITextField!
     
+    @IBOutlet weak var mapView: GMSMapView!
     
     //MARK: Method
     
@@ -30,8 +40,14 @@ class AddTravelViewController: UIViewController {
         if checkTitleIsValid() {
             print("DEBUG: 유효한 타이틀")
             
+            let location = List<Double>()
+            location.append(pinLocation.latitude)
+            location.append(pinLocation.longitude)
+            
             try! localRealm.write {
-                localRealm.add(TravelDocument(title: titleTextField.text!, travel: List<Travel>()))
+                localRealm.add(LocationDocument(title: titleTextField.text!,
+                                                memoryList: List<MemoryData>(),
+                                                location: location))
             }
             
             let sb = UIStoryboard(name: "AddPin", bundle: nil)
@@ -46,18 +62,54 @@ class AddTravelViewController: UIViewController {
 
     }
     
+    @objc func mapViewClicked(gesture: UITapGestureRecognizer) {
+        let sb = UIStoryboard(name: "SelectLocation", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "SelectLocationViewController") as! SelectLocationViewController
+        vc.modalPresentationStyle = .fullScreen
+        vc.location = pinLocation
+        
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    func loadMap(location: CLLocationCoordinate2D) {
+        let camera = GMSCameraPosition.camera(
+            withLatitude: location.latitude,
+            longitude: location.longitude,
+            zoom: 16)
+
+        mapView.settings.scrollGestures = false
+        mapView.settings.zoomGestures = false
+        mapView.settings.tiltGestures = false
+        mapView.settings.rotateGestures = false
+        
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(mapViewClicked(gesture:)))
+        
+        mapView.addGestureRecognizer(gesture)
+        
+        mapView.camera = camera
+    }
+    
+    func drawPin() {
+        
+        let marker = GMSMarker(position: pinLocation)
+        
+        marker.icon = GMSMarker.markerImage(with: UIColor.blue)
+        
+        marker.map = mapView
+    }
+    
     func checkTitleIsValid() -> Bool {
         
         guard let title = titleTextField.text, !(title.isEmpty) else {
             
-            presentOkAlert(message: "여행 제목을 입력해주세요.")
+            presentOkAlert(message: "추가하고 싶은 장소를 입력해주세요.")
             return false
         }
         
         
         if !(tasks.filter("documentTitle = '\(title)'").isEmpty) {
             print("쭝복임!")
-            presentOkAlert(message: "이미 존재하는 여행 제목입니다.\n다른 제목을 입력해주세요.")
+            presentOkAlert(message: "이미 기록했던 장소입니다.\n다른 장소를 입력해주세요.")
             return false
         }
         
@@ -71,7 +123,7 @@ class AddTravelViewController: UIViewController {
                                      action: #selector(forwardButtonClicked(_:)))
         
         self.navigationItem.rightBarButtonItem = button
-        self.title = "여행 추가"
+        self.title = "장소 추가"
     }
     
     
@@ -80,6 +132,9 @@ class AddTravelViewController: UIViewController {
         super.viewDidLoad()
 
         navBarConfig()
+        
+        loadMap(location: pinLocation)
+        drawPin()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -87,7 +142,8 @@ class AddTravelViewController: UIViewController {
         
         self.titleTextField.becomeFirstResponder()
         
-        tasks = localRealm.objects(TravelDocument.self)
+        tasks = localRealm.objects(LocationDocument.self)
+        LocationManager.shared.checkUsersLocationServicesAuthorization()
     }
 
 }

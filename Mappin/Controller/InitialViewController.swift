@@ -14,9 +14,9 @@ class InitialViewController: UIViewController {
     
     let localRealm = try! Realm()
     
-    var tasks: Results<TravelDocument>! {
+    var tasks: Results<LocationDocument>! {
         didSet {
-            if tasks.isEmpty || tasks.filter({ $0.travels.isEmpty == false }).isEmpty {
+            if tasks.isEmpty || tasks.filter({ $0.memoryList.isEmpty == false }).isEmpty {
                 print("비었네용")
                 self.emptyHandlingView.isHidden = false
             } else {
@@ -69,7 +69,7 @@ class InitialViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tasks = localRealm.objects(TravelDocument.self)
+        tasks = localRealm.objects(LocationDocument.self)
         print("DEBUG: Tasks is \(tasks)")
     }
     
@@ -83,21 +83,27 @@ extension InitialViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
+       
+        
         let task = tasks[indexPath.row]
         
         cell.backgroundColor = .systemBackground
         
-        cell.documentTitleLabel.text = task.documentTitle
-        cell.dateLabel.text = dateToString(date: task.travels.first!.travelDate)
+        if let memory = task.memoryList.first {
+            cell.documentTitleLabel.text = task.documentTitle
+            
+            cell.dateLabel.text = dateToString(date: memory.memoryDate)
+            
+            cell.photoImageView.image = ImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(memory._id)_0.jpeg")
+            
+            cell.photoImageView.contentMode = .scaleAspectFill
+            
+            cell.photoImageView.layer.cornerRadius = 10
+            
+            cell.opacityView.backgroundColor = UIColor(white: 0.3, alpha: 0.3)
+            cell.opacityView.layer.cornerRadius = 10
+        }
         
-        cell.photoImageView.image = ImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(task.travels.first!._id)_0.jpeg")
-        
-        cell.photoImageView.contentMode = .scaleAspectFill
-        
-        cell.photoImageView.layer.cornerRadius = 10
-        
-        cell.opacityView.backgroundColor = UIColor(white: 0.3, alpha: 0.3)
-        cell.opacityView.layer.cornerRadius = 10
         
         return cell
     }
@@ -125,7 +131,7 @@ extension InitialViewController: UITableViewDelegate, UITableViewDataSource {
             return nil
         }
         
-        header.titleLabel.text = "나의 여행"
+        header.titleLabel.text = "장소"
         
         return header
     }

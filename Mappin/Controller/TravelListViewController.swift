@@ -12,7 +12,7 @@ class TravelListViewController: UIViewController {
     
 
     //MARK: Properties
-    var travelDocument: TravelDocument? = nil {
+    var travelDocument: LocationDocument? = nil {
         didSet {
             self.title = travelDocument?.documentTitle ?? ""
         }
@@ -52,7 +52,7 @@ extension TravelListViewController: UITableViewDataSource, UITableViewDelegate {
             return 0
         }
         
-        return tasks.travels.count
+        return tasks.memoryList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -65,15 +65,15 @@ extension TravelListViewController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
         
-        let task = tasks.travels[indexPath.row]
+        let task = tasks.memoryList[indexPath.row]
         
         cell.photoImageView.image = ImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(task._id)_0.jpeg")
         
         cell.opacityView.backgroundColor = UIColor(white: 0.3, alpha: 0.3)
         
-        cell.dateLabel.text = dateToString(date: task.travelDate)
+        cell.dateLabel.text = dateToString(date: task.memoryDate)
         
-        cell.locationDescriptionLabel.text = task.locationDescription
+        cell.locationDescriptionLabel.text = task.memoryDescription
         
         cell.photoImageView.contentMode = .scaleAspectFill
         
@@ -94,10 +94,10 @@ extension TravelListViewController: UITableViewDataSource, UITableViewDelegate {
             return
         }
         
-        let task = tasks.travels[indexPath.row]
+        let task = tasks.memoryList[indexPath.row]
         
         
-        for imageName in task.travelPicture {
+        for imageName in task.memoryPicture {
             guard let image = ImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(imageName).jpeg") else {
                 print("DEBUG: 이미지 가져오는거 실패했음 ㅠㅠ")
                 return

@@ -7,7 +7,6 @@
 
 import UIKit
 import RealmSwift
-import GoogleMaps
 import PhotosUI
 import SwiftUI
 
@@ -24,13 +23,7 @@ class AddPinViewController: UIViewController {
         }
     }
     
-    var pinLocation = CLLocationCoordinate2D(latitude: UserDefaults.standard.double(forKey: "userLatitude"), longitude: UserDefaults.standard.double(forKey: "userLongitude")) {
-        didSet {
-            mapView.clear()
-            loadMap(location: pinLocation)
-            drawPin()
-        }
-    }
+
     
     var photoImages: [UIImage] = [] {
         didSet {
@@ -43,7 +36,7 @@ class AddPinViewController: UIViewController {
     
     var titleSource = [String]()
     
-    var tasks: Results<TravelDocument>!
+    var tasks: Results<LocationDocument>!
     
     let datePicker = UIDatePicker()
     
@@ -62,8 +55,6 @@ class AddPinViewController: UIViewController {
     @IBOutlet weak var dateTextField: UITextField!
     
     @IBOutlet weak var locationTextField: CustomTextField!
-    
-    @IBOutlet weak var mapView: GMSMapView!
     
     @IBOutlet weak var contentTextView: UITextView!
     
@@ -130,14 +121,7 @@ class AddPinViewController: UIViewController {
         self.present(sheet, animated: true, completion: nil)
     }
     
-    @objc func mapViewClicked(gesture: UITapGestureRecognizer) {
-        let sb = UIStoryboard(name: "SelectLocation", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "SelectLocationViewController") as! SelectLocationViewController
-        vc.modalPresentationStyle = .fullScreen
-        vc.location = pinLocation
-        
-        self.present(vc, animated: true, completion: nil)
-    }
+
     
     
     //MARK: functions
@@ -182,29 +166,24 @@ class AddPinViewController: UIViewController {
     
     func addDataToRealm() -> Bool {
         if dataValidCheck() {
-            let task = Travel(title: documentTitle!,
-                              date: datePicker.date,
-                              picture: RealmSwift.List<String>(),
-                              content: contentTextView.text!,
-                              location: RealmSwift.List<Double>(),
-                              locationDescription: locationAddress ?? "")
+            let task = MemoryData(date: datePicker.date,
+                                  picture: RealmSwift.List<String>(),
+                                  content: contentTextView.text!,
+                                  description: locationAddress ?? "")
 
             for (index, image) in photoImages.enumerated() {
                 let imageName = "\(task._id)_\(index).jpeg"
                 saveImageToDocumentDirectory(imageName: imageName, image: image)
-                task.travelPicture.append(imageName)
+                task.memoryPicture.append(imageName)
             }
             
-            task.travelLocation.append(pinLocation.latitude)
-            task.travelLocation.append(pinLocation.longitude)
-            
-            guard let currentTasks = localRealm.object(ofType: TravelDocument.self, forPrimaryKey: documentTitle!) else {
+            guard let currentTasks = localRealm.object(ofType: LocationDocument.self, forPrimaryKey: documentTitle!) else {
                 print("DEBUG: Tasks 불러오기 실패")
                 return false
             }
 
             try! localRealm.write {
-                currentTasks.travels.append(task)
+                currentTasks.memoryList.append(task)
                 localRealm.add(task)
             }
             
@@ -215,17 +194,22 @@ class AddPinViewController: UIViewController {
     
     func dataValidCheck() -> Bool {
         if documentTitle == nil {
-            presentOkAlert(message: "타이틀을 설정해주세요.")
+            presentOkAlert(message: "스토리를 추가할 장소를 설정해주세요.")
             return false
         }
         
         if contentTextView.textColor == .darkGray {
-            presentOkAlert(message: "내용을 입력해주세요.")
+            presentOkAlert(message: "스토리 내용을 입력해주세요.")
             return false
         }
         
         if photoImages.isEmpty {
             presentOkAlert(message: "사진을 추가해주세요.")
+            return false
+        }
+        
+        guard let location = locationTextField.text, !(location.isEmpty) else {
+            presentOkAlert(message: "스토리 제목을 입력해주세요.")
             return false
         }
         
@@ -288,7 +272,7 @@ class AddPinViewController: UIViewController {
 
     
     func titleTextFieldConfig() {
-        documentTitleTextField.placeholder = "타이틀"
+        documentTitleTextField.placeholder = "스토리를 추가할 장소를 선택해주세요."
         documentTitleTextField.font = UIFont.systemFont(ofSize: 18)
         documentTitleTextField.delegate = self
         
@@ -308,7 +292,7 @@ class AddPinViewController: UIViewController {
     }
     
     func dateTextFieldConfig() {
-        dateTextField.placeholder = "날짜"
+        dateTextField.placeholder = "스토리를 추가할 날짜를 선택해주세요."
         dateTextField.font = UIFont.systemFont(ofSize: 18)
         dateTextField.delegate = self
         
@@ -326,39 +310,14 @@ class AddPinViewController: UIViewController {
     }
     
     func locationTextFieldConfig() {
-        locationTextField.placeholder = "장소 설명"
+        locationTextField.placeholder = "스토리의 제목을 입력해주세요."
         locationTextField.font = UIFont.systemFont(ofSize: 18)
         locationTextField.clearButtonMode = .whileEditing
         
         makeUnderLine(view: locationStackView)
     }
     
-    func loadMap(location: CLLocationCoordinate2D) {
-        let camera = GMSCameraPosition.camera(
-            withLatitude: location.latitude,
-            longitude: location.longitude,
-            zoom: 16)
 
-        mapView.settings.scrollGestures = false
-        mapView.settings.zoomGestures = false
-        mapView.settings.tiltGestures = false
-        mapView.settings.rotateGestures = false
-        
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(mapViewClicked(gesture:)))
-        
-        mapView.addGestureRecognizer(gesture)
-        
-        mapView.camera = camera
-    }
-    
-    func drawPin() {
-        
-        let marker = GMSMarker(position: pinLocation)
-        
-        marker.icon = GMSMarker.markerImage(with: UIColor.blue)
-        
-        marker.map = mapView
-    }
     
     func navBarConfig() {
         let button = UIBarButtonItem(image: UIImage(systemName: "paperplane"),
@@ -367,7 +326,7 @@ class AddPinViewController: UIViewController {
                                      action: #selector(addPin(_:)))
         
         self.navigationItem.rightBarButtonItem = button
-        self.title = "핀 추가"
+        self.title = "스토리 추가"
     }
     
     func collectionViewConfig() {
@@ -378,7 +337,9 @@ class AddPinViewController: UIViewController {
         
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-        flowLayout.minimumInteritemSpacing = 10
+        flowLayout.itemSize = CGSize(width: collectionView.frame.size.width - 60, height: collectionView.frame.size.width - 60)
+        flowLayout.minimumInteritemSpacing = 20
+        flowLayout.minimumLineSpacing = 20
         flowLayout.scrollDirection = .horizontal
         
         collectionView.collectionViewLayout = flowLayout
@@ -408,7 +369,7 @@ class AddPinViewController: UIViewController {
     //MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        tasks = localRealm.objects(TravelDocument.self)
+        tasks = localRealm.objects(LocationDocument.self)
         
         titleSourceUpdate()
         navBarConfig()
@@ -425,10 +386,10 @@ class AddPinViewController: UIViewController {
         locationTextFieldConfig()
         
         scrollViewConfig()
-        loadMap(location: pinLocation)
+        
         
         titleTextFieldConfig()
-        drawPin()
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -478,20 +439,22 @@ extension AddPinViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 cell.removeGestureRecognizer(gesture)
             }
             else {
-                cell.cameraImage.image = UIImage(named: "camera")
+                cell.cameraImage.image = UIImage(systemName: "camera.on.rectangle")
                 cell.layer.borderColor = UIColor.lightGray.cgColor
                 cell.layer.borderWidth = 1
                 cell.cameraLabel.isHidden = false
                 cell.photoImageView.contentMode = .scaleAspectFit
+                cell.photoCountLabel.text = "\(photoImages.count) / 10"
                 cell.addGestureRecognizer(gesture)
             }
         }
         else {
-            cell.cameraImage.image = UIImage(named: "camera")
+            cell.cameraImage.image = UIImage(systemName: "camera.on.rectangle")
             cell.layer.borderColor = UIColor.lightGray.cgColor
             cell.layer.borderWidth = 1
             cell.cameraLabel.isHidden = false
             cell.photoImageView.contentMode = .scaleAspectFit
+            cell.photoCountLabel.text = "\(photoImages.count) / 10"
             cell.addGestureRecognizer(gesture)
         }
         
@@ -502,13 +465,6 @@ extension AddPinViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        let height = collectionView.frame.height - 20
-        
-        return CGSize(width: height, height: height)
     }
     
 }
@@ -523,7 +479,8 @@ extension AddPinViewController: UIScrollViewDelegate {
         
         
         if scrollView.contentOffset.y < -40 {
-            contentTextView.resignFirstResponder()
+//            contentTextView.resignFirstResponder()
+            view.endEditing(true)
         }
     }
 }
@@ -558,6 +515,7 @@ extension AddPinViewController: UIPickerViewDelegate, UIPickerViewDataSource {
 
 extension AddPinViewController: UITextViewDelegate {
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        print(#function)
         setKeyboardObserver()
         return true
     }
@@ -574,6 +532,7 @@ extension AddPinViewController: UITextViewDelegate {
             contentTextView.text = "내용"
             contentTextView.textColor = .darkGray
         }
+        print(#function)
         removeKeyboardObserver()
     }
 }
@@ -628,7 +587,7 @@ extension AddPinViewController: UITextFieldDelegate {
             presentActionSheetInsteadKeyboard(message: "날짜 선택", picker: datePicker)
             return false
         } else if textField == documentTitleTextField {
-            presentActionSheetInsteadKeyboard(message: "여행 선택", picker: titlePickerView)
+            presentActionSheetInsteadKeyboard(message: "스토리를 추가할 장소 선택", picker: titlePickerView)
             return false
         }
         return true
