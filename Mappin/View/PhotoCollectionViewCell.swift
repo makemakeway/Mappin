@@ -32,6 +32,7 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         photoImageView.backgroundColor = nil
         cameraImage.image = nil
         cameraLabel.isHidden = true
+        photoCountLabel.text = ""
         layer.borderWidth = 0
         layer.borderColor = nil
         

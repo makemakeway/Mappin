@@ -71,8 +71,12 @@ class AddPinViewController: UIViewController {
     //MARK: Method
     @objc func addPin(_ sender: UIBarButtonItem) {
         print("DEBUG: 핀 추가")
-        addDataToRealm()
-        self.navigationController?.popToRootViewController(animated: true)
+        if addDataToRealm() {
+            self.navigationController?.popToRootViewController(animated: true)
+        } else {
+            presentOkAlert(message: "스토리를 추가하지 못했습니다.\n잠시후 다시 시도하거나 앱을 재실행해주세요.")
+        }
+        
     }
     
     @objc func selectButtonClicked(_ sender: UIBarButtonItem) {
@@ -169,7 +173,7 @@ class AddPinViewController: UIViewController {
             let task = MemoryData(date: datePicker.date,
                                   picture: RealmSwift.List<String>(),
                                   content: contentTextView.text!,
-                                  description: locationAddress ?? "")
+                                  description: locationTextField.text!)
 
             for (index, image) in photoImages.enumerated() {
                 let imageName = "\(task._id)_\(index).jpeg"
@@ -473,14 +477,12 @@ extension AddPinViewController: UICollectionViewDelegate, UICollectionViewDataSo
 //MARK: ScrollView Delegate
 extension AddPinViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if dateTextField.isEditing || documentTitleTextField.isEditing || locationTextField.isEditing {
+        if locationTextField.isEditing {
             view.endEditing(true)
         }
         
-        
         if scrollView.contentOffset.y < -40 {
-//            contentTextView.resignFirstResponder()
-            view.endEditing(true)
+            contentTextView.resignFirstResponder()
         }
     }
 }
@@ -529,7 +531,7 @@ extension AddPinViewController: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
-            contentTextView.text = "내용"
+            contentTextView.text = "스토리 내용을 입력해주세요."
             contentTextView.textColor = .darkGray
         }
         print(#function)
@@ -587,9 +589,17 @@ extension AddPinViewController: UITextFieldDelegate {
             presentActionSheetInsteadKeyboard(message: "날짜 선택", picker: datePicker)
             return false
         } else if textField == documentTitleTextField {
-            presentActionSheetInsteadKeyboard(message: "스토리를 추가할 장소 선택", picker: titlePickerView)
+            presentActionSheetInsteadKeyboard(message: "장소 선택", picker: titlePickerView)
             return false
+        } else if textField == locationTextField {
+            setKeyboardObserver()
         }
         return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == locationTextField {
+            removeKeyboardObserver()
+        }
     }
 }

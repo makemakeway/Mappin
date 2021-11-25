@@ -102,7 +102,7 @@ extension TravelDetailViewController: UICollectionViewDelegate, UICollectionView
         }
         
         cell.photoImage.image = photoImages[indexPath.row]
-        cell.photoImage.contentMode = .scaleAspectFill
+        cell.photoImage.contentMode = .scaleAspectFit
         
         return cell
     }

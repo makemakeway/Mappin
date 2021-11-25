@@ -13,13 +13,13 @@ import RealmSwift
 class MapViewController: UIViewController {
 
     //MARK: Properties
-    var currentLocation: CLLocationCoordinate2D? {
+    var currentLocation: CLLocationCoordinate2D = LocationManager.shared.currentLocation {
         didSet {
-            print("DEBUG: 현재 위치 = \(currentLocation!)")
+            print("DEBUG: 현재 위치 = \(currentLocation)")
             if !locationUpdated {
-                loadMap(location: currentLocation!)
-                getCurrentAddress(location: CLLocation(latitude: currentLocation!.latitude,
-                                                       longitude: currentLocation!.longitude))
+                loadMap(location: currentLocation)
+                getCurrentAddress(location: CLLocation(latitude: currentLocation.latitude,
+                                                       longitude: currentLocation.longitude))
             }
         }
     }
@@ -49,7 +49,7 @@ class MapViewController: UIViewController {
         let camera = GMSCameraPosition.camera(
             withLatitude: location.latitude,
             longitude: location.longitude,
-            zoom: 16)
+            zoom: 14)
 
         mapView.settings.scrollGestures = true
         mapView.settings.zoomGestures = true
@@ -61,18 +61,14 @@ class MapViewController: UIViewController {
     
     func addPin() {
         for task in tasks {
-            for travel in task.memoryList {
-                let latitude = travel.travelLocation[0]
-                let longitude = travel.travelLocation[1]
-                
-                let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: latitude,
-                                                                        longitude: longitude))
-                marker.map = mapView
-                marker.title = travel.travelTitle
-                marker.snippet = dateToString(date: travel.travelDate)
-                
-                
-            }
+            let latitude = task.locationCoordinate[0]
+            let longitude = task.locationCoordinate[1]
+            
+            let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: latitude,
+                                                                    longitude: longitude))
+            marker.userData = task
+            marker.map = mapView
+            
         }
     }
     
@@ -146,6 +142,8 @@ class MapViewController: UIViewController {
     }
     
     
+    
+    
     //MARK: LifeCycle
     
     override func viewDidLoad() {
@@ -154,15 +152,16 @@ class MapViewController: UIViewController {
         navBarConfig()
         print("viewDidload")
         tasks = localRealm.objects(LocationDocument.self)
+        if !locationUpdated {
+            self.loadMap(location: currentLocation)
+        }
+        addPin()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         locationManager.startUpdatingLocation()
-        if !locationUpdated, currentLocation != nil {
-            self.loadMap(location: currentLocation!)
-        }
-        addPin()
+        
     }
     
 
@@ -196,11 +195,23 @@ extension MapViewController: CLLocationManagerDelegate {
 
 //MARK: GMSMapView delegate
 extension MapViewController: GMSMapViewDelegate {
-    func mapView(_ mapView: GMSMapView, markerInfoContents marker: GMSMarker) -> UIView? {
-        let infoView = MarkerInfoView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+    
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        print("tap \(marker)")
+        let zoom = mapView.camera.zoom
+        let camera = GMSCameraPosition(latitude: marker.position.latitude, longitude: marker.position.longitude, zoom: zoom)
         
-        infoView.tempLabel.text = "zz"
+        CATransaction.begin()
+        CATransaction.setValue(0.1, forKey: kCATransactionAnimationDuration)
+        mapView.animate(to: camera)
+        CATransaction.commit()
         
-        return infoView
+        let sb = UIStoryboard(name: "MarkerInfo", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "MarkerInfoViewController") as! MarkerInfoViewController
+        vc.document = marker.userData as? LocationDocument
+
+        self.presentPanModal(vc)
+        
+        return true
     }
 }
