@@ -8,6 +8,7 @@
 import UIKit
 import RealmSwift
 import GoogleMaps
+import CoreLocation
 
 class AddTravelViewController: UIViewController {
 
@@ -18,11 +19,17 @@ class AddTravelViewController: UIViewController {
     
     var tasks: Results<LocationDocument>!
     
+    var nationalCode = ""
+    
     var pinLocation = LocationManager.shared.currentLocation {
         didSet {
             mapView.clear()
             loadMap(location: pinLocation)
             drawPin()
+            LocationManager.shared.getAddress(location: CLLocation(latitude: pinLocation.latitude,
+                                                                   longitude: pinLocation.longitude)) { [weak self](code) in
+                self?.nationalCode = code
+            }
         }
     }
     
@@ -47,7 +54,8 @@ class AddTravelViewController: UIViewController {
             try! localRealm.write {
                 localRealm.add(LocationDocument(title: titleTextField.text!,
                                                 memoryList: List<MemoryData>(),
-                                                location: location))
+                                                location: location,
+                                                nationalCode: nationalCode))
             }
             
             let sb = UIStoryboard(name: "AddPin", bundle: nil)

@@ -18,8 +18,6 @@ class MapViewController: UIViewController {
             print("DEBUG: 현재 위치 = \(currentLocation)")
             if !locationUpdated {
                 loadMap(location: currentLocation)
-                getCurrentAddress(location: CLLocation(latitude: currentLocation.latitude,
-                                                       longitude: currentLocation.longitude))
             }
         }
     }

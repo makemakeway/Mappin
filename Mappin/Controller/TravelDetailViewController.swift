@@ -36,7 +36,7 @@ class TravelDetailViewController: UIViewController {
         carouselView.register(nib, forCellWithReuseIdentifier: TravelDetailCollectionViewCell.identifier)
         
         let cellWidth = UIScreen.main.bounds.width
-        let cellHeight = carouselView.frame.height - 20
+        let cellHeight = carouselView.frame.height
         
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.itemSize = CGSize(width: cellWidth, height: cellHeight)

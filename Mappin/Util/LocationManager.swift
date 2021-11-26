@@ -39,21 +39,21 @@ class LocationManager {
     
     func getAddress(location: CLLocation, completion: @escaping ((String) -> ()))  {
         let coder = CLGeocoder()
-        let locale = Locale(identifier: "ko-KR")
+        let locale = Locale.current
         
         coder.reverseGeocodeLocation(location, preferredLocale: locale) { (placemark, error) -> Void in
             guard error == nil, let place = placemark?.first else {
                 print("주소 설정 불가능")
                 return
             }
+            if let code = place.isoCountryCode {
+                completion(code)
+                print("isoCountryCode: \(code)")
+            } else {
+                print("isoCountryCode: nil")
+            }
             
             
-            
-            let address = [place.administrativeArea ?? "", place.locality ?? "", place.thoroughfare ?? "", place.subThoroughfare ?? ""]
-            
-            let addressQuery = address.joined(separator: " ")
-            
-            completion(addressQuery)
             return
         }
     }
@@ -71,6 +71,17 @@ class LocationManager {
         if CLLocationManager.locationServicesEnabled() {
             checkCurrentLocationAutorization(status: auth)
         }
+        
+    }
+    
+    func codeToFlag(code: String) -> String {
+        let base: UInt32 = 127397
+        var s = ""
+        
+        for v in code.unicodeScalars {
+            s.unicodeScalars.append(UnicodeScalar(base + v.value)!)
+        }
+        return String(s)
         
     }
     

@@ -81,6 +81,7 @@ class InitialViewController: UIViewController {
         super.viewWillAppear(animated)
         tasks = localRealm.objects(LocationDocument.self)
         print("DEBUG: Tasks is \(tasks)")
+        
         emptyDataDelete()
     }
     

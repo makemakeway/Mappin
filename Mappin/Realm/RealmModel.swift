@@ -15,13 +15,15 @@ class LocationDocument: Object {
     @Persisted var pinColor: String = "red"
     @Persisted var locationCoordinate: List<Double>
     @Persisted var stared: Bool = false
+    @Persisted var nationalCode: String
     
-    convenience init(title: String, memoryList: List<MemoryData>, location: List<Double>) {
+    convenience init(title: String, memoryList: List<MemoryData>, location: List<Double>, nationalCode: String) {
         self.init()
         
         self.documentTitle = title
         self.memoryList = memoryList
         self.locationCoordinate = location
+        self.nationalCode = nationalCode
     }
 }
 
