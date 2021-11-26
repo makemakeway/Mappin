@@ -7,6 +7,7 @@
 
 import UIKit
 import PanModal
+import ImageSlideshow
 
 class TravelDetailViewController: UIViewController {
 
@@ -17,48 +18,42 @@ class TravelDetailViewController: UIViewController {
     
     var photoImages = [UIImage]()
     
+    @IBOutlet weak var imageSlider: ImageSlideshow!
     
     
     //MARK: UI
     
     @IBOutlet weak var mainScrollView: UIScrollView!
     
-    @IBOutlet weak var carouselView: UICollectionView!
     
-    @IBOutlet weak var pageControll: UIPageControl!
     
     //MARK: Method
     
-    func carouselViewConfig() {
-        carouselView.delegate = self
-        carouselView.dataSource = self
-        let nib = UINib(nibName: TravelDetailCollectionViewCell.identifier, bundle: nil)
-        carouselView.register(nib, forCellWithReuseIdentifier: TravelDetailCollectionViewCell.identifier)
-        
-        let cellWidth = UIScreen.main.bounds.width
-        let cellHeight = carouselView.frame.height
-        
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.itemSize = CGSize(width: cellWidth, height: cellHeight)
-        flowLayout.scrollDirection = .horizontal
-        flowLayout.minimumInteritemSpacing = 0
-        flowLayout.minimumLineSpacing = 0
-        
-        carouselView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        carouselView.collectionViewLayout = flowLayout
-        carouselView.isPagingEnabled = true
-        carouselView.showsHorizontalScrollIndicator = false
-        carouselView.decelerationRate = UIScrollView.DecelerationRate.fast
+    @objc func imageTapped(_ sender: UITapGestureRecognizer) {
+        print("image tap")
+        let presentFullScreen = imageSlider.presentFullScreenController(from: self, completion: nil)
     }
+    
+    func imageSliderConfig() {
+        var inputSource = [ImageSource]()
+        
+        inputSource = photoImages.map({ ImageSource(image: $0) })
+        
+        imageSlider.setImageInputs(inputSource)
+        imageSlider.contentScaleMode = .scaleAspectFill
+        
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
+        imageSlider.addGestureRecognizer(gesture)
+    }
+    
     
     func loadImages() {
         if let task = task {
-            for (index, imageName) in task.memoryPicture.enumerated() {
+            for imageName in task.memoryPicture {
                 guard let image = ImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(imageName).jpeg") else {
                     return
                 }
                 photoImages.append(image)
-                carouselView.reloadItems(at: [IndexPath(item: index, section: 0)])
             }
         }
     }
@@ -66,14 +61,6 @@ class TravelDetailViewController: UIViewController {
     func scrollViewConfig() {
         mainScrollView.contentInsetAdjustmentBehavior = .never
         mainScrollView.showsVerticalScrollIndicator = false
-    }
-    
-    func pageControllConfig() {
-        pageControll.numberOfPages = photoImages.count
-        pageControll.currentPage = 0
-        pageControll.pageIndicatorTintColor = .darkGray
-        pageControll.currentPageIndicatorTintColor = .white
-        pageControll.isUserInteractionEnabled = false
     }
     
     func navbarConfig() {
@@ -87,15 +74,8 @@ class TravelDetailViewController: UIViewController {
         super.viewDidLoad()
         loadImages()
         scrollViewConfig()
-        carouselViewConfig()
         navbarConfig()
-        
-        if photoImages.count >= 2 {
-            pageControllConfig()
-        } else {
-            pageControll.isHidden = true
-        }
-        
+        imageSliderConfig()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -105,31 +85,10 @@ class TravelDetailViewController: UIViewController {
     
 }
 
-//MARK: CollectionView extension
-extension TravelDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photoImages.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TravelDetailCollectionViewCell.identifier, for: indexPath) as? TravelDetailCollectionViewCell else {
-            return UICollectionViewCell()
-        }
-        
-        cell.photoImage.image = photoImages[indexPath.row]
-        cell.photoImage.contentMode = .scaleAspectFill
-        
-        return cell
-    }
-}
 
 //MARK: ScrollView delegate
 extension TravelDetailViewController: UIScrollViewDelegate {
     
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        pageControll.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
-    }
 }
 
 //MARK: PanModal

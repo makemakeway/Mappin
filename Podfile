@@ -13,7 +13,7 @@ pod 'GoogleMaps'
 pod 'GooglePlaces'
 pod 'PanModal'
 pod 'RealmSwift', '~>10'
-
+pod 'ImageSlideshow', '~> 1.9.0'
 
 
   target 'MappinTests' do
