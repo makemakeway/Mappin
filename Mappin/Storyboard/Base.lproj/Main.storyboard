@@ -60,6 +60,18 @@
                                     <constraint firstItem="jg9-kF-m2a" firstAttribute="top" secondItem="EWm-Pz-bDz" secondAttribute="top" constant="50" id="zSO-aX-Yvr"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Sb-OD-g5o">
+                                <rect key="frame" x="326" y="746" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="5jJ-j9-zWT"/>
+                                    <constraint firstAttribute="width" constant="44" id="TDb-RU-DLN"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="floatingAddButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vyM-Yl-Vsv"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -68,6 +80,8 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="RpT-Sk-Zsa" secondAttribute="bottom" id="Eqh-qK-M07"/>
                             <constraint firstItem="RpT-Sk-Zsa" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="LYG-gH-cxP"/>
                             <constraint firstAttribute="trailing" secondItem="RpT-Sk-Zsa" secondAttribute="trailing" id="NJG-lK-22K"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="7Sb-OD-g5o" secondAttribute="bottom" constant="20" id="aRS-gR-7VI"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7Sb-OD-g5o" secondAttribute="trailing" constant="20" id="gSG-Zd-RAK"/>
                             <constraint firstItem="EWm-Pz-bDz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="hxI-iS-PLu"/>
                             <constraint firstItem="EWm-Pz-bDz" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="mTZ-VL-dvs"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="EWm-Pz-bDz" secondAttribute="bottom" id="qTg-FL-GbC"/>
@@ -84,6 +98,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="emptyHandlingView" destination="EWm-Pz-bDz" id="ghy-Uz-1fN"/>
+                        <outlet property="floatingAddButton" destination="7Sb-OD-g5o" id="vTx-PK-Frd"/>
                         <outlet property="tableView" destination="RpT-Sk-Zsa" id="d7z-1W-CKa"/>
                     </connections>
                 </viewController>

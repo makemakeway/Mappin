@@ -28,6 +28,20 @@ extension UIViewController {
         
     }
     
+    func floatingAddButtonConfig(button: UIButton, image: String) {
+        button.backgroundColor = .darkGray
+        button.tintColor = .white
+        button.setTitle("", for: .normal)
+        button.setImage(UIImage(systemName: image), for: .normal)
+        
+        button.layer.cornerRadius = button.frame.width / 2
+        
+        button.layer.shadowColor = UIColor.gray.cgColor
+        button.layer.shadowRadius = 10
+        button.layer.shadowOpacity = 0.7
+        button.layer.shadowOffset = CGSize.zero
+    }
+    
     
     func dateToString(date: Date) -> String {
         let df = DateFormatter()

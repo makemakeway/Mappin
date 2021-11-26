@@ -31,7 +31,7 @@ class TravelDetailViewController: UIViewController {
     
     @objc func imageTapped(_ sender: UITapGestureRecognizer) {
         print("image tap")
-        let presentFullScreen = imageSlider.presentFullScreenController(from: self, completion: nil)
+        imageSlider.presentFullScreenController(from: self, completion: nil)
     }
     
     func imageSliderConfig() {

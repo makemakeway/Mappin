@@ -33,6 +33,8 @@ class InitialViewController: UIViewController {
     
     @IBOutlet weak var emptyHandlingView: UIView!
     
+    @IBOutlet weak var floatingAddButton: UIButton!
+    
     //MARK: Method
     
     func tableViewConfig() {
@@ -54,6 +56,15 @@ class InitialViewController: UIViewController {
                 localRealm.delete(task.self)
             }
         }
+        tableView.reloadSections(IndexSet(0...0), with: .automatic)
+    }
+    
+    
+    
+    @IBAction func floatingAddButtonClicked(_ sender: UIButton) {
+        let sb = UIStoryboard(name: "AddTravel", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "AddTravelViewController") as! AddTravelViewController
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func mapButtonClicked(_ sender: UIBarButtonItem) {
@@ -75,6 +86,7 @@ class InitialViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViewConfig()
+        floatingAddButtonConfig(button: floatingAddButton, image: "square.and.pencil")
     }
     
     override func viewWillAppear(_ animated: Bool) {
