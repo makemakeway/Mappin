@@ -96,15 +96,7 @@ extension TravelListViewController: UITableViewDataSource, UITableViewDelegate {
         
         let task = tasks.memoryList[indexPath.row]
         
-        
-        for imageName in task.memoryPicture {
-            guard let image = ImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(imageName).jpeg") else {
-                print("DEBUG: 이미지 가져오는거 실패했음 ㅠㅠ")
-                return
-            }
-            vc.photoImages.append(image)
-        }
-        
+        vc.task = task
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -29,7 +29,8 @@ class MarkerInfoViewController: UIViewController {
     func tableViewConfig() {
         tableView.delegate = self
         tableView.dataSource = self
-        
+        let nib = UINib(nibName: MarkerInfoTableViewCell.identifier, bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: MarkerInfoTableViewCell.identifier)
     }
     
     
@@ -45,7 +46,7 @@ class MarkerInfoViewController: UIViewController {
 //MARK: PanModal
 extension MarkerInfoViewController: PanModalPresentable {
     var panScrollable: UIScrollView? {
-        return nil
+        return tableView
     }
     var shortFormHeight: PanModalHeight {
         return .contentHeight(view.frame.size.height * 0.4)
@@ -72,8 +73,38 @@ extension MarkerInfoViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
+        guard let tasks = document else {
+            return UITableViewCell()
+        }
+        
+        let task = tasks.memoryList[indexPath.row]
+        
+        cell.dateLabel.text = dateToString(date: task.memoryDate)
+        cell.memoryDescriptionLabel.text = task.memoryDescription
+        cell.photoImageView.image = ImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(task._id)_0.jpeg")
+        cell.photoImageView.contentMode = .scaleAspectFill
+        cell.photoImageView.layer.cornerRadius = 5
+        
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if let tasks = document {
+            let sb = UIStoryboard(name: "Detail", bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: "TravelDetailViewController") as! TravelDetailViewController
+            vc.task = tasks.memoryList[indexPath.row]
+            self.presentPanModal(vc)
+        }
+        
+    }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return view.frame.size.height * 0.15
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return document?.documentTitle ?? ""
+    }
 }

@@ -156,11 +156,12 @@ class MapViewController: UIViewController {
             self.loadMap(location: currentLocation)
         }
         addPin()
+        locationManager.startUpdatingLocation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        locationManager.startUpdatingLocation()
+        
         
     }
     

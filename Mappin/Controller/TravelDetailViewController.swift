@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import PanModal
 
 class TravelDetailViewController: UIViewController {
 
     
     //MARK: Properties
+    
+    var task: MemoryData?
     
     var photoImages = [UIImage]()
     
@@ -46,11 +49,23 @@ class TravelDetailViewController: UIViewController {
         carouselView.isPagingEnabled = true
         carouselView.showsHorizontalScrollIndicator = false
         carouselView.decelerationRate = UIScrollView.DecelerationRate.fast
-        
+    }
+    
+    func loadImages() {
+        if let task = task {
+            for (index, imageName) in task.memoryPicture.enumerated() {
+                guard let image = ImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(imageName).jpeg") else {
+                    return
+                }
+                photoImages.append(image)
+                carouselView.reloadItems(at: [IndexPath(item: index, section: 0)])
+            }
+        }
     }
     
     func scrollViewConfig() {
         mainScrollView.contentInsetAdjustmentBehavior = .never
+        mainScrollView.showsVerticalScrollIndicator = false
     }
     
     func pageControllConfig() {
@@ -70,6 +85,7 @@ class TravelDetailViewController: UIViewController {
     //MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadImages()
         scrollViewConfig()
         carouselViewConfig()
         navbarConfig()
@@ -102,7 +118,7 @@ extension TravelDetailViewController: UICollectionViewDelegate, UICollectionView
         }
         
         cell.photoImage.image = photoImages[indexPath.row]
-        cell.photoImage.contentMode = .scaleAspectFit
+        cell.photoImage.contentMode = .scaleAspectFill
         
         return cell
     }
@@ -114,4 +130,19 @@ extension TravelDetailViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         pageControll.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
     }
+}
+
+//MARK: PanModal
+extension TravelDetailViewController: PanModalPresentable {
+    var panScrollable: UIScrollView? {
+        return mainScrollView
+    }
+    
+    var shortFormHeight: PanModalHeight {
+        return .contentHeight(UIScreen.main.bounds.height * 0.5)
+    }
+    var longFormHeight: PanModalHeight {
+        return .maxHeightWithTopInset(20)
+    }
+    
 }

@@ -16,13 +16,6 @@ class AddPinViewController: UIViewController {
     
     //MARK: Properties
     let localRealm = try! Realm()
-    
-    var locationAddress = UserDefaults.standard.string(forKey: "userLocation") {
-        didSet {
-            locationTextField.text = locationAddress
-        }
-    }
-    
 
     
     var photoImages: [UIImage] = [] {
@@ -182,7 +175,8 @@ class AddPinViewController: UIViewController {
             }
             
             guard let currentTasks = localRealm.object(ofType: LocationDocument.self, forPrimaryKey: documentTitle!) else {
-                print("DEBUG: Tasks 불러오기 실패")
+                print("DEBUG: Tasks 불러오기 실패 title = \(documentTitle)")
+                print("DEBUG: tasks = \(tasks)")
                 return false
             }
 
@@ -401,14 +395,6 @@ class AddPinViewController: UIViewController {
         
         print("DEBUG: ViewWillAppear")
         
-        
-        
-        guard let address = locationAddress else {
-            print("DEBUG: 주소 없엉 ㅠㅠ")
-            return
-        }
-        
-        locationTextField.text = address
     }
 }
 

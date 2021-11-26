@@ -45,6 +45,17 @@ class InitialViewController: UIViewController {
         tableView.showsVerticalScrollIndicator = false
     }
     
+    func emptyDataDelete() {
+        let emptyData = tasks.filter({ $0.memoryList.isEmpty == true })
+        
+        for task in emptyData {
+            try! localRealm.write {
+                print("DEBUG: 비어있는 데이터 삭제함 \(task)")
+                localRealm.delete(task.self)
+            }
+        }
+    }
+    
     @IBAction func mapButtonClicked(_ sender: UIBarButtonItem) {
         let sb = UIStoryboard(name: "Map", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
@@ -61,7 +72,6 @@ class InitialViewController: UIViewController {
     //MARK: LifeCycle
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViewConfig()
@@ -71,6 +81,7 @@ class InitialViewController: UIViewController {
         super.viewWillAppear(animated)
         tasks = localRealm.objects(LocationDocument.self)
         print("DEBUG: Tasks is \(tasks)")
+        emptyDataDelete()
     }
     
 
@@ -87,9 +98,10 @@ extension InitialViewController: UITableViewDelegate, UITableViewDataSource {
         
         let task = tasks[indexPath.row]
         
+        
         cell.backgroundColor = .systemBackground
         
-        if let memory = task.memoryList.first {
+        if let memory = task.memoryList.first, !(task.memoryList.isEmpty) {
             cell.documentTitleLabel.text = task.documentTitle
             
             cell.dateLabel.text = dateToString(date: memory.memoryDate)
