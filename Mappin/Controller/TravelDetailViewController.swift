@@ -25,6 +25,12 @@ class TravelDetailViewController: UIViewController {
     
     @IBOutlet weak var mainScrollView: UIScrollView!
     
+    @IBOutlet weak var locationTitleLabel: UILabel!
+    
+    @IBOutlet weak var dateLabel: UILabel!
+    
+    @IBOutlet weak var memoryContentLabel: UILabel!
+    
     
     
     //MARK: Method
@@ -32,6 +38,26 @@ class TravelDetailViewController: UIViewController {
     @objc func imageTapped(_ sender: UITapGestureRecognizer) {
         print("image tap")
         imageSlider.presentFullScreenController(from: self, completion: nil)
+    }
+    
+    func locationTitleLabelConfig() {
+        
+        if let task = task {
+            locationTitleLabel.text = task.memoryDescription
+        }
+        
+    }
+    
+    func dateLabelConfig() {
+        if let task = task {
+            dateLabel.text = dateToString(date: task.memoryDate)
+        }
+    }
+    
+    func memoryContentLabelConfig() {
+        if let task = task {
+            memoryContentLabel.text = task.memoryContent
+        }
     }
     
     func imageSliderConfig() {
@@ -76,6 +102,10 @@ class TravelDetailViewController: UIViewController {
         scrollViewConfig()
         navbarConfig()
         imageSliderConfig()
+        
+        locationTitleLabelConfig()
+        dateLabelConfig()
+        memoryContentLabelConfig()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

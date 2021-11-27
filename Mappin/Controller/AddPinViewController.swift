@@ -311,6 +311,7 @@ class AddPinViewController: UIViewController {
         locationTextField.placeholder = "스토리의 제목을 입력해주세요."
         locationTextField.font = UIFont.systemFont(ofSize: 18)
         locationTextField.clearButtonMode = .whileEditing
+        locationTextField.delegate = self
         
         makeUnderLine(view: locationStackView)
     }
@@ -394,7 +395,14 @@ class AddPinViewController: UIViewController {
         super.viewWillAppear(animated)
         
         print("DEBUG: ViewWillAppear")
+        setKeyboardObserver()
         
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print("DEBUG: ViewWillDisAppear")
+        removeKeyboardObserver()
     }
 }
 
@@ -463,12 +471,9 @@ extension AddPinViewController: UICollectionViewDelegate, UICollectionViewDataSo
 //MARK: ScrollView Delegate
 extension AddPinViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if locationTextField.isEditing {
-            view.endEditing(true)
-        }
         
         if scrollView.contentOffset.y < -40 {
-            contentTextView.resignFirstResponder()
+            view.endEditing(true)
         }
     }
 }
@@ -504,7 +509,6 @@ extension AddPinViewController: UIPickerViewDelegate, UIPickerViewDataSource {
 extension AddPinViewController: UITextViewDelegate {
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         print(#function)
-        setKeyboardObserver()
         return true
     }
     
@@ -521,7 +525,6 @@ extension AddPinViewController: UITextViewDelegate {
             contentTextView.textColor = .darkGray
         }
         print(#function)
-        removeKeyboardObserver()
     }
 }
 
@@ -578,14 +581,14 @@ extension AddPinViewController: UITextFieldDelegate {
             presentActionSheetInsteadKeyboard(message: "장소 선택", picker: titlePickerView)
             return false
         } else if textField == locationTextField {
-            setKeyboardObserver()
+    
         }
         return true
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == locationTextField {
-            removeKeyboardObserver()
+            
         }
     }
 }
