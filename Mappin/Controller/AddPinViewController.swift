@@ -221,7 +221,7 @@ class AddPinViewController: UIViewController {
         
         let imageURL = documentDirectory.appendingPathComponent(imageName)
         
-        guard let data = image.jpegData(compressionQuality: 0.7) else {
+        guard let data = image.jpegData(compressionQuality: 0.5) else {
             return
         }
         
@@ -553,19 +553,34 @@ extension AddPinViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true, completion: nil)
         
-        if !(results.isEmpty)  {
-            photoImages.removeAll()
+        DispatchQueue.global().async { [weak self] in
+            guard let self = self else {
+                return
+            }
             
-            for result in results {
-                let itemProvider = result.itemProvider
-                if itemProvider.canLoadObject(ofClass: UIImage.self) {
-                    itemProvider.loadObject(ofClass: UIImage.self) { [weak self](image, error) in
-                        self?.photoImages.append(image as! UIImage)
+            if !(results.isEmpty)  {
+                self.photoImages.removeAll()
+                
+                let group = DispatchGroup()
+                
+                LoadingIndicator.shared.showIndicator()
+                
+                for result in results {
+                    group.enter()
+                    let itemProvider = result.itemProvider
+                    if itemProvider.canLoadObject(ofClass: UIImage.self) {
+                        itemProvider.loadObject(ofClass: UIImage.self) { (image, error) in
+                            self.photoImages.append(image as! UIImage)
+                            group.leave()
+                        }
                     }
+                    
                 }
+                group.wait()
+                
+                LoadingIndicator.shared.hideIndicator()
             }
         }
-        
     }
 }
 
@@ -580,15 +595,7 @@ extension AddPinViewController: UITextFieldDelegate {
         } else if textField == documentTitleTextField {
             presentActionSheetInsteadKeyboard(message: "장소 선택", picker: titlePickerView)
             return false
-        } else if textField == locationTextField {
-    
         }
         return true
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField == locationTextField {
-            
-        }
     }
 }
