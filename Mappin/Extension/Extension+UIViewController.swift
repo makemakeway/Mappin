@@ -5,7 +5,6 @@
 //  Created by 박연배 on 2021/11/18.
 //
 
-import Foundation
 import UIKit
 import CoreLocation
 import GoogleMaps
@@ -28,9 +27,9 @@ extension UIViewController {
         
     }
     
-    func floatingAddButtonConfig(button: UIButton, image: String) {
-        button.backgroundColor = .darkGray
-        button.tintColor = .white
+    func floatingAddButtonConfig(button: UIButton, image: String, backgroundColor: UIColor, tintColor: UIColor) {
+        button.backgroundColor = backgroundColor
+        button.tintColor = tintColor
         button.setTitle("", for: .normal)
         button.setImage(UIImage(systemName: image), for: .normal)
         
@@ -40,6 +39,38 @@ extension UIViewController {
         button.layer.shadowRadius = 10
         button.layer.shadowOpacity = 0.7
         button.layer.shadowOffset = CGSize.zero
+    }
+    
+    @available (iOS 15, *)
+    func iOS15ButtonConfig(image: UIImage, button: UIButton) {
+        var configure = UIButton.Configuration.filled()
+
+        configure.cornerStyle = .capsule
+        configure.baseBackgroundColor = UIColor.white
+        configure.image = image
+        configure.baseForegroundColor = .darkGray
+        configure.title = ""
+        button.configuration = configure
+
+        button.frame.size = CGSize(width: 44, height: 44)
+        button.layer.shadowOffset = .zero
+        button.layer.shadowColor = UIColor.gray.cgColor
+        button.layer.shadowRadius = 5
+        button.layer.shadowOpacity = 0.7
+    }
+    
+    func iOS13ButtonConfig(image: UIImage, button: UIButton) {
+        button.setTitle("", for: .normal)
+        button.setImage(image, for: .normal)
+        
+        button.tintColor = .darkGray
+        button.backgroundColor = .white
+        
+        button.layer.cornerRadius = 22
+        button.layer.shadowOffset = .zero
+        button.layer.shadowColor = UIColor.gray.cgColor
+        button.layer.shadowRadius = 5
+        button.layer.shadowOpacity = 0.7
     }
     
     

@@ -31,6 +31,7 @@ class TravelDetailViewController: UIViewController {
     
     @IBOutlet weak var memoryContentLabel: UILabel!
     
+    @IBOutlet weak var headerView: UIView!
     
     
     //MARK: Method
@@ -38,6 +39,13 @@ class TravelDetailViewController: UIViewController {
     @objc func imageTapped(_ sender: UITapGestureRecognizer) {
         print("image tap")
         imageSlider.presentFullScreenController(from: self, completion: nil)
+    }
+    
+    func headerViewConfig() {
+        let bottomLine = CALayer()
+        bottomLine.frame = CGRect(x: 0, y: headerView.frame.height, width: headerView.frame.width - 30, height: 1)
+        bottomLine.backgroundColor = UIColor.lightGray.cgColor
+        headerView.layer.addSublayer(bottomLine)
     }
     
     func locationTitleLabelConfig() {
@@ -106,6 +114,7 @@ class TravelDetailViewController: UIViewController {
         locationTitleLabelConfig()
         dateLabelConfig()
         memoryContentLabelConfig()
+        headerViewConfig()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

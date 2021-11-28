@@ -31,6 +31,7 @@ class MarkerInfoViewController: UIViewController {
         tableView.dataSource = self
         let nib = UINib(nibName: MarkerInfoTableViewCell.identifier, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: MarkerInfoTableViewCell.identifier)
+        tableView.register(InitialTableViewHeader.self, forHeaderFooterViewReuseIdentifier: InitialTableViewHeader.identifier)
     }
     
     
@@ -80,7 +81,11 @@ extension MarkerInfoViewController: UITableViewDelegate, UITableViewDataSource {
         let task = tasks.memoryList[indexPath.row]
         
         cell.dateLabel.text = dateToString(date: task.memoryDate)
+        cell.dateLabel.font = UIFont().smallFontRegular
+        
         cell.memoryDescriptionLabel.text = task.memoryDescription
+        cell.memoryDescriptionLabel.font = UIFont().mainFontRegular
+        
         cell.photoImageView.image = ImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(task._id)_0.jpeg")
         cell.photoImageView.contentMode = .scaleAspectFill
         cell.photoImageView.layer.cornerRadius = 5
@@ -104,7 +109,26 @@ extension MarkerInfoViewController: UITableViewDelegate, UITableViewDataSource {
         return view.frame.size.height * 0.15
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return document?.documentTitle ?? ""
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: InitialTableViewHeader.identifier) as? InitialTableViewHeader else {
+            return nil
+        }
+        
+        guard let tasks = document else {
+            print("DEBUG: travelDocument 없음")
+            return nil
+        }
+        
+        header.titleLabel.text = "\(tasks.documentTitle)"
+        header.titleLabel.numberOfLines = 0
+        header.titleLabel.font = UIFont(name: "CookieRunOTF-Bold", size: 20)
+        header.titleLabel.tintColor = .label
+        
+        return header
     }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
 }

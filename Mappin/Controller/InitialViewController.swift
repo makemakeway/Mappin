@@ -86,13 +86,12 @@ class InitialViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViewConfig()
-        floatingAddButtonConfig(button: floatingAddButton, image: "square.and.pencil")
+        floatingAddButtonConfig(button: floatingAddButton, image: "square.and.pencil", backgroundColor: .darkGray, tintColor: .white)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tasks = localRealm.objects(LocationDocument.self)
-        print("DEBUG: Tasks is \(tasks)")
         
         emptyDataDelete()
     }
@@ -116,8 +115,10 @@ extension InitialViewController: UITableViewDelegate, UITableViewDataSource {
         
         if let memory = task.memoryList.first, !(task.memoryList.isEmpty) {
             cell.documentTitleLabel.text = task.documentTitle
+            cell.documentTitleLabel.font = UIFont().titleFontBold
             
             cell.dateLabel.text = dateToString(date: memory.memoryDate)
+            cell.dateLabel.font = UIFont().smallFontBold
             
             cell.photoImageView.image = ImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(memory._id)_0.jpeg")
             
@@ -157,6 +158,7 @@ extension InitialViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         header.titleLabel.text = "장소"
+        header.titleLabel.font = UIFont(name: "CookieRunOTF-Black", size: 24)
         
         return header
     }

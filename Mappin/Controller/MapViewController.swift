@@ -37,10 +37,13 @@ class MapViewController: UIViewController {
     
     //MARK: Method
     
-    @objc func addButtonClicked(_ sender: UIBarButtonItem) {
+    @objc func addButtonClicked(_ sender: UIButton) {
         print("DEBUG: Add button clicked")
         presentActionSheet()
-        
+    }
+    
+    @objc func backButtonClicked(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
     }
     
     func loadMap(location: CLLocationCoordinate2D) {
@@ -125,18 +128,62 @@ class MapViewController: UIViewController {
         self.present(sheet, animated: true, completion: nil)
     }
     
-    func addButtonconfig() -> UIBarButtonItem {
-        let button = UIBarButtonItem(image: UIImage(systemName: "plus"),
-                                     style: UIBarButtonItem.Style.done,
-                                     target: self,
-                                     action: #selector(addButtonClicked(_:)))
-        
-        return button
-    }
+    
     
     func navBarConfig() {
-        self.navigationItem.rightBarButtonItem = addButtonconfig()
-        self.navigationItem.leftBarButtonItem?.tintColor = .label
+        if #available(iOS 15, *) {
+            let backButton = UIButton()
+
+            iOS15ButtonConfig(image: UIImage(systemName: "chevron.left")!, button: backButton)
+            backButton.addTarget(self, action: #selector(backButtonClicked(_:)), for: .touchUpInside)
+
+            view.addSubview(backButton)
+
+            backButton.translatesAutoresizingMaskIntoConstraints = false
+            backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 44).isActive = true
+            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+
+            let addButton = UIButton()
+
+            iOS15ButtonConfig(image: UIImage(systemName: "plus")!, button: addButton)
+            addButton.addTarget(self, action: #selector(addButtonClicked(_:)), for: .touchUpInside)
+
+            view.addSubview(addButton)
+
+            addButton.translatesAutoresizingMaskIntoConstraints = false
+            addButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 44).isActive = true
+            addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+
+        } else {
+            let backButton = UIButton()
+
+            iOS13ButtonConfig(image: UIImage(systemName: "chevron.left")!, button: backButton)
+
+            view.addSubview(backButton)
+
+            backButton.translatesAutoresizingMaskIntoConstraints = false
+            backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 44).isActive = true
+            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+            backButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
+            backButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
+
+            backButton.addTarget(self, action: #selector(backButtonClicked(_:)), for: .touchUpInside)
+
+            let addButton = UIButton()
+
+            iOS13ButtonConfig(image: UIImage(systemName: "plus")!, button: addButton)
+
+            view.addSubview(addButton)
+
+            addButton.translatesAutoresizingMaskIntoConstraints = false
+            addButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 44).isActive = true
+            addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+            addButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
+            addButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
+
+            addButton.addTarget(self, action: #selector(addButtonClicked(_:)), for: .touchUpInside)
+        }
+        
     }
     
     
@@ -159,8 +206,12 @@ class MapViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        
+        navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.isHidden = false
     }
     
 

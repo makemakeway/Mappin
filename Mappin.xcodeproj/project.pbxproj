@@ -44,6 +44,16 @@
 		C27FE5572745218100F91946 /* InitialTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C27FE5552745218100F91946 /* InitialTableViewCell.xib */; };
 		C27FE559274523D500F91946 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27FE558274523D500F91946 /* MapViewController.swift */; };
 		C27FE55B274523EE00F91946 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C27FE55A274523EE00F91946 /* Map.storyboard */; };
+		C2A2C6A727537F38003E8DC2 /* Extension+UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A2C6A627537F38003E8DC2 /* Extension+UIFont.swift */; };
+		C2A2C6B7275385B6003E8DC2 /* CookieRunRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C2A2C6B4275385B6003E8DC2 /* CookieRunRegular.otf */; };
+		C2A2C6B8275385B6003E8DC2 /* CookieRunBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C2A2C6B5275385B6003E8DC2 /* CookieRunBold.otf */; };
+		C2A2C6B9275385B6003E8DC2 /* CookieRunBlack.otf in Resources */ = {isa = PBXBuildFile; fileRef = C2A2C6B6275385B6003E8DC2 /* CookieRunBlack.otf */; };
+		C2A2C6BA275385F1003E8DC2 /* CookieRunBlack.otf in Resources */ = {isa = PBXBuildFile; fileRef = C2A2C6B6275385B6003E8DC2 /* CookieRunBlack.otf */; };
+		C2A2C6BB275385F1003E8DC2 /* CookieRunBlack.otf in Resources */ = {isa = PBXBuildFile; fileRef = C2A2C6B6275385B6003E8DC2 /* CookieRunBlack.otf */; };
+		C2A2C6BC275385F3003E8DC2 /* CookieRunBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C2A2C6B5275385B6003E8DC2 /* CookieRunBold.otf */; };
+		C2A2C6BD275385F4003E8DC2 /* CookieRunBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C2A2C6B5275385B6003E8DC2 /* CookieRunBold.otf */; };
+		C2A2C6BE275385F6003E8DC2 /* CookieRunRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C2A2C6B4275385B6003E8DC2 /* CookieRunRegular.otf */; };
+		C2A2C6BF275385F6003E8DC2 /* CookieRunRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C2A2C6B4275385B6003E8DC2 /* CookieRunRegular.otf */; };
 		C2A80B21274A8D54002E29C9 /* SelectLocation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2A80B20274A8D54002E29C9 /* SelectLocation.storyboard */; };
 		C2CC523B27427AAB00090891 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CC523A27427AAB00090891 /* AppDelegate.swift */; };
 		C2CC523D27427AAB00090891 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CC523C27427AAB00090891 /* SceneDelegate.swift */; };
@@ -118,6 +128,10 @@
 		C27FE5552745218100F91946 /* InitialTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InitialTableViewCell.xib; sourceTree = "<group>"; };
 		C27FE558274523D500F91946 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		C27FE55A274523EE00F91946 /* Map.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
+		C2A2C6A627537F38003E8DC2 /* Extension+UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIFont.swift"; sourceTree = "<group>"; };
+		C2A2C6B4275385B6003E8DC2 /* CookieRunRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CookieRunRegular.otf; sourceTree = "<group>"; };
+		C2A2C6B5275385B6003E8DC2 /* CookieRunBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CookieRunBold.otf; sourceTree = "<group>"; };
+		C2A2C6B6275385B6003E8DC2 /* CookieRunBlack.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CookieRunBlack.otf; sourceTree = "<group>"; };
 		C2A80B20274A8D54002E29C9 /* SelectLocation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelectLocation.storyboard; sourceTree = "<group>"; };
 		C2CC523727427AAB00090891 /* Mappin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mappin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2CC523A27427AAB00090891 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -202,6 +216,7 @@
 			children = (
 				C26A23FA27467450005F42E2 /* Extension+UIViewController.swift */,
 				C2715C69274BDE6F001D5286 /* Extension+UIColor.swift */,
+				C2A2C6A627537F38003E8DC2 /* Extension+UIFont.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -230,6 +245,16 @@
 				C25FFA08274F5BD000B0C41B /* MarkerInfoTableViewCell.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		C2A2C69F27537100003E8DC2 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				C2A2C6B6275385B6003E8DC2 /* CookieRunBlack.otf */,
+				C2A2C6B5275385B6003E8DC2 /* CookieRunBold.otf */,
+				C2A2C6B4275385B6003E8DC2 /* CookieRunRegular.otf */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 		C2CC522E27427AAB00090891 = {
@@ -321,6 +346,7 @@
 		C2CC526C27427B1000090891 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				C2A2C69F27537100003E8DC2 /* Font */,
 				C2CC524327427AAD00090891 /* Assets.xcassets */,
 				C2CC523A27427AAB00090891 /* AppDelegate.swift */,
 				C2CC523C27427AAB00090891 /* SceneDelegate.swift */,
@@ -454,15 +480,18 @@
 				C26A23F8274654B5005F42E2 /* AddPin.storyboard in Resources */,
 				C2CC524727427AAD00090891 /* LaunchScreen.storyboard in Resources */,
 				C2715C6E274BECC5001D5286 /* TravelList.storyboard in Resources */,
+				C2A2C6B7275385B6003E8DC2 /* CookieRunRegular.otf in Resources */,
 				C2715C78274CEEE9001D5286 /* Detail.storyboard in Resources */,
 				C26A23E827462169005F42E2 /* Localizable.strings in Resources */,
 				C26A23FF2746909A005F42E2 /* PhotoCollectionViewCell.xib in Resources */,
 				C26A23F427465074005F42E2 /* AddTravel.storyboard in Resources */,
+				C2A2C6B8275385B6003E8DC2 /* CookieRunBold.otf in Resources */,
 				C2A80B21274A8D54002E29C9 /* SelectLocation.storyboard in Resources */,
 				C2CC524427427AAD00090891 /* Assets.xcassets in Resources */,
 				C25FFA06274F4E9200B0C41B /* MarkerInfo.storyboard in Resources */,
 				C27FE55B274523EE00F91946 /* Map.storyboard in Resources */,
 				C2715C72274CE3F3001D5286 /* TravelListTableViewCell.xib in Resources */,
+				C2A2C6B9275385B6003E8DC2 /* CookieRunBlack.otf in Resources */,
 				C27FE5572745218100F91946 /* InitialTableViewCell.xib in Resources */,
 				C25FFA0A274F5BD000B0C41B /* MarkerInfoTableViewCell.xib in Resources */,
 				C2CC524227427AAB00090891 /* Main.storyboard in Resources */,
@@ -474,6 +503,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2A2C6BE275385F6003E8DC2 /* CookieRunRegular.otf in Resources */,
+				C2A2C6BC275385F3003E8DC2 /* CookieRunBold.otf in Resources */,
+				C2A2C6BA275385F1003E8DC2 /* CookieRunBlack.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,6 +513,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2A2C6BF275385F6003E8DC2 /* CookieRunRegular.otf in Resources */,
+				C2A2C6BD275385F4003E8DC2 /* CookieRunBold.otf in Resources */,
+				C2A2C6BB275385F1003E8DC2 /* CookieRunBlack.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -650,6 +685,7 @@
 				C26A23F227465067005F42E2 /* AddTravelViewController.swift in Sources */,
 				C27A902927488F2700CDF3C9 /* CustomGesture.swift in Sources */,
 				C2715C68274BADA2001D5286 /* InitialTableViewHeader.swift in Sources */,
+				C2A2C6A727537F38003E8DC2 /* Extension+UIFont.swift in Sources */,
 				C27FE552274520C600F91946 /* InitialViewController.swift in Sources */,
 				C25FFA04274F4E8100B0C41B /* MarkerInfoViewController.swift in Sources */,
 				C26A23E427453BF5005F42E2 /* APIS.swift in Sources */,

@@ -5,9 +5,7 @@
 //  Created by 박연배 on 2021/11/27.
 //
 
-import Foundation
 import UIKit
-import SwiftUI
 
 class LoadingIndicator {
     static let shared = LoadingIndicator()

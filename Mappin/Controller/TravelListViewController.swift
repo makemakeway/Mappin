@@ -50,7 +50,7 @@ class TravelListViewController: UIViewController {
         super.viewDidLoad()
 
         tableViewConfig()
-        floatingAddButtonConfig(button: floatingAddButton, image: "plus")
+        floatingAddButtonConfig(button: floatingAddButton, image: "plus", backgroundColor: .darkGray, tintColor: .white)
     }
 
 }

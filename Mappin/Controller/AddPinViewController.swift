@@ -7,7 +7,6 @@
 
 import UIKit
 import RealmSwift
-import PhotosUI
 import SwiftUI
 import TLPhotoPicker
 
@@ -119,8 +118,6 @@ class AddPinViewController: UIViewController {
         self.present(sheet, animated: true, completion: nil)
     }
     
-
-    
     
     //MARK: functions
     
@@ -194,8 +191,7 @@ class AddPinViewController: UIViewController {
             }
             
             guard let currentTasks = localRealm.object(ofType: LocationDocument.self, forPrimaryKey: documentTitle!) else {
-                print("DEBUG: Tasks 불러오기 실패 title = \(documentTitle)")
-                print("DEBUG: tasks = \(tasks)")
+                print("DEBUG: Tasks 불러오기 실패")
                 return false
             }
 
@@ -438,6 +434,7 @@ extension AddPinViewController: UICollectionViewDelegate, UICollectionViewDataSo
             }
             else {
                 cell.cameraImage.image = UIImage(systemName: "camera.on.rectangle")
+                cell.cameraImage.tintColor = .orange
                 cell.layer.borderColor = UIColor.lightGray.cgColor
                 cell.layer.borderWidth = 1
                 cell.cameraLabel.isHidden = false
@@ -448,6 +445,7 @@ extension AddPinViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
         else {
             cell.cameraImage.image = UIImage(systemName: "camera.on.rectangle")
+            cell.cameraImage.tintColor = .orange
             cell.layer.borderColor = UIColor.lightGray.cgColor
             cell.layer.borderWidth = 1
             cell.cameraLabel.isHidden = false
