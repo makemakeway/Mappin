@@ -9,6 +9,7 @@ import UIKit
 import RealmSwift
 import PhotosUI
 import SwiftUI
+import TLPhotoPicker
 
 
 class AddPinViewController: UIViewController {
@@ -22,8 +23,8 @@ class AddPinViewController: UIViewController {
         didSet {
             DispatchQueue.main.async { [weak self] in
                 self?.collectionView.reloadData()
+                self?.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: true)
             }
-            
         }
     }
     
@@ -38,6 +39,8 @@ class AddPinViewController: UIViewController {
     var pickerIndex = 0
     
     var documentTitle: String? = nil
+    
+    var selectedAsset = [TLPHAsset]()
     
     //MARK: UI
     
@@ -89,30 +92,28 @@ class AddPinViewController: UIViewController {
     @objc func cameraImageClicked(_ gesture: CustomGesture) {
         let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let camera = UIAlertAction(title: "카메라로 사진 찍기", style: .default) { [weak self](_) in
-            let picker = self?.makePhotoPicker(type: .camera)
-            picker?.modalPresentationStyle = .fullScreen
-            self?.present(picker!, animated: true, completion: nil)
-            
-        }
-        
         let library = UIAlertAction(title: "갤러리에서 사진 선택", style: .default) { [weak self](_) in
             
-            if #available(iOS 14, *) {
-                let picker = self?.makePHPicker()
-                picker?.modalPresentationStyle = .fullScreen
-                self?.present(picker!, animated: true, completion: nil)
-            } else {
-                let picker = self?.makePhotoPicker(type: .photoLibrary)
-                picker?.modalPresentationStyle = .fullScreen
-                self?.present(picker!, animated: true, completion: nil)
-            }
+            guard let self = self else { return }
+            
+            let vc = TLPhotosPickerViewController()
+            vc.delegate = self
+            vc.modalPresentationStyle = .fullScreen
+            vc.view.backgroundColor = .systemBackground
+            
+            vc.cancelButton.title = "취소"
+            vc.doneButton.title = "선택"
+            vc.configure = self.TLPhotoPickerConfig()
+            
+            
+            self.present(vc, animated: true, completion: nil)
         }
+        
+        
         
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
         sheet.addAction(library)
-        sheet.addAction(camera)
         sheet.addAction(cancel)
         
         self.present(sheet, animated: true, completion: nil)
@@ -122,6 +123,24 @@ class AddPinViewController: UIViewController {
     
     
     //MARK: functions
+    
+    func TLPhotoPickerConfig() -> TLPhotosPickerConfigure {
+        var config = TLPhotosPickerConfigure()
+        
+        config.allowedVideo = false
+        config.allowedLivePhotos = false
+        config.allowedVideoRecording = false
+        config.fetchCollectionTypes = [(.album, .albumRegular)]
+        config.maxSelectedAssets = 10
+        config.mediaType = .image
+        
+        config.doneTitle = "선택"
+        config.cancelTitle = "취소"
+        config.tapHereToChange = "앨범 선택"
+        config.autoPlay = false
+        
+        return config
+    }
     
     func presentActionSheetInsteadKeyboard(message: String, picker: UIView) {
         
@@ -242,26 +261,7 @@ class AddPinViewController: UIViewController {
         }
     }
     
-    func makePhotoPicker(type: UIImagePickerController.SourceType) -> UIImagePickerController {
-        
-        let picker = UIImagePickerController()
-        picker.sourceType = type
-        picker.allowsEditing = true
-        picker.delegate = self
-        
-        return picker
-    }
     
-    @available(iOS 14, *)
-    func makePHPicker() -> PHPickerViewController {
-        var configure = PHPickerConfiguration()
-        configure.selectionLimit = 10
-        configure.filter = .images
-        let picker = PHPickerViewController(configuration: configure)
-        picker.delegate = self
-        return picker
-        
-    }
     
     func pickerViewConfig() {
         titlePickerView.delegate = self
@@ -528,60 +528,37 @@ extension AddPinViewController: UITextViewDelegate {
     }
 }
 
-
-//MARK: ImagePickerDelegate
-
-extension AddPinViewController: UIImagePickerControllerDelegate , UINavigationControllerDelegate{
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true, completion: nil)
-    }
+//MARK: TLPicker Delegate
+extension AddPinViewController: TLPhotosPickerViewControllerDelegate {
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
-            photoImages.append(image)
-            collectionView.reloadData()
-        }
-        picker.dismiss(animated: true, completion: nil)
-    }
-}
-
-
-//MARK: PHPicker Delegate
-
-extension AddPinViewController: PHPickerViewControllerDelegate {
-    @available(iOS 14, *)
-    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        picker.dismiss(animated: true, completion: nil)
-        
+    
+    func shouldDismissPhotoPicker(withTLPHAssets: [TLPHAsset]) -> Bool {
         DispatchQueue.global().async { [weak self] in
-            guard let self = self else {
-                return
-            }
+            guard let self = self else { return }
             
-            if !(results.isEmpty)  {
+            if !(withTLPHAssets.isEmpty) {
+                self.selectedAsset = withTLPHAssets
                 self.photoImages.removeAll()
                 
                 let group = DispatchGroup()
-                
-                LoadingIndicator.shared.showIndicator()
-                
-                for result in results {
+                for asset in withTLPHAssets {
                     group.enter()
-                    let itemProvider = result.itemProvider
-                    if itemProvider.canLoadObject(ofClass: UIImage.self) {
-                        itemProvider.loadObject(ofClass: UIImage.self) { (image, error) in
-                            self.photoImages.append(image as! UIImage)
-                            group.leave()
-                        }
-                    }
-                    
+                    self.photoImages.append(asset.fullResolutionImage!)
+                    group.leave()
                 }
-                group.wait()
                 
+                group.wait()
                 LoadingIndicator.shared.hideIndicator()
             }
         }
+        
+        return true
     }
+    
+    func photoPickerDidCancel() {
+//        dismiss(animated: true, completion: nil)
+    }
+    
 }
 
 
