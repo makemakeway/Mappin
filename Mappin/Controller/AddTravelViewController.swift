@@ -143,6 +143,9 @@ class AddTravelViewController: UIViewController {
         
         loadMap(location: pinLocation)
         drawPin()
+        
+        titleTextField.font = UIFont().mainFontRegular
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

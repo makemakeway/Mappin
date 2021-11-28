@@ -100,6 +100,7 @@ extension MarkerInfoViewController: UITableViewDelegate, UITableViewDataSource {
             let sb = UIStoryboard(name: "Detail", bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "TravelDetailViewController") as! TravelDetailViewController
             vc.task = tasks.memoryList[indexPath.row]
+            vc.throughMap = true
             self.presentPanModal(vc)
         }
         

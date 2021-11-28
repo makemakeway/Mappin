@@ -36,6 +36,13 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         layer.borderWidth = 0
         layer.borderColor = nil
         
+        for subview in container.subviews {
+            if subview is UIButton {
+                subview.removeFromSuperview()
+                break
+            }
+        }
+        
         guard let gestures = self.gestureRecognizers else {
             return
         }

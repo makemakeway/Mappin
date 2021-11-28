@@ -134,7 +134,7 @@ class MapViewController: UIViewController {
         if #available(iOS 15, *) {
             let backButton = UIButton()
 
-            iOS15ButtonConfig(image: UIImage(systemName: "chevron.left")!, button: backButton)
+            iOS15ButtonConfig(image: UIImage(systemName: "chevron.left")!, button: backButton, backgroundColor: .white, foregroundColor: .darkGray)
             backButton.addTarget(self, action: #selector(backButtonClicked(_:)), for: .touchUpInside)
 
             view.addSubview(backButton)
@@ -145,7 +145,7 @@ class MapViewController: UIViewController {
 
             let addButton = UIButton()
 
-            iOS15ButtonConfig(image: UIImage(systemName: "plus")!, button: addButton)
+            iOS15ButtonConfig(image: UIImage(systemName: "plus")!, button: addButton, backgroundColor: .white, foregroundColor: .darkGray)
             addButton.addTarget(self, action: #selector(addButtonClicked(_:)), for: .touchUpInside)
 
             view.addSubview(addButton)
@@ -157,12 +157,12 @@ class MapViewController: UIViewController {
         } else {
             let backButton = UIButton()
 
-            iOS13ButtonConfig(image: UIImage(systemName: "chevron.left")!, button: backButton)
+            iOS13ButtonConfig(image: UIImage(systemName: "chevron.left")!, button: backButton, backgroundColor: .white, foregroundColor: .darkGray)
 
             view.addSubview(backButton)
 
             backButton.translatesAutoresizingMaskIntoConstraints = false
-            backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 44).isActive = true
+            backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 48).isActive = true
             backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
             backButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
             backButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
@@ -171,12 +171,12 @@ class MapViewController: UIViewController {
 
             let addButton = UIButton()
 
-            iOS13ButtonConfig(image: UIImage(systemName: "plus")!, button: addButton)
+            iOS13ButtonConfig(image: UIImage(systemName: "plus")!, button: addButton, backgroundColor: .white, foregroundColor: .darkGray)
 
             view.addSubview(addButton)
 
             addButton.translatesAutoresizingMaskIntoConstraints = false
-            addButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 44).isActive = true
+            addButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 48).isActive = true
             addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
             addButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
             addButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
@@ -184,6 +184,7 @@ class MapViewController: UIViewController {
             addButton.addTarget(self, action: #selector(addButtonClicked(_:)), for: .touchUpInside)
         }
         
+        navigationItem.backButtonTitle = ""
     }
     
     

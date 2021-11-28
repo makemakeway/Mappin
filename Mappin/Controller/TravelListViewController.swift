@@ -37,6 +37,10 @@ class TravelListViewController: UIViewController {
         tableView.separatorStyle = .none
     }
     
+    func navBarConfig() {
+        self.navigationItem.backButtonTitle = ""
+    }
+    
     @IBAction func floatingAddbuttonClicked(_ sender: UIButton) {
         let sb = UIStoryboard(name: "AddPin", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "AddPinViewController") as! AddPinViewController
@@ -48,7 +52,7 @@ class TravelListViewController: UIViewController {
     //MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        navBarConfig()
         tableViewConfig()
         floatingAddButtonConfig(button: floatingAddButton, image: "plus", backgroundColor: .darkGray, tintColor: .white)
     }
@@ -85,8 +89,10 @@ extension TravelListViewController: UITableViewDataSource, UITableViewDelegate {
         cell.opacityView.backgroundColor = UIColor(white: 0.3, alpha: 0.3)
         
         cell.dateLabel.text = dateToString(date: task.memoryDate)
+        cell.dateLabel.font = UIFont().smallFontRegular
         
         cell.locationDescriptionLabel.text = task.memoryDescription
+        cell.locationDescriptionLabel.font = UIFont().mainFontBold
         
         cell.photoImageView.contentMode = .scaleAspectFill
         
@@ -134,6 +140,8 @@ extension TravelListViewController: UITableViewDataSource, UITableViewDelegate {
         let task = tasks.memoryList[indexPath.row]
         
         vc.task = task
+        vc.documentTitle = tasks.documentTitle
+        
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -59,6 +59,9 @@ class InitialViewController: UIViewController {
         tableView.reloadSections(IndexSet(0...0), with: .automatic)
     }
     
+    func navBarConfig() {
+        self.navigationItem.backButtonTitle = ""
+    }
     
     
     @IBAction func floatingAddButtonClicked(_ sender: UIButton) {
@@ -87,6 +90,7 @@ class InitialViewController: UIViewController {
         super.viewDidLoad()
         tableViewConfig()
         floatingAddButtonConfig(button: floatingAddButton, image: "square.and.pencil", backgroundColor: .darkGray, tintColor: .white)
+        navBarConfig()
     }
     
     override func viewWillAppear(_ animated: Bool) {

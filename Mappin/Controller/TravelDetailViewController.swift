@@ -18,6 +18,10 @@ class TravelDetailViewController: UIViewController {
     
     var photoImages = [UIImage]()
     
+    var throughMap = false
+    
+    var documentTitle = ""
+    
     @IBOutlet weak var imageSlider: ImageSlideshow!
     
     
@@ -41,6 +45,37 @@ class TravelDetailViewController: UIViewController {
         imageSlider.presentFullScreenController(from: self, completion: nil)
     }
     
+    @objc func moreButtonClicked(_ sender: UIButton) {
+        print("more Button Clicked")
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let edit = UIAlertAction(title: "스토리 수정하기", style: .default) { [weak self](_) in
+            guard let self = self else { return }
+            
+            let sb = UIStoryboard(name: "AddPin", bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: "AddPinViewController") as! AddPinViewController
+            vc.title = "스토리 수정"
+            
+            vc.memoryData = self.task
+            vc.documentTitle = self.documentTitle
+            
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        actionSheet.addAction(edit)
+        actionSheet.addAction(cancel)
+        
+        present(actionSheet, animated: true, completion: nil)
+    }
+    
+    func addGradient() {
+        let gradient = CAGradientLayer()
+        gradient.frame = CGRect(x: 0, y: 0, width: imageSlider.frame.width, height: imageSlider.frame.height / 6)
+        gradient.colors = [UIColor(white: 0.5, alpha: 0.7).cgColor, UIColor(white: 0, alpha: 0).cgColor]
+        imageSlider.layer.addSublayer(gradient)
+    }
+    
     func headerViewConfig() {
         let bottomLine = CALayer()
         bottomLine.frame = CGRect(x: 0, y: headerView.frame.height, width: headerView.frame.width - 30, height: 1)
@@ -52,6 +87,7 @@ class TravelDetailViewController: UIViewController {
         
         if let task = task {
             locationTitleLabel.text = task.memoryDescription
+            locationTitleLabel.font = UIFont().mainFontBold
         }
         
     }
@@ -59,12 +95,14 @@ class TravelDetailViewController: UIViewController {
     func dateLabelConfig() {
         if let task = task {
             dateLabel.text = dateToString(date: task.memoryDate)
+            dateLabel.font = UIFont().smallFontRegular
         }
     }
     
     func memoryContentLabelConfig() {
         if let task = task {
             memoryContentLabel.text = task.memoryContent
+            memoryContentLabel.font = UIFont().mainFontRegular
         }
     }
     
@@ -75,6 +113,7 @@ class TravelDetailViewController: UIViewController {
         
         imageSlider.setImageInputs(inputSource)
         imageSlider.contentScaleMode = .scaleAspectFill
+        imageSlider.insetsLayoutMarginsFromSafeArea = true
         
         let gesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
         imageSlider.addGestureRecognizer(gesture)
@@ -100,6 +139,22 @@ class TravelDetailViewController: UIViewController {
     func navbarConfig() {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationItem.backButtonTitle = ""
+        
+        if #available(iOS 15, *) {
+            let menuButton = UIButton()
+            
+            iOS15ButtonConfig(image: UIImage(systemName: "ellipsis")!, button: menuButton, backgroundColor: .darkGray, foregroundColor: .white)
+            
+            view.addSubview(menuButton)
+            
+            menuButton.translatesAutoresizingMaskIntoConstraints = false
+            menuButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -48).isActive = true
+            menuButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+            menuButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
+            menuButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
+            menuButton.addTarget(self, action: #selector(moreButtonClicked(_:)), for: .touchUpInside)
+        }
     }
     
     
@@ -115,6 +170,11 @@ class TravelDetailViewController: UIViewController {
         dateLabelConfig()
         memoryContentLabelConfig()
         headerViewConfig()
+        
+        if !throughMap {
+            addGradient()
+        }
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {

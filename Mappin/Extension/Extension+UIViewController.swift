@@ -36,40 +36,40 @@ extension UIViewController {
         button.layer.cornerRadius = button.frame.width / 2
         
         button.layer.shadowColor = UIColor.gray.cgColor
-        button.layer.shadowRadius = 10
+        button.layer.shadowRadius = 2
         button.layer.shadowOpacity = 0.7
         button.layer.shadowOffset = CGSize.zero
     }
     
     @available (iOS 15, *)
-    func iOS15ButtonConfig(image: UIImage, button: UIButton) {
+    func iOS15ButtonConfig(image: UIImage, button: UIButton, backgroundColor: UIColor, foregroundColor: UIColor) {
         var configure = UIButton.Configuration.filled()
 
         configure.cornerStyle = .capsule
-        configure.baseBackgroundColor = UIColor.white
+        configure.baseBackgroundColor = backgroundColor
         configure.image = image
-        configure.baseForegroundColor = .darkGray
+        configure.baseForegroundColor = foregroundColor
         configure.title = ""
         button.configuration = configure
 
         button.frame.size = CGSize(width: 44, height: 44)
         button.layer.shadowOffset = .zero
         button.layer.shadowColor = UIColor.gray.cgColor
-        button.layer.shadowRadius = 5
+        button.layer.shadowRadius = 2
         button.layer.shadowOpacity = 0.7
     }
     
-    func iOS13ButtonConfig(image: UIImage, button: UIButton) {
+    func iOS13ButtonConfig(image: UIImage, button: UIButton, backgroundColor: UIColor, foregroundColor: UIColor) {
         button.setTitle("", for: .normal)
         button.setImage(image, for: .normal)
         
-        button.tintColor = .darkGray
-        button.backgroundColor = .white
+        button.tintColor = foregroundColor
+        button.backgroundColor = backgroundColor
         
         button.layer.cornerRadius = 22
         button.layer.shadowOffset = .zero
         button.layer.shadowColor = UIColor.gray.cgColor
-        button.layer.shadowRadius = 5
+        button.layer.shadowRadius = 2
         button.layer.shadowOpacity = 0.7
     }
     

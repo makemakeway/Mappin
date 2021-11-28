@@ -24,11 +24,11 @@ class SelectLocationViewController: UIViewController {
     
     //MARK: Method
     
-    @objc func dismissButtonClicked(_ sender: UIBarButtonItem) {
+    @objc func dismissButtonClicked(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
     
-    @objc func completeButtonClicked(_ sender: UIBarButtonItem) {
+    @objc func completeButtonClicked(_ sender: UIButton) {
         
         if let nvc = self.presentingViewController as? UINavigationController {
             guard let vc = nvc.topViewController as? AddTravelViewController else {
@@ -37,11 +37,6 @@ class SelectLocationViewController: UIViewController {
             }
             
             vc.pinLocation = mapView.camera.target
-//            LocationManager.shared.getAddress(location: CLLocation(latitude: mapView.camera.target.latitude,
-//                                                                   longitude: mapView.camera.target.longitude),
-//                                              completion: { _ in
-//                // 주소 쓸 일 있을 때 추가하면 됨
-//            })
         }
         dismiss(animated: true, completion: nil)
     }
@@ -66,24 +61,59 @@ class SelectLocationViewController: UIViewController {
     }
     
     func navBarConfig() {
+        if #available(iOS 15, *) {
+            let backButton = UIButton()
+
+            iOS15ButtonConfig(image: UIImage(systemName: "xmark")!, button: backButton, backgroundColor: .white, foregroundColor: .darkGray)
+            backButton.addTarget(self, action: #selector(dismissButtonClicked(_:)), for: .touchUpInside)
+
+            view.addSubview(backButton)
+
+            backButton.translatesAutoresizingMaskIntoConstraints = false
+            backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 44).isActive = true
+            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+
+            let addButton = UIButton()
+
+            iOS15ButtonConfig(image: UIImage(systemName: "paperplane")!, button: addButton, backgroundColor: .white, foregroundColor: .darkGray)
+            addButton.addTarget(self, action: #selector(completeButtonClicked(_:)), for: .touchUpInside)
+
+            view.addSubview(addButton)
+
+            addButton.translatesAutoresizingMaskIntoConstraints = false
+            addButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 44).isActive = true
+            addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+
+        } else {
+            let backButton = UIButton()
+
+            iOS13ButtonConfig(image: UIImage(systemName: "xmark")!, button: backButton, backgroundColor: .white, foregroundColor: .darkGray)
+
+            view.addSubview(backButton)
+
+            backButton.translatesAutoresizingMaskIntoConstraints = false
+            backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 48).isActive = true
+            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+            backButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
+            backButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
+
+            backButton.addTarget(self, action: #selector(dismissButtonClicked(_:)), for: .touchUpInside)
+
+            let addButton = UIButton()
+
+            iOS13ButtonConfig(image: UIImage(systemName: "paperplane")!, button: addButton, backgroundColor: .white, foregroundColor: .darkGray)
+
+            view.addSubview(addButton)
+
+            addButton.translatesAutoresizingMaskIntoConstraints = false
+            addButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 48).isActive = true
+            addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+            addButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
+            addButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
+
+            addButton.addTarget(self, action: #selector(completeButtonClicked(_:)), for: .touchUpInside)
+        }
         
-        
-        let navItem = UINavigationItem(title: "위치 설정")
-        
-        let dismissButton = UIBarButtonItem(image: UIImage(systemName: "xmark"),
-                                            style: .plain,
-                                            target: self,
-                                            action: #selector(dismissButtonClicked(_:)))
-        let completeButton = UIBarButtonItem(image: UIImage(systemName: "paperplane"),
-                                             style: .plain,
-                                             target: self,
-                                             action: #selector(completeButtonClicked(_:)))
-        
-        navItem.leftBarButtonItem = dismissButton
-        navItem.rightBarButtonItem = completeButton
-        
-        navBar.setItems([navItem], animated: false)
-        navBar.setBackgroundImage(UIImage(), for: .default)
     }
     
     
@@ -97,8 +127,12 @@ class SelectLocationViewController: UIViewController {
         } else  {
             mapViewConfig(location: LocationManager.shared.currentLocation)
         }
-        
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
 }
 
 //MARK: MapView Delegate

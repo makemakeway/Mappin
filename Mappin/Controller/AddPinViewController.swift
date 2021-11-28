@@ -21,8 +21,8 @@ class AddPinViewController: UIViewController {
     var photoImages: [UIImage] = [] {
         didSet {
             DispatchQueue.main.async { [weak self] in
-                self?.collectionView.reloadData()
-                self?.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: true)
+                self?.collectionView.reloadSections(IndexSet(0...0))
+                
             }
         }
     }
@@ -40,6 +40,14 @@ class AddPinViewController: UIViewController {
     var documentTitle: String? = nil
     
     var selectedAsset = [TLPHAsset]()
+    
+    var memoryData: MemoryData? = nil {
+        didSet {
+            editMode = true
+        }
+    }
+    
+    var editMode = false
     
     //MARK: UI
     
@@ -64,6 +72,11 @@ class AddPinViewController: UIViewController {
     
     
     //MARK: Method
+    @objc func removePhoto(_ sender: UIButton) {
+        photoImages.remove(at: sender.tag)
+        print("DEBUG: \(sender.tag)번째 지움")
+    }
+    
     @objc func addPin(_ sender: UIBarButtonItem) {
         print("DEBUG: 핀 추가")
         if addDataToRealm() {
@@ -72,20 +85,6 @@ class AddPinViewController: UIViewController {
             presentOkAlert(message: "스토리를 추가하지 못했습니다.\n잠시후 다시 시도하거나 앱을 재실행해주세요.")
         }
         
-    }
-    
-    @objc func selectButtonClicked(_ sender: UIBarButtonItem) {
-        print("DEBUG: 선택")
-        
-        if sender.tag == 0 {
-            dateTextField.text = dateToString(date: datePicker.date)
-        } else {
-            print("도큐먼트")
-            documentTitleTextField.text = titleSource[pickerIndex]
-            documentTitle = titleSource[pickerIndex]
-        }
-        
-        view.endEditing(true)
     }
     
     @objc func cameraImageClicked(_ gesture: CustomGesture) {
@@ -120,6 +119,22 @@ class AddPinViewController: UIViewController {
     
     
     //MARK: functions
+    
+    func editModeConfig() {
+        if let data = memoryData {
+            documentTitleTextField.isUserInteractionEnabled = false
+            dateTextField.text = dateToString(date: data.memoryDate)
+            locationTextField.text = data.memoryDescription
+            contentTextView.text = data.memoryContent
+            self.title = "스토리 수정"
+            for image in data.memoryPicture {
+                guard let img = ImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(image)") else { return }
+                photoImages.append(img)
+            }
+            
+            
+        }
+    }
     
     func TLPhotoPickerConfig() -> TLPhotosPickerConfigure {
         var config = TLPhotosPickerConfigure()
@@ -349,9 +364,13 @@ class AddPinViewController: UIViewController {
         contentTextView.layer.borderWidth = 0.5
         
         contentTextView.delegate = self
-        contentTextView.text = "내용"
-        contentTextView.textColor = .darkGray
-        contentTextView.font = UIFont.systemFont(ofSize: 18)
+        
+        if !editMode {
+            contentTextView.text = "스토리 내용을 입력해주세요."
+            contentTextView.textColor = .darkGray
+        }
+        
+        contentTextView.font = UIFont().mainFontRegular
         
         contentTextView.layer.cornerRadius = 5
     }
@@ -384,7 +403,7 @@ class AddPinViewController: UIViewController {
         
         
         titleTextFieldConfig()
-        
+        editModeConfig()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -418,10 +437,10 @@ extension AddPinViewController: UICollectionViewDelegate, UICollectionViewDataSo
             return UICollectionViewCell()
         }
         
+        cell.clipsToBounds = false
+        
         let gesture = CustomGesture(target: self, action: #selector(cameraImageClicked(_:)))
         gesture.index = indexPath.row
-        
-        cell.layer.cornerRadius = 10
         
         if photoImages.count != 0 && indexPath.row < photoImages.count {
             let data = photoImages[indexPath.row]
@@ -429,8 +448,23 @@ extension AddPinViewController: UICollectionViewDelegate, UICollectionViewDataSo
             if photoImages.count <= 10 && data.size.width != 0 {
                 cell.photoImageView.image = data
                 cell.photoImageView.contentMode = .scaleAspectFill
+                cell.photoImageView.layer.cornerRadius = 10
                 cell.cameraLabel.isHidden = true
                 cell.removeGestureRecognizer(gesture)
+                
+                if #available(iOS 15, *) {
+                    let deleteButton = UIButton()
+                    iOS15ButtonConfig(image: UIImage(systemName: "minus")!, button: deleteButton, backgroundColor: .red, foregroundColor: .white)
+                    
+                    cell.container.addSubview(deleteButton)
+                    cell.container.layer.cornerRadius = 10
+                    deleteButton.translatesAutoresizingMaskIntoConstraints = false
+                    deleteButton.topAnchor.constraint(equalTo: cell.container.topAnchor, constant: -10).isActive = true
+                    deleteButton.trailingAnchor.constraint(equalTo: cell.container.trailingAnchor, constant: 10).isActive = true
+                    deleteButton.tag = indexPath.row
+                    deleteButton.addTarget(self, action: #selector(removePhoto(_:)), for: .touchUpInside)
+                }
+                
             }
             else {
                 cell.cameraImage.image = UIImage(systemName: "camera.on.rectangle")
@@ -440,6 +474,7 @@ extension AddPinViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 cell.cameraLabel.isHidden = false
                 cell.photoImageView.contentMode = .scaleAspectFit
                 cell.photoCountLabel.text = "\(photoImages.count) / 10"
+                cell.photoCountLabel.font = UIFont().mainFontRegular
                 cell.addGestureRecognizer(gesture)
             }
         }
@@ -451,10 +486,11 @@ extension AddPinViewController: UICollectionViewDelegate, UICollectionViewDataSo
             cell.cameraLabel.isHidden = false
             cell.photoImageView.contentMode = .scaleAspectFit
             cell.photoCountLabel.text = "\(photoImages.count) / 10"
+            cell.photoCountLabel.font = UIFont().mainFontRegular
             cell.addGestureRecognizer(gesture)
         }
         
-        
+        cell.layer.cornerRadius = 10
         
         return cell
     }
@@ -549,12 +585,8 @@ extension AddPinViewController: TLPhotosPickerViewControllerDelegate {
                 LoadingIndicator.shared.hideIndicator()
             }
         }
-        
+        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: true)
         return true
-    }
-    
-    func photoPickerDidCancel() {
-//        dismiss(animated: true, completion: nil)
     }
     
 }
