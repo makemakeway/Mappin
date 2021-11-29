@@ -54,6 +54,7 @@
 		C2A2C6BD275385F4003E8DC2 /* CookieRunBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C2A2C6B5275385B6003E8DC2 /* CookieRunBold.otf */; };
 		C2A2C6BE275385F6003E8DC2 /* CookieRunRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C2A2C6B4275385B6003E8DC2 /* CookieRunRegular.otf */; };
 		C2A2C6BF275385F6003E8DC2 /* CookieRunRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C2A2C6B4275385B6003E8DC2 /* CookieRunRegular.otf */; };
+		C2A2C6C127553073003E8DC2 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A2C6C027553073003E8DC2 /* Extension+String.swift */; };
 		C2A80B21274A8D54002E29C9 /* SelectLocation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2A80B20274A8D54002E29C9 /* SelectLocation.storyboard */; };
 		C2CC523B27427AAB00090891 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CC523A27427AAB00090891 /* AppDelegate.swift */; };
 		C2CC523D27427AAB00090891 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CC523C27427AAB00090891 /* SceneDelegate.swift */; };
@@ -132,6 +133,7 @@
 		C2A2C6B4275385B6003E8DC2 /* CookieRunRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CookieRunRegular.otf; sourceTree = "<group>"; };
 		C2A2C6B5275385B6003E8DC2 /* CookieRunBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CookieRunBold.otf; sourceTree = "<group>"; };
 		C2A2C6B6275385B6003E8DC2 /* CookieRunBlack.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CookieRunBlack.otf; sourceTree = "<group>"; };
+		C2A2C6C027553073003E8DC2 /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
 		C2A80B20274A8D54002E29C9 /* SelectLocation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelectLocation.storyboard; sourceTree = "<group>"; };
 		C2CC523727427AAB00090891 /* Mappin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mappin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2CC523A27427AAB00090891 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				C26A23FA27467450005F42E2 /* Extension+UIViewController.swift */,
 				C2715C69274BDE6F001D5286 /* Extension+UIColor.swift */,
 				C2A2C6A627537F38003E8DC2 /* Extension+UIFont.swift */,
+				C2A2C6C027553073003E8DC2 /* Extension+String.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -668,6 +671,7 @@
 				C27FE55027451BCF00F91946 /* RealmModel.swift in Sources */,
 				C26A23FB27467450005F42E2 /* Extension+UIViewController.swift in Sources */,
 				C27FE559274523D500F91946 /* MapViewController.swift in Sources */,
+				C2A2C6C127553073003E8DC2 /* Extension+String.swift in Sources */,
 				C27FE5562745218100F91946 /* InitialTableViewCell.swift in Sources */,
 				C2715C7B274CFD32001D5286 /* TravelDetailCollectionViewCell.swift in Sources */,
 				C2CC523B27427AAB00090891 /* AppDelegate.swift in Sources */,

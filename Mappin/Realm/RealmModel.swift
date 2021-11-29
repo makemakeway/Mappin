@@ -16,14 +16,20 @@ class LocationDocument: Object {
     @Persisted var locationCoordinate: List<Double>
     @Persisted var stared: Bool = false
     @Persisted var nationalCode: String
+    @Persisted var latestWrittenDate: Date
+    @Persisted var oldestWrittenDate: Date
+    @Persisted var lastUpdated: Date
     
-    convenience init(title: String, memoryList: List<MemoryData>, location: List<Double>, nationalCode: String) {
+    convenience init(title: String, memoryList: List<MemoryData>, location: List<Double>, nationalCode: String, latest: Date, oldest: Date, lastUpdated: Date) {
         self.init()
         
         self.documentTitle = title
         self.memoryList = memoryList
         self.locationCoordinate = location
         self.nationalCode = nationalCode
+        self.latestWrittenDate = latest
+        self.oldestWrittenDate = oldest
+        self.lastUpdated = lastUpdated
     }
 }
 

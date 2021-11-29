@@ -18,6 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey(APIS.shared.GOOGLE_MAPS_API)
         UIBarButtonItem.appearance().tintColor = UIColor.label
         
+        
+        let fontAttr = [NSAttributedString.Key.font: UIFont().mainFontRegular]
+        UINavigationBar.appearance().titleTextAttributes = fontAttr
+        
         return true
     }
 

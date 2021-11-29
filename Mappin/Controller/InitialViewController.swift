@@ -41,6 +41,10 @@ class InitialViewController: UIViewController {
     
     //MARK: Method
     
+    func localizingText() {
+        
+    }
+    
     func tableViewConfig() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -99,7 +103,7 @@ class InitialViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tasks = localRealm.objects(LocationDocument.self)
+        tasks = localRealm.objects(LocationDocument.self).sorted(byKeyPath: "latestWrittenDate", ascending: false)
         
         emptyDataDelete()
     }
@@ -117,15 +121,24 @@ extension InitialViewController: UITableViewDelegate, UITableViewDataSource {
        
         
         let task = tasks[indexPath.row]
-        
+//        let task = Array(tasks).sorted(by: { $0.memoryList.first!.memoryDate < $1.memoryList.first!.memoryDate })[indexPath.row]
+        print(task)
         
         cell.backgroundColor = .systemBackground
         
-        if let memory = task.memoryList.first, !(task.memoryList.isEmpty) {
+        if let memory = task.memoryList.sorted(byKeyPath: "memoryDate", ascending: true).first, !(task.memoryList.isEmpty) {
             cell.documentTitleLabel.text = task.documentTitle
             cell.documentTitleLabel.font = UIFont().titleFontBold
             
-            cell.dateLabel.text = dateToString(date: memory.memoryDate)
+            let calendar = Calendar.current
+            
+            if calendar.dateComponents([.day], from: task.oldestWrittenDate, to: task.latestWrittenDate).day! >= 1 {
+                cell.dateLabel.text = dateToString(date: task.oldestWrittenDate) + " ~ " + dateToString(date: task.latestWrittenDate)
+            } else {
+                cell.dateLabel.text = dateToString(date: task.oldestWrittenDate)
+            }
+            
+            
             cell.dateLabel.font = UIFont().smallFontBold
             
             cell.photoImageView.image = ImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(memory._id)_0.jpeg")

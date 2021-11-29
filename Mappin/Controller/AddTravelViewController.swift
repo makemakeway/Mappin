@@ -57,7 +57,10 @@ class AddTravelViewController: UIViewController {
                 localRealm.add(LocationDocument(title: titleTextField.text!,
                                                 memoryList: List<MemoryData>(),
                                                 location: location,
-                                                nationalCode: nationalCode))
+                                                nationalCode: nationalCode,
+                                                latest: Date(),
+                                                oldest: Date(),
+                                                lastUpdated: Date()))
             }
             
             let sb = UIStoryboard(name: "AddPin", bundle: nil)

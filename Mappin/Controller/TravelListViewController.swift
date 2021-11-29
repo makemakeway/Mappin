@@ -84,7 +84,7 @@ extension TravelListViewController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
         
-        let task = tasks.memoryList[indexPath.row]
+        let task = tasks.memoryList.sorted(byKeyPath: "memoryDate", ascending: true)[indexPath.row]
         
         cell.photoImageView.image = ImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(task._id)_0.jpeg")
         
@@ -141,7 +141,7 @@ extension TravelListViewController: UITableViewDataSource, UITableViewDelegate {
             return
         }
         
-        let task = tasks.memoryList[indexPath.row]
+        let task = tasks.memoryList.sorted(byKeyPath: "memoryDate", ascending: true)[indexPath.row]
         
         vc.task = task
         vc.documentTitle = tasks.documentTitle

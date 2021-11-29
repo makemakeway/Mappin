@@ -95,6 +95,7 @@ class AddPinViewController: UIViewController {
     func updateDataToRealm() {
         if dataValidCheck() {
             guard let currentTask = localRealm.object(ofType: MemoryData.self, forPrimaryKey: memoryData!._id) else { return }
+            guard let currentDocument = localRealm.object(ofType: LocationDocument.self, forPrimaryKey: documentTitleTextField.text!) else { return }
             
             let group = DispatchGroup()
             LoadingIndicator.shared.showIndicator()
@@ -118,6 +119,12 @@ class AddPinViewController: UIViewController {
                 currentTask.memoryDate = datePicker.date
                 currentTask.memoryContent = contentTextView.text!
                 currentTask.memoryDescription = locationTextField.text!
+                
+                let memoryList = currentDocument.memoryList.sorted(byKeyPath: "memoryDate", ascending: false)
+                
+                currentDocument.latestWrittenDate = memoryList.first!.memoryDate
+                currentDocument.oldestWrittenDate = memoryList.last!.memoryDate
+                currentDocument.lastUpdated = Date()
             }
             LoadingIndicator.shared.hideIndicator()
             return
@@ -258,6 +265,11 @@ class AddPinViewController: UIViewController {
             try! localRealm.write {
                 currentTasks.memoryList.append(task)
                 localRealm.add(task)
+                let memoryList = currentTasks.memoryList.sorted(byKeyPath: "memoryDate", ascending: false)
+                
+                currentTasks.latestWrittenDate = memoryList.first!.memoryDate
+                currentTasks.oldestWrittenDate = memoryList.last!.memoryDate
+                currentTasks.lastUpdated = Date()
             }
             
             LoadingIndicator.shared.hideIndicator()
