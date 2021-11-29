@@ -8,6 +8,7 @@
 import UIKit
 import PanModal
 import ImageSlideshow
+import RealmSwift
 
 class TravelDetailViewController: UIViewController {
 
@@ -22,12 +23,12 @@ class TravelDetailViewController: UIViewController {
     
     var documentTitle = ""
     
-    let gesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
+    var gesture: UITapGestureRecognizer?
     
-    @IBOutlet weak var imageSlider: ImageSlideshow!
-    
+    let localRealm = try! Realm()
     
     //MARK: UI
+    @IBOutlet weak var imageSlider: ImageSlideshow!
     
     @IBOutlet weak var mainScrollView: UIScrollView!
     
@@ -63,9 +64,37 @@ class TravelDetailViewController: UIViewController {
             
             self.navigationController?.pushViewController(vc, animated: true)
         }
+        
+        let delete = UIAlertAction(title: "스토리 삭제하기", style: .destructive) { [weak self](_) in
+            guard let self = self, let task = self.task else { return }
+            let alert = UIAlertController(title: nil, message: "스토리를 정말 삭제하시겠어요?", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "예, 삭제할게요.", style: .default) { _ in
+                try! self.localRealm.write {
+                    guard let task = self.localRealm.object(ofType: MemoryData.self, forPrimaryKey: task._id) else {
+                        return
+                    }
+                    let group = DispatchGroup()
+                    for imageName in task.memoryPicture {
+                        group.enter()
+                        ImageManager.shared.deleteImageFromDocumentDirectory(imageName: imageName)
+                        group.leave()
+                    }
+                    group.wait()
+                    
+                    self.localRealm.delete(task)
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
+            let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+            alert.addAction(ok)
+            alert.addAction(cancel)
+            self.present(alert, animated: true, completion: nil)
+        }
+        
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
         actionSheet.addAction(edit)
+        actionSheet.addAction(delete)
         actionSheet.addAction(cancel)
         
         present(actionSheet, animated: true, completion: nil)
@@ -183,14 +212,16 @@ class TravelDetailViewController: UIViewController {
             addGradient()
             moreButtonConfig()
         }
-        
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
+        imageSlider.addGestureRecognizer(gesture)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         loadImages()
         imageSliderConfig()
-        imageSlider.addGestureRecognizer(gesture)
+        
         locationTitleLabelConfig()
         dateLabelConfig()
         memoryContentLabelConfig()
@@ -206,7 +237,6 @@ class TravelDetailViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        imageSlider.removeGestureRecognizer(gesture)
     }
     
 }

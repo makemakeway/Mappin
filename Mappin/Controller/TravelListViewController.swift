@@ -19,8 +19,6 @@ class TravelListViewController: UIViewController {
     
     let localRealm = try! Realm()
     
-    var reloadIndexPath: IndexPath = [0, 0]
-    
     //MARK: UI
     
     @IBOutlet weak var tableView: UITableView!
@@ -103,31 +101,31 @@ extension TravelListViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
-        guard let tasks = travelDocument else {
-            return nil
-        }
-        let task = tasks.memoryList[indexPath.row]
-        
-        let delete = UIContextualAction(style: .normal, title: nil) { [weak self](_, _, _) in
-            print("Delete \(task)")
-            
-            
-            try! self?.localRealm.write {
-                self?.localRealm.delete(task.self)
-            }
-            tableView.reloadSections(IndexSet(0...0), with: .automatic)
-        }
-        
-        delete.image = UIImage(systemName: "trash")
-        delete.backgroundColor = .red
-        
-        
-        let actions = UISwipeActionsConfiguration(actions: [delete])
-        return actions
-        
-    }
+//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+//        
+//        guard let tasks = travelDocument else {
+//            return nil
+//        }
+//        let task = tasks.memoryList[indexPath.row]
+//        
+//        let delete = UIContextualAction(style: .normal, title: nil) { [weak self](_, _, _) in
+//            print("Delete \(task)")
+//            
+//            
+//            try! self?.localRealm.write {
+//                self?.localRealm.delete(task.self)
+//            }
+//            tableView.reloadSections(IndexSet(0...0), with: .automatic)
+//        }
+//        
+//        delete.image = UIImage(systemName: "trash")
+//        delete.backgroundColor = .red
+//        
+//        
+//        let actions = UISwipeActionsConfiguration(actions: [delete])
+//        return actions
+//        
+//    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UIScreen.main.bounds.height * 0.2

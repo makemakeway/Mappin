@@ -97,6 +97,7 @@ class AddPinViewController: UIViewController {
             guard let currentTask = localRealm.object(ofType: MemoryData.self, forPrimaryKey: memoryData!._id) else { return }
             
             let group = DispatchGroup()
+            LoadingIndicator.shared.showIndicator()
             try! localRealm.write {
                 for imageName in currentTask.memoryPicture {
                     group.enter()
@@ -118,7 +119,7 @@ class AddPinViewController: UIViewController {
                 currentTask.memoryContent = contentTextView.text!
                 currentTask.memoryDescription = locationTextField.text!
             }
-            
+            LoadingIndicator.shared.hideIndicator()
             return
         }
     }
