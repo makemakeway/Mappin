@@ -103,6 +103,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="emptyHandlingButton" destination="i9G-hl-rda" id="D0Z-Pu-dik"/>
+                        <outlet property="emptyHandlingLabel" destination="jg9-kF-m2a" id="ffO-Th-HVQ"/>
                         <outlet property="emptyHandlingView" destination="EWm-Pz-bDz" id="ghy-Uz-1fN"/>
                         <outlet property="floatingAddButton" destination="7Sb-OD-g5o" id="vTx-PK-Frd"/>
                         <outlet property="tableView" destination="RpT-Sk-Zsa" id="d7z-1W-CKa"/>

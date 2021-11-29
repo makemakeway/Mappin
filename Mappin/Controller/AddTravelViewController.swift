@@ -33,6 +33,8 @@ class AddTravelViewController: UIViewController {
         }
     }
     
+    let locationManager = LocationManager.shared.manager
+    
     //MARK: UI
     
     @IBOutlet weak var titleTextField: UITextField!
@@ -101,7 +103,6 @@ class AddTravelViewController: UIViewController {
         
         let marker = GMSMarker(position: pinLocation)
         
-        marker.icon = GMSMarker.markerImage(with: UIColor.blue)
         
         marker.map = mapView
     }
@@ -132,6 +133,7 @@ class AddTravelViewController: UIViewController {
         
         self.navigationItem.rightBarButtonItem = button
         self.title = "장소 추가"
+        self.navigationItem.backButtonTitle = ""
     }
     
     
@@ -146,6 +148,9 @@ class AddTravelViewController: UIViewController {
         
         titleTextField.font = UIFont().mainFontRegular
         
+        locationManager.delegate = self
+        locationManager.startUpdatingLocation()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -154,7 +159,39 @@ class AddTravelViewController: UIViewController {
         self.titleTextField.becomeFirstResponder()
         
         tasks = localRealm.objects(LocationDocument.self)
-        LocationManager.shared.checkUsersLocationServicesAuthorization()
     }
+}
 
+
+extension AddTravelViewController: CLLocationManagerDelegate {
+    @available (iOS 14.0, *)
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        print(#function)
+        LocationManager.shared.checkUsersLocationServicesAuthorization()
+        let auth = LocationManager.shared.manager.authorizationStatus
+        switch manager.authorizationStatus {
+        case .denied:
+            authorizationHandling(title: "위치 접근 권한 요청", message: "위치 접근 권한을 허용해야 앱을 이용할 수 있습니다.")
+        case .notDetermined, .restricted:
+            LocationManager.shared.checkCurrentLocationAutorization(status: auth)
+        default:
+            print("DEBUG: ㅋㅋ")
+            pinLocation = LocationManager.shared.currentLocation
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        print(#function)
+        LocationManager.shared.checkUsersLocationServicesAuthorization()
+        let auth = CLLocationManager.authorizationStatus()
+        switch status {
+        case .denied:
+            authorizationHandling(title: "위치 접근 권한 요청", message: "위치 접근 권한을 허용해야 앱을 이용할 수 있습니다.")
+        case .notDetermined, .restricted:
+            LocationManager.shared.checkCurrentLocationAutorization(status: auth)
+        default:
+            print("DEBUG: ㅋㅋ")
+            pinLocation = LocationManager.shared.currentLocation
+        }
+    }
 }

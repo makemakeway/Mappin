@@ -221,7 +221,8 @@ class MapViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
-//        emptyDataDelete()
+        
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -245,21 +246,54 @@ extension MapViewController: CLLocationManagerDelegate {
         print("DEBUG: \(error)")
     }
     
+    @available (iOS 14.0, *)
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        if #available(iOS 14.0, *) {
-            print(#function)
-            LocationManager.shared.checkUsersLocationServicesAuthorization()
+        print(#function)
+        LocationManager.shared.checkUsersLocationServicesAuthorization()
+        switch manager.authorizationStatus {
+        case .denied:
+            authorizationHandling(title: "위치 접근 권한 요청", message: "위치 접근 권한을 허용해야 앱을 이용할 수 있습니다.")
+        default:
+            print("DEBUG: ㅋㅋ")
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         print(#function)
         LocationManager.shared.checkUsersLocationServicesAuthorization()
+        switch status {
+        case .denied:
+            authorizationHandling(title: "위치 접근 권한 요청", message: "위치 접근 권한을 허용해야 앱을 이용할 수 있습니다.")
+        default:
+            print("DEBUG: ㅋㅋ")
+        }
     }
 }
 
 //MARK: GMSMapView delegate
 extension MapViewController: GMSMapViewDelegate {
+    func didTapMyLocationButton(for mapView: GMSMapView) -> Bool {
+        if #available(iOS 14, *) {
+            switch locationManager.authorizationStatus {
+            case .denied:
+                authorizationHandling(title: "위치 접근 권한 요청", message: "위치 접근 권한을 허용해야 앱을 이용할 수 있습니다.")
+                return true
+            default:
+                print("DEBUG: \(#function)")
+                return false
+            }
+        } else {
+            switch CLLocationManager.authorizationStatus() {
+            case .denied:
+                authorizationHandling(title: "위치 접근 권한 요청", message: "위치 접근 권한을 허용해야 앱을 이용할 수 있습니다.")
+                return true
+            default:
+                print("DEBUG: \(#function)")
+                return false
+            }
+        }
+        
+    }
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         print("tap \(marker)")

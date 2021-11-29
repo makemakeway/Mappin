@@ -70,7 +70,6 @@ class LocationManager {
         if CLLocationManager.locationServicesEnabled() {
             checkCurrentLocationAutorization(status: auth)
         }
-        
     }
     
     func codeToFlag(code: String) -> String {

@@ -117,4 +117,19 @@ extension UIViewController {
         }
     }
     
+    func authorizationHandling(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "예", style: .default) { _ in
+            guard let url = URL(string: UIApplication.openSettingsURLString) else {
+                return
+            }
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url)
+            }
+        }
+        
+        alert.addAction(ok)
+        
+        present(alert, animated: true, completion: nil)
+    }
 }

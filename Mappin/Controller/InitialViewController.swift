@@ -35,6 +35,10 @@ class InitialViewController: UIViewController {
     
     @IBOutlet weak var floatingAddButton: UIButton!
     
+    @IBOutlet weak var emptyHandlingLabel: UILabel!
+    
+    @IBOutlet weak var emptyHandlingButton: UIButton!
+    
     //MARK: Method
     
     func tableViewConfig() {

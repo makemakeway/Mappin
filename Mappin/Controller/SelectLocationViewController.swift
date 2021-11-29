@@ -61,6 +61,10 @@ class SelectLocationViewController: UIViewController {
     }
     
     func navBarConfig() {
+        self.navigationController?.navigationBar.isHidden = true
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        
         if #available(iOS 15, *) {
             let backButton = UIButton()
 
@@ -116,6 +120,24 @@ class SelectLocationViewController: UIViewController {
         
     }
     
+    func checkAuthorization() {
+        if #available(iOS 14, *) {
+            switch LocationManager.shared.manager.authorizationStatus {
+            case .denied:
+                authorizationHandling(title: "위치 접근 권한 요청", message: "위치 접근 권한을 허용해야 앱을 이용할 수 있습니다.")
+            default:
+                print("ㅋㅋ")
+            }
+        } else {
+            switch CLLocationManager.authorizationStatus() {
+            case .denied:
+                authorizationHandling(title: "위치 접근 권한 요청", message: "위치 접근 권한을 허용해야 앱을 이용할 수 있습니다.")
+            default:
+                print("ㅋㅋ")
+            }
+        }
+    }
+    
     
     //MARK: LifeCycle
     override func viewDidLoad() {
@@ -131,6 +153,14 @@ class SelectLocationViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        checkAuthorization()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.navigationBar.shadowImage = nil
+        self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
     }
     
 }
@@ -142,5 +172,9 @@ extension SelectLocationViewController: GMSMapViewDelegate {
         
         // 핀 위치: 37.4987508201444
         // 실제 위치: 37.4987358201444
+    }
+    func didTapMyLocationButton(for mapView: GMSMapView) -> Bool {
+        checkAuthorization()
+        return false
     }
 }

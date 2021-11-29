@@ -610,6 +610,19 @@ extension AddPinViewController: TLPhotosPickerViewControllerDelegate {
         return true
     }
     
+    func handleNoAlbumPermissions(picker: TLPhotosPickerViewController) {
+        picker.dismiss(animated: true) { [weak self] in
+            self?.authorizationHandling(title: "사진 접근 권한 요청", message: "앱을 이용하기 위해서는 사진 접근 권한이 필요합니다.")
+        }
+    }
+    
+    func handleNoCameraPermissions(picker: TLPhotosPickerViewController) {
+        picker.dismiss(animated: true) { [weak self] in
+            self?.authorizationHandling(title: "카메라 접근 권한 요청", message: "앱을 이용하기 위해서는 카메라 접근 권한이 필요합니다.")
+        }
+        
+    }
+    
 }
 
 
