@@ -22,6 +22,8 @@ class TravelDetailViewController: UIViewController {
     
     var documentTitle = ""
     
+    let gesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
+    
     @IBOutlet weak var imageSlider: ImageSlideshow!
     
     
@@ -114,13 +116,11 @@ class TravelDetailViewController: UIViewController {
         imageSlider.setImageInputs(inputSource)
         imageSlider.contentScaleMode = .scaleAspectFill
         imageSlider.insetsLayoutMarginsFromSafeArea = true
-        
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
-        imageSlider.addGestureRecognizer(gesture)
     }
     
     
     func loadImages() {
+        photoImages.removeAll()
         if let task = task {
             for imageName in task.memoryPicture {
                 guard let image = ImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(imageName).jpeg") else {
@@ -140,11 +140,26 @@ class TravelDetailViewController: UIViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationItem.backButtonTitle = ""
-        
+    }
+    
+    func moreButtonConfig() {
         if #available(iOS 15, *) {
             let menuButton = UIButton()
             
             iOS15ButtonConfig(image: UIImage(systemName: "ellipsis")!, button: menuButton, backgroundColor: .darkGray, foregroundColor: .white)
+            
+            view.addSubview(menuButton)
+            
+            menuButton.translatesAutoresizingMaskIntoConstraints = false
+            menuButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -48).isActive = true
+            menuButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+            menuButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
+            menuButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
+            menuButton.addTarget(self, action: #selector(moreButtonClicked(_:)), for: .touchUpInside)
+        } else {
+            let menuButton = UIButton()
+            
+            iOS13ButtonConfig(image: UIImage(systemName: "ellipsis")!, button: menuButton, backgroundColor: .darkGray, foregroundColor: .white)
             
             view.addSubview(menuButton)
             
@@ -161,25 +176,37 @@ class TravelDetailViewController: UIViewController {
     //MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadImages()
         scrollViewConfig()
         navbarConfig()
-        imageSliderConfig()
         
+        if !throughMap {
+            addGradient()
+            moreButtonConfig()
+        }
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadImages()
+        imageSliderConfig()
+        imageSlider.addGestureRecognizer(gesture)
         locationTitleLabelConfig()
         dateLabelConfig()
         memoryContentLabelConfig()
         headerViewConfig()
-        
-        if !throughMap {
-            addGradient()
-        }
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+        self.navigationController?.navigationBar.shadowImage = nil
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        imageSlider.removeGestureRecognizer(gesture)
     }
     
 }
@@ -200,7 +227,7 @@ extension TravelDetailViewController: PanModalPresentable {
         return .contentHeight(UIScreen.main.bounds.height * 0.5)
     }
     var longFormHeight: PanModalHeight {
-        return .maxHeightWithTopInset(20)
+        return .maxHeightWithTopInset(0)
     }
     
 }

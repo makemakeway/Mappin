@@ -86,12 +86,12 @@ class LocationManager {
     
     func checkCurrentLocationAutorization(status: CLAuthorizationStatus) {
         switch status {
-        case .notDetermined:
+        case .notDetermined, .restricted:
             print("DEBUG: 사용자의 위치 권한이 설정되지 않았음")
             manager.requestWhenInUseAuthorization()
             manager.desiredAccuracy = kCLLocationAccuracyBest
             manager.startUpdatingLocation()
-        case .restricted, .denied:
+        case .denied:
             print("DEBUG: 사용자의 위치 권한 사용 불가. Alert 띄워주자")
         case .authorizedAlways, .authorizedWhenInUse:
             print("DEBUG: 사용자의 위치 권한 사용 가능.")

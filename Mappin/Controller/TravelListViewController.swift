@@ -9,8 +9,6 @@ import UIKit
 import RealmSwift
 
 class TravelListViewController: UIViewController {
-    
-    
 
     //MARK: Properties
     var travelDocument: LocationDocument? = nil {
@@ -20,6 +18,8 @@ class TravelListViewController: UIViewController {
     }
     
     let localRealm = try! Realm()
+    
+    var reloadIndexPath: IndexPath = [0, 0]
     
     //MARK: UI
     
@@ -57,6 +57,10 @@ class TravelListViewController: UIViewController {
         floatingAddButtonConfig(button: floatingAddButton, image: "plus", backgroundColor: .darkGray, tintColor: .white)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadSections(IndexSet(0...0), with: .automatic)
+    }
 }
 
 
@@ -108,6 +112,8 @@ extension TravelListViewController: UITableViewDataSource, UITableViewDelegate {
         
         let delete = UIContextualAction(style: .normal, title: nil) { [weak self](_, _, _) in
             print("Delete \(task)")
+            
+            
             try! self?.localRealm.write {
                 self?.localRealm.delete(task.self)
             }

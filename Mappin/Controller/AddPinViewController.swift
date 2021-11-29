@@ -79,12 +79,48 @@ class AddPinViewController: UIViewController {
     
     @objc func addPin(_ sender: UIBarButtonItem) {
         print("DEBUG: 핀 추가")
+        if editMode {
+            updateDataToRealm()
+            self.navigationController?.popViewController(animated: true)
+            return
+        }
         if addDataToRealm() {
             self.navigationController?.popToRootViewController(animated: true)
         } else {
             presentOkAlert(message: "스토리를 추가하지 못했습니다.\n잠시후 다시 시도하거나 앱을 재실행해주세요.")
         }
         
+    }
+    
+    func updateDataToRealm() {
+        if dataValidCheck() {
+            guard let currentTask = localRealm.object(ofType: MemoryData.self, forPrimaryKey: memoryData!._id) else { return }
+            
+            let group = DispatchGroup()
+            try! localRealm.write {
+                for imageName in currentTask.memoryPicture {
+                    group.enter()
+                    ImageManager.shared.deleteImageFromDocumentDirectory(imageName: imageName)
+                    group.leave()
+                }
+                group.wait()
+                
+                currentTask.memoryPicture.removeAll()
+                for (index, image) in photoImages.enumerated() {
+                    group.enter()
+                    let imageName = "\(currentTask._id)_\(index)"
+                    ImageManager.shared.saveImageToDocumentDirectory(imageName: imageName, image: image)
+                    currentTask.memoryPicture.append(imageName)
+                    group.leave()
+                }
+                group.wait()
+                currentTask.memoryDate = datePicker.date
+                currentTask.memoryContent = contentTextView.text!
+                currentTask.memoryDescription = locationTextField.text!
+            }
+            
+            return
+        }
     }
     
     @objc func cameraImageClicked(_ gesture: CustomGesture) {
@@ -194,16 +230,24 @@ class AddPinViewController: UIViewController {
     
     func addDataToRealm() -> Bool {
         if dataValidCheck() {
+            
+            LoadingIndicator.shared.showIndicator()
+            
+            let group = DispatchGroup()
+            
             let task = MemoryData(date: datePicker.date,
                                   picture: RealmSwift.List<String>(),
                                   content: contentTextView.text!,
                                   description: locationTextField.text!)
 
             for (index, image) in photoImages.enumerated() {
-                let imageName = "\(task._id)_\(index).jpeg"
-                saveImageToDocumentDirectory(imageName: imageName, image: image)
+                group.enter()
+                let imageName = "\(task._id)_\(index)"
+                ImageManager.shared.saveImageToDocumentDirectory(imageName: imageName, image: image)
                 task.memoryPicture.append(imageName)
+                group.leave()
             }
+            group.wait()
             
             guard let currentTasks = localRealm.object(ofType: LocationDocument.self, forPrimaryKey: documentTitle!) else {
                 print("DEBUG: Tasks 불러오기 실패")
@@ -214,6 +258,8 @@ class AddPinViewController: UIViewController {
                 currentTasks.memoryList.append(task)
                 localRealm.add(task)
             }
+            
+            LoadingIndicator.shared.hideIndicator()
             
             return true
         }
@@ -244,34 +290,6 @@ class AddPinViewController: UIViewController {
         return true
     }
     
-    func saveImageToDocumentDirectory(imageName: String, image: UIImage) {
-        guard let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
-            return
-        }
-        
-        let imageURL = documentDirectory.appendingPathComponent(imageName)
-        
-        guard let data = image.jpegData(compressionQuality: 0.5) else {
-            return
-        }
-        
-        if FileManager.default.fileExists(atPath: imageURL.path) {
-            do {
-                try FileManager.default.removeItem(at: imageURL)
-                print("DEBUG: 기존 이미지 삭제 완료")
-            } catch {
-                print("DEBUG: 기존 이미지 삭제 실패")
-            }
-        }
-        
-        do {
-            try data.write(to: imageURL)
-            print("DEBUG: 이미지 저장 완료")
-        } catch {
-            print("DEBUG: 이미지 저장 실패")
-        }
-    }
-    
     
     
     func pickerViewConfig() {
@@ -282,7 +300,7 @@ class AddPinViewController: UIViewController {
     
     func titleTextFieldConfig() {
         documentTitleTextField.placeholder = "스토리를 추가할 장소를 선택해주세요."
-        documentTitleTextField.font = UIFont.systemFont(ofSize: 18)
+        documentTitleTextField.font = UIFont().mainFontRegular
         documentTitleTextField.delegate = self
         
         makeUnderLine(view: titleStackView)
@@ -302,7 +320,7 @@ class AddPinViewController: UIViewController {
     
     func dateTextFieldConfig() {
         dateTextField.placeholder = "스토리를 추가할 날짜를 선택해주세요."
-        dateTextField.font = UIFont.systemFont(ofSize: 18)
+        dateTextField.font = UIFont().mainFontRegular
         dateTextField.delegate = self
         
         makeUnderLine(view: dateStackView)
@@ -320,7 +338,7 @@ class AddPinViewController: UIViewController {
     
     func locationTextFieldConfig() {
         locationTextField.placeholder = "스토리의 제목을 입력해주세요."
-        locationTextField.font = UIFont.systemFont(ofSize: 18)
+        locationTextField.font = UIFont().mainFontRegular
         locationTextField.clearButtonMode = .whileEditing
         locationTextField.delegate = self
         
@@ -573,6 +591,8 @@ extension AddPinViewController: TLPhotosPickerViewControllerDelegate {
             if !(withTLPHAssets.isEmpty) {
                 self.selectedAsset = withTLPHAssets
                 self.photoImages.removeAll()
+                
+                LoadingIndicator.shared.showIndicator()
                 
                 let group = DispatchGroup()
                 for asset in withTLPHAssets {

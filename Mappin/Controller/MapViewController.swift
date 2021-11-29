@@ -46,6 +46,19 @@ class MapViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
+    func emptyDataDelete() {
+        let emptyData = tasks.filter({ $0.memoryList.isEmpty == true })
+        
+        for task in emptyData {
+            try! localRealm.write {
+                print("DEBUG: 비어있는 데이터 삭제함 \(task)")
+                localRealm.delete(task.self)
+            }
+        }
+        mapView.clear()
+        addPin()
+    }
+    
     func loadMap(location: CLLocationCoordinate2D) {
         let camera = GMSCameraPosition.camera(
             withLatitude: location.latitude,
@@ -208,6 +221,7 @@ class MapViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
+//        emptyDataDelete()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
