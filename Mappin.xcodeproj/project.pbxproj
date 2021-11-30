@@ -24,6 +24,10 @@
 		C26A23FB27467450005F42E2 /* Extension+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26A23FA27467450005F42E2 /* Extension+UIViewController.swift */; };
 		C26A23FE2746909A005F42E2 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26A23FC2746909A005F42E2 /* PhotoCollectionViewCell.swift */; };
 		C26A23FF2746909A005F42E2 /* PhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26A23FD2746909A005F42E2 /* PhotoCollectionViewCell.xib */; };
+		C26D2E4A27566A850035D339 /* SCDream3.otf in Resources */ = {isa = PBXBuildFile; fileRef = C26D2E4927566A850035D339 /* SCDream3.otf */; };
+		C26D2E4C27566A8B0035D339 /* SCDream4.otf in Resources */ = {isa = PBXBuildFile; fileRef = C26D2E4B27566A8B0035D339 /* SCDream4.otf */; };
+		C26D2E4E27566A920035D339 /* SCDream6.otf in Resources */ = {isa = PBXBuildFile; fileRef = C26D2E4D27566A920035D339 /* SCDream6.otf */; };
+		C26D2E5027566C8B0035D339 /* SCDream8.otf in Resources */ = {isa = PBXBuildFile; fileRef = C26D2E4F27566C8B0035D339 /* SCDream8.otf */; };
 		C2715C68274BADA2001D5286 /* InitialTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2715C67274BADA2001D5286 /* InitialTableViewHeader.swift */; };
 		C2715C6A274BDE6F001D5286 /* Extension+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2715C69274BDE6F001D5286 /* Extension+UIColor.swift */; };
 		C2715C6C274BECB6001D5286 /* TravelListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2715C6B274BECB6001D5286 /* TravelListViewController.swift */; };
@@ -45,15 +49,9 @@
 		C27FE559274523D500F91946 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27FE558274523D500F91946 /* MapViewController.swift */; };
 		C27FE55B274523EE00F91946 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C27FE55A274523EE00F91946 /* Map.storyboard */; };
 		C2A2C6A727537F38003E8DC2 /* Extension+UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A2C6A627537F38003E8DC2 /* Extension+UIFont.swift */; };
-		C2A2C6B7275385B6003E8DC2 /* CookieRunRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C2A2C6B4275385B6003E8DC2 /* CookieRunRegular.otf */; };
-		C2A2C6B8275385B6003E8DC2 /* CookieRunBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C2A2C6B5275385B6003E8DC2 /* CookieRunBold.otf */; };
 		C2A2C6B9275385B6003E8DC2 /* CookieRunBlack.otf in Resources */ = {isa = PBXBuildFile; fileRef = C2A2C6B6275385B6003E8DC2 /* CookieRunBlack.otf */; };
 		C2A2C6BA275385F1003E8DC2 /* CookieRunBlack.otf in Resources */ = {isa = PBXBuildFile; fileRef = C2A2C6B6275385B6003E8DC2 /* CookieRunBlack.otf */; };
 		C2A2C6BB275385F1003E8DC2 /* CookieRunBlack.otf in Resources */ = {isa = PBXBuildFile; fileRef = C2A2C6B6275385B6003E8DC2 /* CookieRunBlack.otf */; };
-		C2A2C6BC275385F3003E8DC2 /* CookieRunBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C2A2C6B5275385B6003E8DC2 /* CookieRunBold.otf */; };
-		C2A2C6BD275385F4003E8DC2 /* CookieRunBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C2A2C6B5275385B6003E8DC2 /* CookieRunBold.otf */; };
-		C2A2C6BE275385F6003E8DC2 /* CookieRunRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C2A2C6B4275385B6003E8DC2 /* CookieRunRegular.otf */; };
-		C2A2C6BF275385F6003E8DC2 /* CookieRunRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C2A2C6B4275385B6003E8DC2 /* CookieRunRegular.otf */; };
 		C2A2C6C127553073003E8DC2 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A2C6C027553073003E8DC2 /* Extension+String.swift */; };
 		C2A2C6C427562832003E8DC2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C2A2C6C627562832003E8DC2 /* InfoPlist.strings */; };
 		C2A80B21274A8D54002E29C9 /* SelectLocation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2A80B20274A8D54002E29C9 /* SelectLocation.storyboard */; };
@@ -110,6 +108,10 @@
 		C26A23FA27467450005F42E2 /* Extension+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIViewController.swift"; sourceTree = "<group>"; };
 		C26A23FC2746909A005F42E2 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		C26A23FD2746909A005F42E2 /* PhotoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCollectionViewCell.xib; sourceTree = "<group>"; };
+		C26D2E4927566A850035D339 /* SCDream3.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SCDream3.otf; sourceTree = "<group>"; };
+		C26D2E4B27566A8B0035D339 /* SCDream4.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SCDream4.otf; sourceTree = "<group>"; };
+		C26D2E4D27566A920035D339 /* SCDream6.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SCDream6.otf; sourceTree = "<group>"; };
+		C26D2E4F27566C8B0035D339 /* SCDream8.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SCDream8.otf; sourceTree = "<group>"; };
 		C2715C67274BADA2001D5286 /* InitialTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialTableViewHeader.swift; sourceTree = "<group>"; };
 		C2715C69274BDE6F001D5286 /* Extension+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIColor.swift"; sourceTree = "<group>"; };
 		C2715C6B274BECB6001D5286 /* TravelListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelListViewController.swift; sourceTree = "<group>"; };
@@ -131,8 +133,6 @@
 		C27FE558274523D500F91946 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		C27FE55A274523EE00F91946 /* Map.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
 		C2A2C6A627537F38003E8DC2 /* Extension+UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIFont.swift"; sourceTree = "<group>"; };
-		C2A2C6B4275385B6003E8DC2 /* CookieRunRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CookieRunRegular.otf; sourceTree = "<group>"; };
-		C2A2C6B5275385B6003E8DC2 /* CookieRunBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CookieRunBold.otf; sourceTree = "<group>"; };
 		C2A2C6B6275385B6003E8DC2 /* CookieRunBlack.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CookieRunBlack.otf; sourceTree = "<group>"; };
 		C2A2C6C027553073003E8DC2 /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
 		C2A2C6C527562832003E8DC2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -258,8 +258,10 @@
 			isa = PBXGroup;
 			children = (
 				C2A2C6B6275385B6003E8DC2 /* CookieRunBlack.otf */,
-				C2A2C6B5275385B6003E8DC2 /* CookieRunBold.otf */,
-				C2A2C6B4275385B6003E8DC2 /* CookieRunRegular.otf */,
+				C26D2E4927566A850035D339 /* SCDream3.otf */,
+				C26D2E4B27566A8B0035D339 /* SCDream4.otf */,
+				C26D2E4D27566A920035D339 /* SCDream6.otf */,
+				C26D2E4F27566C8B0035D339 /* SCDream8.otf */,
 			);
 			path = Font;
 			sourceTree = "<group>";
@@ -484,25 +486,27 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C26D2E4A27566A850035D339 /* SCDream3.otf in Resources */,
 				C26A23F8274654B5005F42E2 /* AddPin.storyboard in Resources */,
 				C2CC524727427AAD00090891 /* LaunchScreen.storyboard in Resources */,
 				C2715C6E274BECC5001D5286 /* TravelList.storyboard in Resources */,
-				C2A2C6B7275385B6003E8DC2 /* CookieRunRegular.otf in Resources */,
 				C2715C78274CEEE9001D5286 /* Detail.storyboard in Resources */,
 				C26A23E827462169005F42E2 /* Localizable.strings in Resources */,
 				C26A23FF2746909A005F42E2 /* PhotoCollectionViewCell.xib in Resources */,
 				C26A23F427465074005F42E2 /* AddTravel.storyboard in Resources */,
-				C2A2C6B8275385B6003E8DC2 /* CookieRunBold.otf in Resources */,
 				C2A2C6C427562832003E8DC2 /* InfoPlist.strings in Resources */,
 				C2A80B21274A8D54002E29C9 /* SelectLocation.storyboard in Resources */,
+				C26D2E4E27566A920035D339 /* SCDream6.otf in Resources */,
 				C2CC524427427AAD00090891 /* Assets.xcassets in Resources */,
 				C25FFA06274F4E9200B0C41B /* MarkerInfo.storyboard in Resources */,
 				C27FE55B274523EE00F91946 /* Map.storyboard in Resources */,
 				C2715C72274CE3F3001D5286 /* TravelListTableViewCell.xib in Resources */,
 				C2A2C6B9275385B6003E8DC2 /* CookieRunBlack.otf in Resources */,
+				C26D2E5027566C8B0035D339 /* SCDream8.otf in Resources */,
 				C27FE5572745218100F91946 /* InitialTableViewCell.xib in Resources */,
 				C25FFA0A274F5BD000B0C41B /* MarkerInfoTableViewCell.xib in Resources */,
 				C2CC524227427AAB00090891 /* Main.storyboard in Resources */,
+				C26D2E4C27566A8B0035D339 /* SCDream4.otf in Resources */,
 				C2715C7C274CFD32001D5286 /* TravelDetailCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -511,8 +515,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2A2C6BE275385F6003E8DC2 /* CookieRunRegular.otf in Resources */,
-				C2A2C6BC275385F3003E8DC2 /* CookieRunBold.otf in Resources */,
 				C2A2C6BA275385F1003E8DC2 /* CookieRunBlack.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -521,8 +523,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2A2C6BF275385F6003E8DC2 /* CookieRunRegular.otf in Resources */,
-				C2A2C6BD275385F4003E8DC2 /* CookieRunBold.otf in Resources */,
 				C2A2C6BB275385F1003E8DC2 /* CookieRunBlack.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -900,10 +900,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = H3V637RY5A;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Mappin/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "앱을 이용하려면 사용자의 카메라 접근 권한이 필요합니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "앱을 이용하려면 사용자의 위치 정보 권한이 필요합니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "앱을 이용하려면 사용자의 사진 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -930,10 +933,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = H3V637RY5A;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Mappin/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "앱을 이용하려면 사용자의 카메라 접근 권한이 필요합니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "앱을 이용하려면 사용자의 위치 정보 권한이 필요합니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "앱을 이용하려면 사용자의 사진 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

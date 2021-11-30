@@ -171,7 +171,7 @@ extension InitialViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         header.titleLabel.text = "Place".localized()
-        header.titleLabel.font = UIFont(name: "CookieRunOTF-Black", size: 24)
+        header.titleLabel.font = UIFont().titleFontBlack
         
         return header
     }

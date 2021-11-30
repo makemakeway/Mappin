@@ -91,7 +91,7 @@ extension TravelListViewController: UITableViewDataSource, UITableViewDelegate {
         cell.opacityView.backgroundColor = UIColor(white: 0.3, alpha: 0.3)
         
         cell.dateLabel.text = dateToString(date: task.memoryDate)
-        cell.dateLabel.font = UIFont().smallFontRegular
+        cell.dateLabel.font = UIFont().smallFontBold
         
         cell.locationDescriptionLabel.text = task.memoryDescription
         cell.locationDescriptionLabel.font = UIFont().mainFontBold

@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIBarButtonItem.appearance().tintColor = UIColor.label
         
         
-        let fontAttr = [NSAttributedString.Key.font: UIFont().mainFontRegular]
+        let fontAttr = [NSAttributedString.Key.font: UIFont().mainFontBold]
         UINavigationBar.appearance().titleTextAttributes = fontAttr
 //        UINavigationBar.appearance().isTranslucent = false
         

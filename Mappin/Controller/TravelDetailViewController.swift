@@ -109,7 +109,7 @@ class TravelDetailViewController: UIViewController {
     
     func headerViewConfig() {
         let bottomLine = CALayer()
-        bottomLine.frame = CGRect(x: 0, y: headerView.frame.height, width: headerView.frame.width - 30, height: 1)
+        bottomLine.frame = CGRect(x: 0, y: headerView.frame.height, width: UIScreen.main.bounds.width - 40, height: 1)
         bottomLine.backgroundColor = UIColor.lightGray.cgColor
         headerView.layer.addSublayer(bottomLine)
     }
@@ -118,7 +118,7 @@ class TravelDetailViewController: UIViewController {
         
         if let task = task {
             locationTitleLabel.text = task.memoryDescription
-            locationTitleLabel.font = UIFont().mainFontBold
+            locationTitleLabel.font = UIFont().mainFontRegular
         }
         
     }
@@ -126,7 +126,7 @@ class TravelDetailViewController: UIViewController {
     func dateLabelConfig() {
         if let task = task {
             dateLabel.text = dateToString(date: task.memoryDate)
-            dateLabel.font = UIFont().smallFontRegular
+            dateLabel.font = UIFont().mainFontRegular
         }
     }
     

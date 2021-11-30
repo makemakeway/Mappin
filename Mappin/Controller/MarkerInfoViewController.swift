@@ -123,7 +123,7 @@ extension MarkerInfoViewController: UITableViewDelegate, UITableViewDataSource {
         
         header.titleLabel.text = "\(tasks.documentTitle)"
         header.titleLabel.numberOfLines = 0
-        header.titleLabel.font = UIFont(name: "CookieRunOTF-Bold", size: 20)
+        header.titleLabel.font = UIFont().titleFontBold
         header.titleLabel.tintColor = .label
         
         return header
