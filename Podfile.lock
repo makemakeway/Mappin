@@ -14,6 +14,7 @@ PODS:
   - Realm/Headers (10.20.0)
   - RealmSwift (10.20.0):
     - Realm (= 10.20.0)
+  - SideMenu (6.5.0)
   - TLPhotoPicker (2.1.6)
 
 DEPENDENCIES:
@@ -22,6 +23,7 @@ DEPENDENCIES:
   - ImageSlideshow (~> 1.9.0)
   - PanModal
   - RealmSwift (~> 10)
+  - SideMenu
   - TLPhotoPicker
 
 SPEC REPOS:
@@ -32,6 +34,7 @@ SPEC REPOS:
     - PanModal
     - Realm
     - RealmSwift
+    - SideMenu
     - TLPhotoPicker
 
 SPEC CHECKSUMS:
@@ -41,8 +44,9 @@ SPEC CHECKSUMS:
   PanModal: 3e16ead1a907fb06f4df3f13492fd00149fa4974
   Realm: ae32bdc1da7d19c7617e0400201a77acd4a211b9
   RealmSwift: c95eec6a712924870b2e36c4c081d63ec07e5414
+  SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
   TLPhotoPicker: 57ad6b54a9cf8c9ec60107be0864d42f3dbe7175
 
-PODFILE CHECKSUM: b46f01dadec2f8976c11044cc308cef82b5904fd
+PODFILE CHECKSUM: 20db86c8554bf38fc9d53813bbf21711f96a49a2
 
 COCOAPODS: 1.11.2

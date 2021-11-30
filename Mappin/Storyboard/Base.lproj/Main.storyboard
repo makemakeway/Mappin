@@ -98,6 +98,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Mappin" id="PLO-fK-Adb">
+                        <barButtonItem key="leftBarButtonItem" image="text.justify" catalog="system" id="4h9-4j-iRh">
+                            <connections>
+                                <action selector="sideMenuButtonClicked:" destination="BYZ-38-t0r" id="Hu1-Up-Phf"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="map" catalog="system" id="2EW-Id-ego">
                             <color key="tintColor" systemColor="labelColor"/>
                             <connections>
@@ -138,6 +143,7 @@
     </scenes>
     <resources>
         <image name="map" catalog="system" width="128" height="110"/>
+        <image name="text.justify" catalog="system" width="128" height="100"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

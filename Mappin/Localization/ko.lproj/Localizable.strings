@@ -99,3 +99,8 @@
 //MARK: TLPhotopicker (In Pods)
 
 "Album" = "앨범";
+
+
+//MARK: SideMenu
+
+"Open source license" = "오픈소스 라이선스";

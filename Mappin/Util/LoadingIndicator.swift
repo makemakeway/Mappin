@@ -33,6 +33,7 @@ class LoadingIndicator {
                 loadingIndicatorView = existView
             } else {
                 loadingIndicatorView = UIActivityIndicatorView(style: .large)
+                loadingIndicatorView.color = .darkGray
                 loadingIndicatorView.frame = window.frame
                 window.addSubview(loadingIndicatorView)
                 loadingIndicatorView.startAnimating()

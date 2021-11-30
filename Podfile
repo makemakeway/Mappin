@@ -15,6 +15,8 @@ pod 'PanModal'
 pod 'RealmSwift', '~>10'
 pod 'ImageSlideshow', '~> 1.9.0'
 pod "TLPhotoPicker"
+pod 'SideMenu'
+
 
   target 'MappinTests' do
     inherit! :search_paths

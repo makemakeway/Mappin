@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import SideMenu
 
 class InitialViewController: UIViewController {
 
@@ -62,6 +63,17 @@ class InitialViewController: UIViewController {
         self.navigationItem.backButtonTitle = ""
     }
     
+    @IBAction func sideMenuButtonClicked(_ sender: UIBarButtonItem) {
+        
+        let sb = UIStoryboard(name: "SideMenu", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "SideMenuViewController")
+        
+        let sideMenu = SideMenuNavigationController(rootViewController: vc)
+        
+        sideMenu.leftSide = true
+        
+        present(sideMenu, animated: true, completion: nil)
+    }
     
     @IBAction func floatingAddButtonClicked(_ sender: UIButton) {
         let sb = UIStoryboard(name: "AddTravel", bundle: nil)

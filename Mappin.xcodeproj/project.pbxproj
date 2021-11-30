@@ -28,6 +28,15 @@
 		C26D2E4C27566A8B0035D339 /* SCDream4.otf in Resources */ = {isa = PBXBuildFile; fileRef = C26D2E4B27566A8B0035D339 /* SCDream4.otf */; };
 		C26D2E4E27566A920035D339 /* SCDream6.otf in Resources */ = {isa = PBXBuildFile; fileRef = C26D2E4D27566A920035D339 /* SCDream6.otf */; };
 		C26D2E5027566C8B0035D339 /* SCDream8.otf in Resources */ = {isa = PBXBuildFile; fileRef = C26D2E4F27566C8B0035D339 /* SCDream8.otf */; };
+		C26D2E522756787B0035D339 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26D2E512756787B0035D339 /* SideMenuViewController.swift */; };
+		C26D2E5627567D270035D339 /* SideMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C26D2E5527567D270035D339 /* SideMenu.storyboard */; };
+		C26D2E5927567D5D0035D339 /* SideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26D2E5727567D5D0035D339 /* SideMenuTableViewCell.swift */; };
+		C26D2E5A27567D5D0035D339 /* SideMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26D2E5827567D5D0035D339 /* SideMenuTableViewCell.xib */; };
+		C26D2E5C275680C30035D339 /* LicenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26D2E5B275680C30035D339 /* LicenseViewController.swift */; };
+		C26D2E5E275680D30035D339 /* License.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C26D2E5D275680D30035D339 /* License.storyboard */; };
+		C26D2E61275683AB0035D339 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26D2E60275683AB0035D339 /* Library.swift */; };
+		C26D2E6327568DC70035D339 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26D2E6227568DC70035D339 /* WebViewController.swift */; };
+		C26D2E6527568DD30035D339 /* Web.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C26D2E6427568DD30035D339 /* Web.storyboard */; };
 		C2715C68274BADA2001D5286 /* InitialTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2715C67274BADA2001D5286 /* InitialTableViewHeader.swift */; };
 		C2715C6A274BDE6F001D5286 /* Extension+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2715C69274BDE6F001D5286 /* Extension+UIColor.swift */; };
 		C2715C6C274BECB6001D5286 /* TravelListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2715C6B274BECB6001D5286 /* TravelListViewController.swift */; };
@@ -112,6 +121,15 @@
 		C26D2E4B27566A8B0035D339 /* SCDream4.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SCDream4.otf; sourceTree = "<group>"; };
 		C26D2E4D27566A920035D339 /* SCDream6.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SCDream6.otf; sourceTree = "<group>"; };
 		C26D2E4F27566C8B0035D339 /* SCDream8.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SCDream8.otf; sourceTree = "<group>"; };
+		C26D2E512756787B0035D339 /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
+		C26D2E5527567D270035D339 /* SideMenu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SideMenu.storyboard; sourceTree = "<group>"; };
+		C26D2E5727567D5D0035D339 /* SideMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewCell.swift; sourceTree = "<group>"; };
+		C26D2E5827567D5D0035D339 /* SideMenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SideMenuTableViewCell.xib; sourceTree = "<group>"; };
+		C26D2E5B275680C30035D339 /* LicenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseViewController.swift; sourceTree = "<group>"; };
+		C26D2E5D275680D30035D339 /* License.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = License.storyboard; sourceTree = "<group>"; };
+		C26D2E60275683AB0035D339 /* Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
+		C26D2E6227568DC70035D339 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		C26D2E6427568DD30035D339 /* Web.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Web.storyboard; sourceTree = "<group>"; };
 		C2715C67274BADA2001D5286 /* InitialTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialTableViewHeader.swift; sourceTree = "<group>"; };
 		C2715C69274BDE6F001D5286 /* Extension+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIColor.swift"; sourceTree = "<group>"; };
 		C2715C6B274BECB6001D5286 /* TravelListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelListViewController.swift; sourceTree = "<group>"; };
@@ -228,6 +246,14 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		C26D2E5F2756839C0035D339 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C26D2E60275683AB0035D339 /* Library.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		C27FE54E2745181A00F91946 /* Realm */ = {
 			isa = PBXGroup;
 			children = (
@@ -250,6 +276,8 @@
 				C2715C7A274CFD32001D5286 /* TravelDetailCollectionViewCell.xib */,
 				C25FFA07274F5BD000B0C41B /* MarkerInfoTableViewCell.swift */,
 				C25FFA08274F5BD000B0C41B /* MarkerInfoTableViewCell.xib */,
+				C26D2E5727567D5D0035D339 /* SideMenuTableViewCell.swift */,
+				C26D2E5827567D5D0035D339 /* SideMenuTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -291,6 +319,7 @@
 		C2CC523927427AAB00090891 /* Mappin */ = {
 			isa = PBXGroup;
 			children = (
+				C26D2E5F2756839C0035D339 /* Model */,
 				C26A23F92746743D005F42E2 /* Extension */,
 				C26A23EE274622F8005F42E2 /* Util */,
 				C26A23E527462147005F42E2 /* Localization */,
@@ -332,6 +361,9 @@
 				C2715C6B274BECB6001D5286 /* TravelListViewController.swift */,
 				C2715C75274CEED9001D5286 /* TravelDetailViewController.swift */,
 				C25FFA03274F4E8100B0C41B /* MarkerInfoViewController.swift */,
+				C26D2E512756787B0035D339 /* SideMenuViewController.swift */,
+				C26D2E5B275680C30035D339 /* LicenseViewController.swift */,
+				C26D2E6227568DC70035D339 /* WebViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -348,6 +380,9 @@
 				C2715C6D274BECC5001D5286 /* TravelList.storyboard */,
 				C2715C77274CEEE9001D5286 /* Detail.storyboard */,
 				C25FFA05274F4E9200B0C41B /* MarkerInfo.storyboard */,
+				C26D2E5527567D270035D339 /* SideMenu.storyboard */,
+				C26D2E5D275680D30035D339 /* License.storyboard */,
+				C26D2E6427568DD30035D339 /* Web.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -493,7 +528,9 @@
 				C2715C78274CEEE9001D5286 /* Detail.storyboard in Resources */,
 				C26A23E827462169005F42E2 /* Localizable.strings in Resources */,
 				C26A23FF2746909A005F42E2 /* PhotoCollectionViewCell.xib in Resources */,
+				C26D2E6527568DD30035D339 /* Web.storyboard in Resources */,
 				C26A23F427465074005F42E2 /* AddTravel.storyboard in Resources */,
+				C26D2E5E275680D30035D339 /* License.storyboard in Resources */,
 				C2A2C6C427562832003E8DC2 /* InfoPlist.strings in Resources */,
 				C2A80B21274A8D54002E29C9 /* SelectLocation.storyboard in Resources */,
 				C26D2E4E27566A920035D339 /* SCDream6.otf in Resources */,
@@ -501,9 +538,11 @@
 				C25FFA06274F4E9200B0C41B /* MarkerInfo.storyboard in Resources */,
 				C27FE55B274523EE00F91946 /* Map.storyboard in Resources */,
 				C2715C72274CE3F3001D5286 /* TravelListTableViewCell.xib in Resources */,
+				C26D2E5A27567D5D0035D339 /* SideMenuTableViewCell.xib in Resources */,
 				C2A2C6B9275385B6003E8DC2 /* CookieRunBlack.otf in Resources */,
 				C26D2E5027566C8B0035D339 /* SCDream8.otf in Resources */,
 				C27FE5572745218100F91946 /* InitialTableViewCell.xib in Resources */,
+				C26D2E5627567D270035D339 /* SideMenu.storyboard in Resources */,
 				C25FFA0A274F5BD000B0C41B /* MarkerInfoTableViewCell.xib in Resources */,
 				C2CC524227427AAB00090891 /* Main.storyboard in Resources */,
 				C26D2E4C27566A8B0035D339 /* SCDream4.otf in Resources */,
@@ -675,6 +714,7 @@
 				C27A902F274A6F6B00CDF3C9 /* CustomTextField.swift in Sources */,
 				C27FE55027451BCF00F91946 /* RealmModel.swift in Sources */,
 				C26A23FB27467450005F42E2 /* Extension+UIViewController.swift in Sources */,
+				C26D2E522756787B0035D339 /* SideMenuViewController.swift in Sources */,
 				C27FE559274523D500F91946 /* MapViewController.swift in Sources */,
 				C2A2C6C127553073003E8DC2 /* Extension+String.swift in Sources */,
 				C27FE5562745218100F91946 /* InitialTableViewCell.swift in Sources */,
@@ -682,9 +722,12 @@
 				C2CC523B27427AAB00090891 /* AppDelegate.swift in Sources */,
 				C2715C6C274BECB6001D5286 /* TravelListViewController.swift in Sources */,
 				C26A23FE2746909A005F42E2 /* PhotoCollectionViewCell.swift in Sources */,
+				C26D2E5927567D5D0035D339 /* SideMenuTableViewCell.swift in Sources */,
 				C26A23F027462304005F42E2 /* LocationManager.swift in Sources */,
 				C27A9031274A813A00CDF3C9 /* SelectLocationViewController.swift in Sources */,
+				C26D2E6327568DC70035D339 /* WebViewController.swift in Sources */,
 				C2715C76274CEED9001D5286 /* TravelDetailViewController.swift in Sources */,
+				C26D2E5C275680C30035D339 /* LicenseViewController.swift in Sources */,
 				C2CC523D27427AAB00090891 /* SceneDelegate.swift in Sources */,
 				C2715C74274CE9CD001D5286 /* ImageManager.swift in Sources */,
 				C26A23F62746549F005F42E2 /* AddPinViewController.swift in Sources */,
@@ -693,6 +736,7 @@
 				C25FFA09274F5BD000B0C41B /* MarkerInfoTableViewCell.swift in Sources */,
 				C26A23F227465067005F42E2 /* AddTravelViewController.swift in Sources */,
 				C27A902927488F2700CDF3C9 /* CustomGesture.swift in Sources */,
+				C26D2E61275683AB0035D339 /* Library.swift in Sources */,
 				C2715C68274BADA2001D5286 /* InitialTableViewHeader.swift in Sources */,
 				C2A2C6A727537F38003E8DC2 /* Extension+UIFont.swift in Sources */,
 				C27FE552274520C600F91946 /* InitialViewController.swift in Sources */,
