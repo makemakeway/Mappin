@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let fontAttr = [NSAttributedString.Key.font: UIFont().mainFontRegular]
         UINavigationBar.appearance().titleTextAttributes = fontAttr
+//        UINavigationBar.appearance().isTranslucent = false
         
         return true
     }

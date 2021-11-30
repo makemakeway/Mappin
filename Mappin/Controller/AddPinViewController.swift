@@ -378,7 +378,7 @@ class AddPinViewController: UIViewController {
         
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-        flowLayout.itemSize = CGSize(width: collectionView.frame.size.width - 60, height: collectionView.frame.size.width - 60)
+        flowLayout.itemSize = CGSize(width: UIScreen.main.bounds.width - 40, height: collectionView.frame.size.width - 60)
         flowLayout.minimumInteritemSpacing = 20
         flowLayout.minimumLineSpacing = 20
         flowLayout.scrollDirection = .horizontal

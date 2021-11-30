@@ -8,6 +8,7 @@
 import UIKit
 import CoreLocation
 import GoogleMaps
+import RealmSwift
 
 extension UIViewController {
     func presentOkAlert(message: String) {
@@ -18,10 +19,24 @@ extension UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    func emptyDataDelete(tasks: Results<LocationDocument>, tableView: UITableView?, localRealm: Realm) {
+        let emptyData = tasks.filter({ $0.memoryList.isEmpty == true })
+        
+        for task in emptyData {
+            try! localRealm.write {
+                print("DEBUG: 비어있는 데이터 삭제함")
+                localRealm.delete(task.self)
+            }
+        }
+        if let tableView = tableView {
+            tableView.reloadSections(IndexSet(0...0), with: .automatic)
+        }
+    }
+    
     func makeUnderLine(view: UIView) {
         let underline = CALayer()
         
-        underline.frame = CGRect(x: 0, y: view.frame.height, width: view.frame.width - 25, height: 0.5)
+        underline.frame = CGRect(x: 0, y: view.frame.height, width: UIScreen.main.bounds.width - 40, height: 0.5)
         underline.backgroundColor = UIColor.lightGray.cgColor
         view.layer.addSublayer(underline)
         
@@ -33,7 +48,7 @@ extension UIViewController {
         button.setTitle("", for: .normal)
         button.setImage(UIImage(systemName: image), for: .normal)
         
-        button.layer.cornerRadius = button.frame.width / 2
+        button.layer.cornerRadius = 22
         
         button.layer.shadowColor = UIColor.gray.cgColor
         button.layer.shadowRadius = 2

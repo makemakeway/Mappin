@@ -42,7 +42,8 @@ class InitialViewController: UIViewController {
     //MARK: Method
     
     func localizingText() {
-        
+        emptyHandlingLabel.text = "There is no record of writing 🥲".localized()
+        emptyHandlingButton.setTitle("Fill it out".localized(), for: .normal)
     }
     
     func tableViewConfig() {
@@ -55,17 +56,7 @@ class InitialViewController: UIViewController {
         tableView.showsVerticalScrollIndicator = false
     }
     
-    func emptyDataDelete() {
-        let emptyData = tasks.filter({ $0.memoryList.isEmpty == true })
-        
-        for task in emptyData {
-            try! localRealm.write {
-                print("DEBUG: 비어있는 데이터 삭제함 \(task)")
-                localRealm.delete(task.self)
-            }
-        }
-        tableView.reloadSections(IndexSet(0...0), with: .automatic)
-    }
+
     
     func navBarConfig() {
         self.navigationItem.backButtonTitle = ""
@@ -99,13 +90,14 @@ class InitialViewController: UIViewController {
         tableViewConfig()
         floatingAddButtonConfig(button: floatingAddButton, image: "square.and.pencil", backgroundColor: .darkGray, tintColor: .white)
         navBarConfig()
+        localizingText()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tasks = localRealm.objects(LocationDocument.self).sorted(byKeyPath: "latestWrittenDate", ascending: false)
         
-        emptyDataDelete()
+        emptyDataDelete(tasks: tasks, tableView: tableView, localRealm: localRealm)
     }
     
 

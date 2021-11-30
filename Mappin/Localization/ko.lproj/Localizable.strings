@@ -5,3 +5,73 @@
   Created by 박연배 on 2021/11/18.
   
 */
+
+//MARK: Alert
+"Cancel" = "취소";
+"OK" = "예";
+"Confirm" = "확인";
+"Done" = "완료";
+
+//MARK: InitialViewController
+"There is no record of writing 🥲" = "아직 작성한 기록이 없어요 🥲";
+
+
+"Fill it out" = "작성하러 가기";
+
+"Place" = "장소";
+
+
+
+//MARK: MapViewController
+"Add a story" = "스토리 추가";
+
+"Add a story to a new place." = "새로운 장소에 추가하기";
+
+"Add a story to the existing place." = "기존 장소에 추가하기";
+
+"The existing place does not exist. Please create a new place." = "기존 장소가 없습니다. 새로운 장소를 추가해주세요.";
+
+//MARK: AddTravelViewController
+
+"Please enter the place you want to add." = "추가하고 싶은 장소를 입력해주세요.";
+
+"It's already been recorded.\n Please enter another place." = "이미 입력한 장소입니다.\n 다른 장소를 입력해주세요.";
+
+"Add Place" = "장소 추가";
+
+
+//MARK: AddPinViewController
+
+"Failed to add story.\n Please try again in a little while or run the app again." = "스토리를 추가하지 못했습니다.\n 잠시후에 시도하거나 앱을 재실행 시켜주세요.";
+
+"Add a photo" = "사진 추가";
+
+"Edit a Story" = "스토리 수정";
+
+"Please enter a place to add a story." = "스토리를 추가할 장소를 입력해주세요.";
+
+"Please enter the contents of the story." = "스토리의 내용을 입력해주세요.";
+
+"Please add a photo." = "사진을 추가해주세요.";
+
+"Please enter the title of the story." = "스토리의 제목을 입력해주세요.";
+
+"Choose a place to add a story." = "스토리를 추가할 장소";
+
+"Choose the date of the story." = "스토리의 날짜";
+
+"Add a Story" = "스토리 추가";
+
+"Choose a Date" = "날짜 선택";
+
+"Choose a Place" = "장소 선택";
+
+//MARK: TravelDetailViewController
+
+"Edit the story" = "스토리 수정";
+
+"Delete the story" = "스토리 삭제";
+
+"Do you really want to delete the story?" = "정말 스토리를 삭제하시겠어요?";
+
+"Delete it" = "삭제하기";

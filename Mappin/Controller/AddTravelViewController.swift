@@ -150,6 +150,8 @@ class AddTravelViewController: UIViewController {
         drawPin()
         
         titleTextField.font = UIFont().mainFontRegular
+        titleTextField.autocorrectionType = .no
+        titleTextField.autocapitalizationType = .none
         
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
@@ -162,6 +164,8 @@ class AddTravelViewController: UIViewController {
         self.titleTextField.becomeFirstResponder()
         
         tasks = localRealm.objects(LocationDocument.self)
+        
+        emptyDataDelete(tasks: tasks, tableView: nil, localRealm: localRealm)
     }
 }
 
