@@ -25,9 +25,9 @@
 //MARK: MapViewController
 "Add a story" = "Add a story";
 
-"Add a story to a new place." = "Add a story to a new place.";
+"Add a story to a new place" = "Add a story to a new place";
 
-"Add a story to the existing place." = "Add a story to the existing place.";
+"Add a story to the existing place" = "Add a story to the existing place";
 
 "The existing place does not exist. Please create a new place." = "The existing place does not exist. Please create a new place.";
 
@@ -39,6 +39,7 @@
 
 "Add Place" = "Add Place";
 
+"Enter place" = "Enter place";
 
 //MARK: AddPinViewController
 
@@ -56,15 +57,19 @@
 
 "Please enter the title of the story." = "Please enter the title of the story.";
 
-"Choose a place to add a story." = "Choose a place to add a story.";
+"Choose a place to add a story" = "Choose a place to add a story";
 
-"Choose the date of the story." = "Choose the date of the story.";
+"Choose the date of the story" = "Choose the date of the story";
 
 "Add a Story" = "Add a Story";
 
 "Choose a Date" = "Choose a Date";
 
 "Choose a Place" = "Choose a Place";
+
+"Title of the story" = "Title of the story";
+
+"Contents of the story" = "Contents of the story";
 
 //MARK: TravelDetailViewController
 
@@ -77,3 +82,22 @@
 "Yes, Delete it" = "Yes, Delete it";
 
 
+//MARK: Authorization Handler
+
+
+"Request for access to the location" = "Request for access to the location";
+
+"You need to allow location access to use the app." = "You need to allow location access to use the app.";
+
+"Request for access to the photo" = "Request for access to the photo";
+
+"You need to allow photo access to use the app." = "You need to allow photo access to use the app.";
+
+"Request for access to the camera" = "Request for access to the camera";
+
+"You need to allow camera access to use the app." = "You need to allow camera access to use the app.";
+
+
+//MARK: TLPhotopicker (In Pods)
+
+"Album" = "Album";

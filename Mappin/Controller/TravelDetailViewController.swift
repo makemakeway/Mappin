@@ -52,12 +52,12 @@ class TravelDetailViewController: UIViewController {
         print("more Button Clicked")
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let edit = UIAlertAction(title: "스토리 수정하기", style: .default) { [weak self](_) in
+        let edit = UIAlertAction(title: "Edit the story".localized(), style: .default) { [weak self](_) in
             guard let self = self else { return }
             
             let sb = UIStoryboard(name: "AddPin", bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "AddPinViewController") as! AddPinViewController
-            vc.title = "스토리 수정"
+            vc.title = "Edit the story".localized()
             
             vc.memoryData = self.task
             vc.documentTitle = self.documentTitle
@@ -65,10 +65,10 @@ class TravelDetailViewController: UIViewController {
             self.navigationController?.pushViewController(vc, animated: true)
         }
         
-        let delete = UIAlertAction(title: "스토리 삭제하기", style: .destructive) { [weak self](_) in
+        let delete = UIAlertAction(title: "Delete the story".localized(), style: .destructive) { [weak self](_) in
             guard let self = self, let task = self.task else { return }
-            let alert = UIAlertController(title: nil, message: "스토리를 정말 삭제하시겠어요?", preferredStyle: .alert)
-            let ok = UIAlertAction(title: "예, 삭제할게요.", style: .default) { _ in
+            let alert = UIAlertController(title: nil, message: "Do you really want to delete the story?".localized(), preferredStyle: .alert)
+            let ok = UIAlertAction(title: "Delete it".localized(), style: .default) { _ in
                 try! self.localRealm.write {
                     guard let task = self.localRealm.object(ofType: MemoryData.self, forPrimaryKey: task._id) else {
                         return
@@ -85,13 +85,13 @@ class TravelDetailViewController: UIViewController {
                     self.navigationController?.popViewController(animated: true)
                 }
             }
-            let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+            let cancel = UIAlertAction(title: "Cancel".localized(), style: .cancel, handler: nil)
             alert.addAction(ok)
             alert.addAction(cancel)
             self.present(alert, animated: true, completion: nil)
         }
         
-        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        let cancel = UIAlertAction(title: "Cancel".localized(), style: .cancel, handler: nil)
         
         actionSheet.addAction(edit)
         actionSheet.addAction(delete)

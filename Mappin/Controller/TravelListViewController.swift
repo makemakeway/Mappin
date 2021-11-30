@@ -97,7 +97,7 @@ extension TravelListViewController: UITableViewDataSource, UITableViewDelegate {
         cell.locationDescriptionLabel.font = UIFont().mainFontBold
         
         cell.photoImageView.contentMode = .scaleAspectFill
-        
+        cell.selectionStyle = .none
         return cell
     }
     

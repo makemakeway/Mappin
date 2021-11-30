@@ -1,0 +1,15 @@
+/* 
+  InfoPlist.strings
+  Mappin
+
+  Created by 박연배 on 2021/11/30.
+  
+*/
+
+NSPhotoLibraryUsageDescription = "This app requires access to the photo library.";
+
+NSCameraUsageDescription = "This app requires access to the camera.";
+
+NSLocationWhenInUseUsageDescription = "This app requires access to the location.";
+
+

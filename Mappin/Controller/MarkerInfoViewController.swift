@@ -89,6 +89,7 @@ extension MarkerInfoViewController: UITableViewDelegate, UITableViewDataSource {
         cell.photoImageView.image = ImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(task._id)_0.jpeg")
         cell.photoImageView.contentMode = .scaleAspectFill
         cell.photoImageView.layer.cornerRadius = 5
+        cell.selectionStyle = .none
         
         return cell
     }

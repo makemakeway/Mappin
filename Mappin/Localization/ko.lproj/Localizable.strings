@@ -25,9 +25,9 @@
 //MARK: MapViewController
 "Add a story" = "스토리 추가";
 
-"Add a story to a new place." = "새로운 장소에 추가하기";
+"Add a story to a new place" = "새로운 장소에 추가하기";
 
-"Add a story to the existing place." = "기존 장소에 추가하기";
+"Add a story to the existing place" = "기존 장소에 추가하기";
 
 "The existing place does not exist. Please create a new place." = "기존 장소가 없습니다. 새로운 장소를 추가해주세요.";
 
@@ -39,6 +39,7 @@
 
 "Add Place" = "장소 추가";
 
+"Enter place" = "장소 입력";
 
 //MARK: AddPinViewController
 
@@ -56,15 +57,19 @@
 
 "Please enter the title of the story." = "스토리의 제목을 입력해주세요.";
 
-"Choose a place to add a story." = "스토리를 추가할 장소";
+"Choose a place to add a story" = "스토리를 추가할 장소";
 
-"Choose the date of the story." = "스토리의 날짜";
+"Choose the date of the story" = "스토리의 날짜";
 
 "Add a Story" = "스토리 추가";
 
 "Choose a Date" = "날짜 선택";
 
 "Choose a Place" = "장소 선택";
+
+"Title of the story" = "스토리의 제목을 입력해주세요.";
+
+"Contents of the story" = "내용";
 
 //MARK: TravelDetailViewController
 
@@ -75,3 +80,22 @@
 "Do you really want to delete the story?" = "정말 스토리를 삭제하시겠어요?";
 
 "Delete it" = "삭제하기";
+
+//MARK: Autorization handler
+
+"Request for access to the location" = "위치 권한 접근 요청";
+
+"You need to allow location access to use the app." = "앱을 이용하기 위해서 위치 접근 권한이 필요합니다.";
+
+"Request for access to the photo" = "사진 접근 권한 요청";
+
+"You need to allow photo access to use the app." = "앱을 이용하기 위해서 사진 접근 권한이 필요합니다.";
+
+"Request for access to the camera" = "카메라 접근 권한 요청";
+
+"You need to allow camera access to use the app." = "앱을 이용하기 위해서 카메라 접근 권한이 필요합니다.";
+
+
+//MARK: TLPhotopicker (In Pods)
+
+"Album" = "앨범";

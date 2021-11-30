@@ -21,6 +21,8 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var photoCountLabel: UILabel!
     
+    @IBOutlet weak var addPhotoLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -9,11 +9,11 @@
 		<string>CookieRunRegular.otf</string>
 	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>앱의 기능을 이용하려면 사용자의 사진 접근 권한이 필요합니다.</string>
+	<string>앱을 이용하려면 사용자의 사진 접근 권한이 필요합니다.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>앱의 기능을 이용하려면 사용자의 카메라 접근 권한이 필요합니다.</string>
+	<string>앱을 이용하려면 사용자의 카메라 접근 권한이 필요합니다.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>앱의 기능을 이용하려면 사용자의 위치 정보 권한이 필요합니다.</string>
+	<string>앱을 이용하려면 사용자의 위치 정보 권한이 필요합니다.</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>googlechromes</string>

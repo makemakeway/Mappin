@@ -113,10 +113,10 @@ extension InitialViewController: UITableViewDelegate, UITableViewDataSource {
        
         
         let task = tasks[indexPath.row]
-//        let task = Array(tasks).sorted(by: { $0.memoryList.first!.memoryDate < $1.memoryList.first!.memoryDate })[indexPath.row]
         print(task)
         
         cell.backgroundColor = .systemBackground
+        cell.selectionStyle = .none
         
         if let memory = task.memoryList.sorted(byKeyPath: "memoryDate", ascending: true).first, !(task.memoryList.isEmpty) {
             cell.documentTitleLabel.text = task.documentTitle
@@ -170,7 +170,7 @@ extension InitialViewController: UITableViewDelegate, UITableViewDataSource {
             return nil
         }
         
-        header.titleLabel.text = "장소"
+        header.titleLabel.text = "Place".localized()
         header.titleLabel.font = UIFont(name: "CookieRunOTF-Black", size: 24)
         
         return header

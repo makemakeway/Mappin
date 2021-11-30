@@ -13,7 +13,7 @@ import RealmSwift
 extension UIViewController {
     func presentOkAlert(message: String) {
         let alert = UIAlertController(title: nil, message: "\(message)", preferredStyle: .alert)
-        let ok = UIAlertAction(title: "확인", style: .default, handler: nil)
+        let ok = UIAlertAction(title: "Confirm".localized(), style: .default, handler: nil)
         
         alert.addAction(ok)
         self.present(alert, animated: true, completion: nil)
@@ -133,8 +133,8 @@ extension UIViewController {
     }
     
     func authorizationHandling(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let ok = UIAlertAction(title: "예", style: .default) { _ in
+        let alert = UIAlertController(title: title.localized(), message: message.localized(), preferredStyle: .alert)
+        let ok = UIAlertAction(title: "Confirm".localized(), style: .default) { _ in
             guard let url = URL(string: UIApplication.openSettingsURLString) else {
                 return
             }

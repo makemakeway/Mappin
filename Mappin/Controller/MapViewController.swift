@@ -108,9 +108,9 @@ class MapViewController: UIViewController {
     
     
     func presentActionSheet() {
-        let sheet = UIAlertController(title: "기록 추가", message: nil, preferredStyle: .actionSheet)
+        let sheet = UIAlertController(title: "Add a story".localized(), message: nil, preferredStyle: .actionSheet)
         
-        let newlyTravel = UIAlertAction(title: "새로운 장소에 기록 추가하기", style: .default) { _ in
+        let newlyTravel = UIAlertAction(title: "Add a story to a new place".localized(), style: .default) { _ in
             print("DEBUG: 새로운 장소 추가 씬으로")
             let sb = UIStoryboard(name: "AddTravel", bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "AddTravelViewController") as! AddTravelViewController
@@ -118,10 +118,10 @@ class MapViewController: UIViewController {
             self.navigationController?.pushViewController(vc, animated: true)
         }
         
-        let existingTravel = UIAlertAction(title: "기존 장소에 기록 추가하기", style: .default) { [weak self](_) in
+        let existingTravel = UIAlertAction(title: "Add a story to the existing place".localized(), style: .default) { [weak self](_) in
             print("DEBUG: 기록 추가 씬으로")
             if self!.tasks.isEmpty {
-                self?.presentOkAlert(message: "기존 장소가 존재하지 않습니다. 새로운 장소를 만들어주세요.")
+                self?.presentOkAlert(message: "The existing place does not exist. Please create a new place.".localized())
                 return
             }
             
@@ -132,7 +132,7 @@ class MapViewController: UIViewController {
             self?.navigationController?.pushViewController(vc, animated: true)
         }
         
-        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        let cancel = UIAlertAction(title: "Cancel".localized(), style: .cancel, handler: nil)
         
         sheet.addAction(existingTravel)
         sheet.addAction(newlyTravel)
@@ -251,7 +251,7 @@ extension MapViewController: CLLocationManagerDelegate {
         LocationManager.shared.checkUsersLocationServicesAuthorization()
         switch manager.authorizationStatus {
         case .denied:
-            authorizationHandling(title: "위치 접근 권한 요청", message: "위치 접근 권한을 허용해야 앱을 이용할 수 있습니다.")
+            authorizationHandling(title: "Request for access to the location", message: "You need to allow location access to use the app.")
         default:
             print("DEBUG: ㅋㅋ")
         }
@@ -262,7 +262,7 @@ extension MapViewController: CLLocationManagerDelegate {
         LocationManager.shared.checkUsersLocationServicesAuthorization()
         switch status {
         case .denied:
-            authorizationHandling(title: "위치 접근 권한 요청", message: "위치 접근 권한을 허용해야 앱을 이용할 수 있습니다.")
+            authorizationHandling(title: "Request for access to the location", message: "You need to allow location access to use the app.")
         default:
             print("DEBUG: ㅋㅋ")
         }
@@ -275,7 +275,7 @@ extension MapViewController: GMSMapViewDelegate {
         if #available(iOS 14, *) {
             switch locationManager.authorizationStatus {
             case .denied:
-                authorizationHandling(title: "위치 접근 권한 요청", message: "위치 접근 권한을 허용해야 앱을 이용할 수 있습니다.")
+                authorizationHandling(title: "Request for access to the location", message: "You need to allow location access to use the app.")
                 return true
             default:
                 print("DEBUG: \(#function)")
@@ -284,7 +284,7 @@ extension MapViewController: GMSMapViewDelegate {
         } else {
             switch CLLocationManager.authorizationStatus() {
             case .denied:
-                authorizationHandling(title: "위치 접근 권한 요청", message: "위치 접근 권한을 허용해야 앱을 이용할 수 있습니다.")
+                authorizationHandling(title: "Request for access to the location", message: "You need to allow location access to use the app.")
                 return true
             default:
                 print("DEBUG: \(#function)")

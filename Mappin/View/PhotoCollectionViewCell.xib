@@ -76,6 +76,7 @@
             </constraints>
             <size key="customSize" width="336" height="342"/>
             <connections>
+                <outlet property="addPhotoLabel" destination="gAq-DV-bFT" id="pyx-i6-wD5"/>
                 <outlet property="cameraImage" destination="lwn-gL-cyx" id="DvQ-np-UAe"/>
                 <outlet property="cameraLabel" destination="gAq-DV-bFT" id="hVv-zo-Y7g"/>
                 <outlet property="container" destination="Oi0-4O-unJ" id="91s-M7-kCB"/>

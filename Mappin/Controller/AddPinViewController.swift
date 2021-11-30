@@ -87,7 +87,7 @@ class AddPinViewController: UIViewController {
         if addDataToRealm() {
             self.navigationController?.popToRootViewController(animated: true)
         } else {
-            presentOkAlert(message: "스토리를 추가하지 못했습니다.\n잠시후 다시 시도하거나 앱을 재실행해주세요.")
+            presentOkAlert(message: "Failed to add story.\n Please try again in a little while or run the app again.".localized())
         }
         
     }
@@ -134,7 +134,7 @@ class AddPinViewController: UIViewController {
     @objc func cameraImageClicked(_ gesture: CustomGesture) {
         let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let library = UIAlertAction(title: "갤러리에서 사진 선택", style: .default) { [weak self](_) in
+        let library = UIAlertAction(title: "Add a photo".localized(), style: .default) { [weak self](_) in
             
             guard let self = self else { return }
             
@@ -143,8 +143,8 @@ class AddPinViewController: UIViewController {
             vc.modalPresentationStyle = .fullScreen
             vc.view.backgroundColor = .systemBackground
             
-            vc.cancelButton.title = "취소"
-            vc.doneButton.title = "선택"
+            vc.cancelButton.title = "Cancel".localized()
+            vc.doneButton.title = "Done".localized()
             vc.configure = self.TLPhotoPickerConfig()
             
             
@@ -153,7 +153,7 @@ class AddPinViewController: UIViewController {
         
         
         
-        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        let cancel = UIAlertAction(title: "Cancel".localized(), style: .cancel, handler: nil)
         
         sheet.addAction(library)
         sheet.addAction(cancel)
@@ -170,7 +170,7 @@ class AddPinViewController: UIViewController {
             dateTextField.text = dateToString(date: data.memoryDate)
             locationTextField.text = data.memoryDescription
             contentTextView.text = data.memoryContent
-            self.title = "스토리 수정"
+            self.title = "Edit a Story".localized()
             for image in data.memoryPicture {
                 guard let img = ImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(image)") else { return }
                 photoImages.append(img)
@@ -190,9 +190,9 @@ class AddPinViewController: UIViewController {
         config.maxSelectedAssets = 10
         config.mediaType = .image
         
-        config.doneTitle = "선택"
-        config.cancelTitle = "취소"
-        config.tapHereToChange = "앨범 선택"
+        config.doneTitle = "Done".localized()
+        config.cancelTitle = "Cancel".localized()
+        config.tapHereToChange = "Album".localized()
         config.autoPlay = false
         
         return config
@@ -209,13 +209,13 @@ class AddPinViewController: UIViewController {
         picker.leadingAnchor.constraint(equalTo: actionSheet.view.leadingAnchor).isActive = true
         picker.topAnchor.constraint(equalTo: actionSheet.view.topAnchor, constant: 20).isActive = true
         
-        let cancelButton = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        let cancelButton = UIAlertAction(title: "Cancel".localized(), style: .cancel, handler: nil)
         
         actionSheet.addAction(cancelButton)
         
         if picker is UIPickerView {
             
-            let okButton = UIAlertAction(title: "선택", style: .default) { _ in
+            let okButton = UIAlertAction(title: "Done".localized(), style: .default) { _ in
                 self.documentTitleTextField.text = self.titleSource[self.pickerIndex]
                 self.documentTitle = self.titleSource[self.pickerIndex]
             }
@@ -226,7 +226,7 @@ class AddPinViewController: UIViewController {
             
         } else {
             
-            let okButton = UIAlertAction(title: "선택", style: .default) { _ in
+            let okButton = UIAlertAction(title: "Done".localized(), style: .default) { _ in
                 self.dateTextField.text = self.dateToString(date: self.datePicker.date)
             }
             
@@ -281,22 +281,22 @@ class AddPinViewController: UIViewController {
     
     func dataValidCheck() -> Bool {
         if documentTitle == nil {
-            presentOkAlert(message: "스토리를 추가할 장소를 설정해주세요.")
+            presentOkAlert(message: "Please enter a place to add a story.".localized())
             return false
         }
         
         if contentTextView.textColor == .darkGray {
-            presentOkAlert(message: "스토리 내용을 입력해주세요.")
+            presentOkAlert(message: "Please enter the contents of the story.".localized())
             return false
         }
         
         if photoImages.isEmpty {
-            presentOkAlert(message: "사진을 추가해주세요.")
+            presentOkAlert(message: "Please add a photo.".localized())
             return false
         }
         
         guard let location = locationTextField.text, !(location.isEmpty) else {
-            presentOkAlert(message: "스토리 제목을 입력해주세요.")
+            presentOkAlert(message: "Please enter the title of the story.".localized())
             return false
         }
         
@@ -312,7 +312,7 @@ class AddPinViewController: UIViewController {
 
     
     func titleTextFieldConfig() {
-        documentTitleTextField.placeholder = "스토리를 추가할 장소를 선택해주세요."
+        documentTitleTextField.placeholder = "Choose a place to add a story".localized()
         documentTitleTextField.font = UIFont().mainFontRegular
         documentTitleTextField.delegate = self
         
@@ -332,7 +332,7 @@ class AddPinViewController: UIViewController {
     }
     
     func dateTextFieldConfig() {
-        dateTextField.placeholder = "스토리를 추가할 날짜를 선택해주세요."
+        dateTextField.placeholder = "Choose the date of the story".localized()
         dateTextField.font = UIFont().mainFontRegular
         dateTextField.delegate = self
         
@@ -350,7 +350,7 @@ class AddPinViewController: UIViewController {
     }
     
     func locationTextFieldConfig() {
-        locationTextField.placeholder = "스토리의 제목을 입력해주세요."
+        locationTextField.placeholder = "Title of the story".localized()
         locationTextField.font = UIFont().mainFontRegular
         locationTextField.clearButtonMode = .whileEditing
         locationTextField.delegate = self
@@ -367,7 +367,7 @@ class AddPinViewController: UIViewController {
                                      action: #selector(addPin(_:)))
         
         self.navigationItem.rightBarButtonItem = button
-        self.title = "스토리 추가"
+        self.title = "Add a Story".localized()
     }
     
     func collectionViewConfig() {
@@ -397,7 +397,7 @@ class AddPinViewController: UIViewController {
         contentTextView.delegate = self
         
         if !editMode {
-            contentTextView.text = "스토리 내용을 입력해주세요."
+            contentTextView.text = "Contents of the story".localized()
             contentTextView.textColor = .darkGray
         }
         
@@ -506,6 +506,7 @@ extension AddPinViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 cell.photoImageView.contentMode = .scaleAspectFit
                 cell.photoCountLabel.text = "\(photoImages.count) / 10"
                 cell.photoCountLabel.font = UIFont().mainFontRegular
+                cell.addPhotoLabel.text = "Add a photo".localized()
                 cell.addGestureRecognizer(gesture)
             }
         }
@@ -518,6 +519,7 @@ extension AddPinViewController: UICollectionViewDelegate, UICollectionViewDataSo
             cell.photoImageView.contentMode = .scaleAspectFit
             cell.photoCountLabel.text = "\(photoImages.count) / 10"
             cell.photoCountLabel.font = UIFont().mainFontRegular
+            cell.addPhotoLabel.text = "Add a photo".localized()
             cell.addGestureRecognizer(gesture)
         }
         
@@ -586,7 +588,7 @@ extension AddPinViewController: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
-            contentTextView.text = "스토리 내용을 입력해주세요."
+            contentTextView.text = "Contents of the story".localized()
             contentTextView.textColor = .darkGray
         }
         print(#function)
@@ -624,13 +626,13 @@ extension AddPinViewController: TLPhotosPickerViewControllerDelegate {
     
     func handleNoAlbumPermissions(picker: TLPhotosPickerViewController) {
         picker.dismiss(animated: true) { [weak self] in
-            self?.authorizationHandling(title: "사진 접근 권한 요청", message: "앱을 이용하기 위해서는 사진 접근 권한이 필요합니다.")
+            self?.authorizationHandling(title: "Request for access to the photo", message: "You need to allow photo access to use the app.")
         }
     }
     
     func handleNoCameraPermissions(picker: TLPhotosPickerViewController) {
         picker.dismiss(animated: true) { [weak self] in
-            self?.authorizationHandling(title: "카메라 접근 권한 요청", message: "앱을 이용하기 위해서는 카메라 접근 권한이 필요합니다.")
+            self?.authorizationHandling(title: "Request for access to the camera", message: "You need to allow camera access to use the app.")
         }
         
     }
@@ -643,10 +645,10 @@ extension AddPinViewController: TLPhotosPickerViewControllerDelegate {
 extension AddPinViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == dateTextField {
-            presentActionSheetInsteadKeyboard(message: "날짜 선택", picker: datePicker)
+            presentActionSheetInsteadKeyboard(message: "Choose a Date".localized(), picker: datePicker)
             return false
         } else if textField == documentTitleTextField {
-            presentActionSheetInsteadKeyboard(message: "장소 선택", picker: titlePickerView)
+            presentActionSheetInsteadKeyboard(message: "Choose a Place".localized(), picker: titlePickerView)
             return false
         }
         return true

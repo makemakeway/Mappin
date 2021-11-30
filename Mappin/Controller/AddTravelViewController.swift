@@ -114,14 +114,14 @@ class AddTravelViewController: UIViewController {
         
         guard let title = titleTextField.text, !(title.isEmpty) else {
             
-            presentOkAlert(message: "추가하고 싶은 장소를 입력해주세요.")
+            presentOkAlert(message: "Please enter the place you want to add.".localized())
             return false
         }
         
         
         if !(tasks.filter("documentTitle = '\(title)'").isEmpty) {
             print("쭝복임!")
-            presentOkAlert(message: "이미 기록했던 장소입니다.\n다른 장소를 입력해주세요.")
+            presentOkAlert(message: "It's already been recorded.\n Please enter another place.".localized())
             return false
         }
         
@@ -135,7 +135,7 @@ class AddTravelViewController: UIViewController {
                                      action: #selector(forwardButtonClicked(_:)))
         
         self.navigationItem.rightBarButtonItem = button
-        self.title = "장소 추가"
+        self.title = "Add Place".localized()
         self.navigationItem.backButtonTitle = ""
     }
     
@@ -152,6 +152,7 @@ class AddTravelViewController: UIViewController {
         titleTextField.font = UIFont().mainFontRegular
         titleTextField.autocorrectionType = .no
         titleTextField.autocapitalizationType = .none
+        titleTextField.placeholder = "Enter place".localized()
         
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
@@ -178,7 +179,7 @@ extension AddTravelViewController: CLLocationManagerDelegate {
         let auth = LocationManager.shared.manager.authorizationStatus
         switch manager.authorizationStatus {
         case .denied:
-            authorizationHandling(title: "위치 접근 권한 요청", message: "위치 접근 권한을 허용해야 앱을 이용할 수 있습니다.")
+            authorizationHandling(title: "Request for access to the location", message: "You need to allow location access to use the app.")
         case .notDetermined, .restricted:
             LocationManager.shared.checkCurrentLocationAutorization(status: auth)
         default:
@@ -193,7 +194,7 @@ extension AddTravelViewController: CLLocationManagerDelegate {
         let auth = CLLocationManager.authorizationStatus()
         switch status {
         case .denied:
-            authorizationHandling(title: "위치 접근 권한 요청", message: "위치 접근 권한을 허용해야 앱을 이용할 수 있습니다.")
+            authorizationHandling(title: "Request for access to the location", message: "You need to allow location access to use the app.")
         case .notDetermined, .restricted:
             LocationManager.shared.checkCurrentLocationAutorization(status: auth)
         default:

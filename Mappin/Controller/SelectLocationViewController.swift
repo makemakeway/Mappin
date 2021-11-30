@@ -124,14 +124,14 @@ class SelectLocationViewController: UIViewController {
         if #available(iOS 14, *) {
             switch LocationManager.shared.manager.authorizationStatus {
             case .denied:
-                authorizationHandling(title: "위치 접근 권한 요청", message: "위치 접근 권한을 허용해야 앱을 이용할 수 있습니다.")
+                authorizationHandling(title: "Request for access to the location", message: "You need to allow location access to use the app.")
             default:
                 print("ㅋㅋ")
             }
         } else {
             switch CLLocationManager.authorizationStatus() {
             case .denied:
-                authorizationHandling(title: "위치 접근 권한 요청", message: "위치 접근 권한을 허용해야 앱을 이용할 수 있습니다.")
+                authorizationHandling(title: "Request for access to the location", message: "You need to allow location access to use the app.")
             default:
                 print("ㅋㅋ")
             }
