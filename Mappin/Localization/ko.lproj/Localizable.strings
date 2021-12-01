@@ -103,4 +103,13 @@
 
 //MARK: SideMenu
 
+"App info" = "앱 정보";
+
+
+//MARK: App info
+
 "Open source license" = "오픈소스 라이선스";
+
+"Contact" = "문의하기";
+
+"Personal information policy" = "개인정보 처리 방침";

@@ -105,4 +105,13 @@
 
 //MARK: SideMenu
 
-"Open source license" = "Open-source license";
+"App info" = "App info";
+
+
+//MARK: App info
+
+"Open source license" = "Open source license";
+
+"Contact" = "Contact";
+
+"Personal information policy" = "Personal information policy";

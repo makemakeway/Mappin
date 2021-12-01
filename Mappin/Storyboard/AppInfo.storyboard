@@ -9,34 +9,35 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Side Menu View Controller-->
+        <!--App Info View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="SideMenuViewController" id="Y6W-OH-hqX" customClass="SideMenuViewController" customModule="Mappin" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AppInfoViewController" id="Y6W-OH-hqX" customClass="AppInfoViewController" customModule="Mappin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="qsa-8i-S1C">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="hPQ-EZ-lZN">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="qsa-8i-S1C" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="2Lx-Jg-bVd"/>
-                            <constraint firstItem="qsa-8i-S1C" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="dWZ-WZ-t8p"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="qsa-8i-S1C" secondAttribute="bottom" id="hRd-km-jBh"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="qsa-8i-S1C" secondAttribute="trailing" id="hbJ-OY-sar"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="hPQ-EZ-lZN" secondAttribute="trailing" id="0wc-u8-UyW"/>
+                            <constraint firstItem="hPQ-EZ-lZN" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="6A8-0S-OcM"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="hPQ-EZ-lZN" secondAttribute="bottom" id="j3b-hU-cQJ"/>
+                            <constraint firstItem="hPQ-EZ-lZN" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="kx4-fF-fTf"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="tableView" destination="qsa-8i-S1C" id="5hu-k4-10d"/>
+                        <outlet property="tableView" destination="hPQ-EZ-lZN" id="8GT-r6-GhR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="133" y="94"/>
+            <point key="canvasLocation" x="132" y="53"/>
         </scene>
     </scenes>
     <resources>

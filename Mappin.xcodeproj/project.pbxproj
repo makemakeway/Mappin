@@ -10,6 +10,13 @@
 		3409569BE6EC9DAB39372756 /* Pods_MappinTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C3D2C17A29D6BA849D1972D /* Pods_MappinTests.framework */; };
 		BD88EEB02F5B62ACD06C55AD /* Pods_Mappin_MappinUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5A79D76CC78A409BC6B2DC2 /* Pods_Mappin_MappinUITests.framework */; };
 		C25D072E27527C6400175D6C /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25D072D27527C6400175D6C /* LoadingIndicator.swift */; };
+		C25FF50727574FA900A83A40 /* IBMPlexSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C25FF50627574FA900A83A40 /* IBMPlexSansKR-Regular.otf */; };
+		C25FF509275750FB00A83A40 /* IBMPlexSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C25FF508275750FB00A83A40 /* IBMPlexSansKR-Bold.otf */; };
+		C25FF50B2757520300A83A40 /* IBMPlexSansKR-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C25FF50A2757520300A83A40 /* IBMPlexSansKR-SemiBold.otf */; };
+		C25FF50D2757548D00A83A40 /* AppInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25FF50C2757548D00A83A40 /* AppInfoViewController.swift */; };
+		C25FF50F275754A900A83A40 /* AppInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C25FF50E275754A900A83A40 /* AppInfo.storyboard */; };
+		C25FF5122757579F00A83A40 /* DefaultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25FF5102757579F00A83A40 /* DefaultTableViewCell.swift */; };
+		C25FF5132757579F00A83A40 /* DefaultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C25FF5112757579F00A83A40 /* DefaultTableViewCell.xib */; };
 		C25FFA04274F4E8100B0C41B /* MarkerInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25FFA03274F4E8100B0C41B /* MarkerInfoViewController.swift */; };
 		C25FFA06274F4E9200B0C41B /* MarkerInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C25FFA05274F4E9200B0C41B /* MarkerInfo.storyboard */; };
 		C25FFA09274F5BD000B0C41B /* MarkerInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25FFA07274F5BD000B0C41B /* MarkerInfoTableViewCell.swift */; };
@@ -24,10 +31,6 @@
 		C26A23FB27467450005F42E2 /* Extension+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26A23FA27467450005F42E2 /* Extension+UIViewController.swift */; };
 		C26A23FE2746909A005F42E2 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26A23FC2746909A005F42E2 /* PhotoCollectionViewCell.swift */; };
 		C26A23FF2746909A005F42E2 /* PhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26A23FD2746909A005F42E2 /* PhotoCollectionViewCell.xib */; };
-		C26D2E4A27566A850035D339 /* SCDream3.otf in Resources */ = {isa = PBXBuildFile; fileRef = C26D2E4927566A850035D339 /* SCDream3.otf */; };
-		C26D2E4C27566A8B0035D339 /* SCDream4.otf in Resources */ = {isa = PBXBuildFile; fileRef = C26D2E4B27566A8B0035D339 /* SCDream4.otf */; };
-		C26D2E4E27566A920035D339 /* SCDream6.otf in Resources */ = {isa = PBXBuildFile; fileRef = C26D2E4D27566A920035D339 /* SCDream6.otf */; };
-		C26D2E5027566C8B0035D339 /* SCDream8.otf in Resources */ = {isa = PBXBuildFile; fileRef = C26D2E4F27566C8B0035D339 /* SCDream8.otf */; };
 		C26D2E522756787B0035D339 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26D2E512756787B0035D339 /* SideMenuViewController.swift */; };
 		C26D2E5627567D270035D339 /* SideMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C26D2E5527567D270035D339 /* SideMenu.storyboard */; };
 		C26D2E5927567D5D0035D339 /* SideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26D2E5727567D5D0035D339 /* SideMenuTableViewCell.swift */; };
@@ -58,9 +61,6 @@
 		C27FE559274523D500F91946 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27FE558274523D500F91946 /* MapViewController.swift */; };
 		C27FE55B274523EE00F91946 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C27FE55A274523EE00F91946 /* Map.storyboard */; };
 		C2A2C6A727537F38003E8DC2 /* Extension+UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A2C6A627537F38003E8DC2 /* Extension+UIFont.swift */; };
-		C2A2C6B9275385B6003E8DC2 /* CookieRunBlack.otf in Resources */ = {isa = PBXBuildFile; fileRef = C2A2C6B6275385B6003E8DC2 /* CookieRunBlack.otf */; };
-		C2A2C6BA275385F1003E8DC2 /* CookieRunBlack.otf in Resources */ = {isa = PBXBuildFile; fileRef = C2A2C6B6275385B6003E8DC2 /* CookieRunBlack.otf */; };
-		C2A2C6BB275385F1003E8DC2 /* CookieRunBlack.otf in Resources */ = {isa = PBXBuildFile; fileRef = C2A2C6B6275385B6003E8DC2 /* CookieRunBlack.otf */; };
 		C2A2C6C127553073003E8DC2 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A2C6C027553073003E8DC2 /* Extension+String.swift */; };
 		C2A2C6C427562832003E8DC2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C2A2C6C627562832003E8DC2 /* InfoPlist.strings */; };
 		C2A80B21274A8D54002E29C9 /* SelectLocation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2A80B20274A8D54002E29C9 /* SelectLocation.storyboard */; };
@@ -100,6 +100,13 @@
 		95B82A3A54DF9CD55A1D4029 /* Pods-Mappin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mappin.debug.xcconfig"; path = "Target Support Files/Pods-Mappin/Pods-Mappin.debug.xcconfig"; sourceTree = "<group>"; };
 		9C3D2C17A29D6BA849D1972D /* Pods_MappinTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MappinTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C25D072D27527C6400175D6C /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
+		C25FF50627574FA900A83A40 /* IBMPlexSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSansKR-Regular.otf"; sourceTree = "<group>"; };
+		C25FF508275750FB00A83A40 /* IBMPlexSansKR-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSansKR-Bold.otf"; sourceTree = "<group>"; };
+		C25FF50A2757520300A83A40 /* IBMPlexSansKR-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSansKR-SemiBold.otf"; sourceTree = "<group>"; };
+		C25FF50C2757548D00A83A40 /* AppInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoViewController.swift; sourceTree = "<group>"; };
+		C25FF50E275754A900A83A40 /* AppInfo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AppInfo.storyboard; sourceTree = "<group>"; };
+		C25FF5102757579F00A83A40 /* DefaultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTableViewCell.swift; sourceTree = "<group>"; };
+		C25FF5112757579F00A83A40 /* DefaultTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DefaultTableViewCell.xib; sourceTree = "<group>"; };
 		C25FFA03274F4E8100B0C41B /* MarkerInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerInfoViewController.swift; sourceTree = "<group>"; };
 		C25FFA05274F4E9200B0C41B /* MarkerInfo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MarkerInfo.storyboard; sourceTree = "<group>"; };
 		C25FFA07274F5BD000B0C41B /* MarkerInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerInfoTableViewCell.swift; sourceTree = "<group>"; };
@@ -117,10 +124,6 @@
 		C26A23FA27467450005F42E2 /* Extension+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIViewController.swift"; sourceTree = "<group>"; };
 		C26A23FC2746909A005F42E2 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		C26A23FD2746909A005F42E2 /* PhotoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCollectionViewCell.xib; sourceTree = "<group>"; };
-		C26D2E4927566A850035D339 /* SCDream3.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SCDream3.otf; sourceTree = "<group>"; };
-		C26D2E4B27566A8B0035D339 /* SCDream4.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SCDream4.otf; sourceTree = "<group>"; };
-		C26D2E4D27566A920035D339 /* SCDream6.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SCDream6.otf; sourceTree = "<group>"; };
-		C26D2E4F27566C8B0035D339 /* SCDream8.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SCDream8.otf; sourceTree = "<group>"; };
 		C26D2E512756787B0035D339 /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		C26D2E5527567D270035D339 /* SideMenu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SideMenu.storyboard; sourceTree = "<group>"; };
 		C26D2E5727567D5D0035D339 /* SideMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewCell.swift; sourceTree = "<group>"; };
@@ -151,7 +154,6 @@
 		C27FE558274523D500F91946 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		C27FE55A274523EE00F91946 /* Map.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
 		C2A2C6A627537F38003E8DC2 /* Extension+UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIFont.swift"; sourceTree = "<group>"; };
-		C2A2C6B6275385B6003E8DC2 /* CookieRunBlack.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CookieRunBlack.otf; sourceTree = "<group>"; };
 		C2A2C6C027553073003E8DC2 /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
 		C2A2C6C527562832003E8DC2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C2A2C6C727562834003E8DC2 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -278,6 +280,8 @@
 				C25FFA08274F5BD000B0C41B /* MarkerInfoTableViewCell.xib */,
 				C26D2E5727567D5D0035D339 /* SideMenuTableViewCell.swift */,
 				C26D2E5827567D5D0035D339 /* SideMenuTableViewCell.xib */,
+				C25FF5102757579F00A83A40 /* DefaultTableViewCell.swift */,
+				C25FF5112757579F00A83A40 /* DefaultTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -285,11 +289,9 @@
 		C2A2C69F27537100003E8DC2 /* Font */ = {
 			isa = PBXGroup;
 			children = (
-				C2A2C6B6275385B6003E8DC2 /* CookieRunBlack.otf */,
-				C26D2E4927566A850035D339 /* SCDream3.otf */,
-				C26D2E4B27566A8B0035D339 /* SCDream4.otf */,
-				C26D2E4D27566A920035D339 /* SCDream6.otf */,
-				C26D2E4F27566C8B0035D339 /* SCDream8.otf */,
+				C25FF50627574FA900A83A40 /* IBMPlexSansKR-Regular.otf */,
+				C25FF50A2757520300A83A40 /* IBMPlexSansKR-SemiBold.otf */,
+				C25FF508275750FB00A83A40 /* IBMPlexSansKR-Bold.otf */,
 			);
 			path = Font;
 			sourceTree = "<group>";
@@ -364,6 +366,7 @@
 				C26D2E512756787B0035D339 /* SideMenuViewController.swift */,
 				C26D2E5B275680C30035D339 /* LicenseViewController.swift */,
 				C26D2E6227568DC70035D339 /* WebViewController.swift */,
+				C25FF50C2757548D00A83A40 /* AppInfoViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 				C26D2E5527567D270035D339 /* SideMenu.storyboard */,
 				C26D2E5D275680D30035D339 /* License.storyboard */,
 				C26D2E6427568DD30035D339 /* Web.storyboard */,
+				C25FF50E275754A900A83A40 /* AppInfo.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -521,7 +525,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C26D2E4A27566A850035D339 /* SCDream3.otf in Resources */,
+				C25FF50B2757520300A83A40 /* IBMPlexSansKR-SemiBold.otf in Resources */,
 				C26A23F8274654B5005F42E2 /* AddPin.storyboard in Resources */,
 				C2CC524727427AAD00090891 /* LaunchScreen.storyboard in Resources */,
 				C2715C6E274BECC5001D5286 /* TravelList.storyboard in Resources */,
@@ -531,21 +535,21 @@
 				C26D2E6527568DD30035D339 /* Web.storyboard in Resources */,
 				C26A23F427465074005F42E2 /* AddTravel.storyboard in Resources */,
 				C26D2E5E275680D30035D339 /* License.storyboard in Resources */,
+				C25FF509275750FB00A83A40 /* IBMPlexSansKR-Bold.otf in Resources */,
 				C2A2C6C427562832003E8DC2 /* InfoPlist.strings in Resources */,
 				C2A80B21274A8D54002E29C9 /* SelectLocation.storyboard in Resources */,
-				C26D2E4E27566A920035D339 /* SCDream6.otf in Resources */,
 				C2CC524427427AAD00090891 /* Assets.xcassets in Resources */,
+				C25FF50727574FA900A83A40 /* IBMPlexSansKR-Regular.otf in Resources */,
 				C25FFA06274F4E9200B0C41B /* MarkerInfo.storyboard in Resources */,
 				C27FE55B274523EE00F91946 /* Map.storyboard in Resources */,
+				C25FF5132757579F00A83A40 /* DefaultTableViewCell.xib in Resources */,
 				C2715C72274CE3F3001D5286 /* TravelListTableViewCell.xib in Resources */,
 				C26D2E5A27567D5D0035D339 /* SideMenuTableViewCell.xib in Resources */,
-				C2A2C6B9275385B6003E8DC2 /* CookieRunBlack.otf in Resources */,
-				C26D2E5027566C8B0035D339 /* SCDream8.otf in Resources */,
 				C27FE5572745218100F91946 /* InitialTableViewCell.xib in Resources */,
 				C26D2E5627567D270035D339 /* SideMenu.storyboard in Resources */,
 				C25FFA0A274F5BD000B0C41B /* MarkerInfoTableViewCell.xib in Resources */,
 				C2CC524227427AAB00090891 /* Main.storyboard in Resources */,
-				C26D2E4C27566A8B0035D339 /* SCDream4.otf in Resources */,
+				C25FF50F275754A900A83A40 /* AppInfo.storyboard in Resources */,
 				C2715C7C274CFD32001D5286 /* TravelDetailCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -554,7 +558,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2A2C6BA275385F1003E8DC2 /* CookieRunBlack.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -562,7 +565,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2A2C6BB275385F1003E8DC2 /* CookieRunBlack.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -717,6 +719,7 @@
 				C26D2E522756787B0035D339 /* SideMenuViewController.swift in Sources */,
 				C27FE559274523D500F91946 /* MapViewController.swift in Sources */,
 				C2A2C6C127553073003E8DC2 /* Extension+String.swift in Sources */,
+				C25FF5122757579F00A83A40 /* DefaultTableViewCell.swift in Sources */,
 				C27FE5562745218100F91946 /* InitialTableViewCell.swift in Sources */,
 				C2715C7B274CFD32001D5286 /* TravelDetailCollectionViewCell.swift in Sources */,
 				C2CC523B27427AAB00090891 /* AppDelegate.swift in Sources */,
@@ -738,6 +741,7 @@
 				C27A902927488F2700CDF3C9 /* CustomGesture.swift in Sources */,
 				C26D2E61275683AB0035D339 /* Library.swift in Sources */,
 				C2715C68274BADA2001D5286 /* InitialTableViewHeader.swift in Sources */,
+				C25FF50D2757548D00A83A40 /* AppInfoViewController.swift in Sources */,
 				C2A2C6A727537F38003E8DC2 /* Extension+UIFont.swift in Sources */,
 				C27FE552274520C600F91946 /* InitialViewController.swift in Sources */,
 				C25FFA04274F4E8100B0C41B /* MarkerInfoViewController.swift in Sources */,
@@ -944,7 +948,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = H3V637RY5A;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Mappin/Info.plist;
@@ -977,7 +981,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = H3V637RY5A;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Mappin/Info.plist;

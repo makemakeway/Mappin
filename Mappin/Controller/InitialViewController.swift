@@ -44,6 +44,7 @@ class InitialViewController: UIViewController {
     
     func localizingText() {
         emptyHandlingLabel.text = "There is no record of writing 🥲".localized()
+        emptyHandlingLabel.font = UIFont().mainFontRegular
         emptyHandlingButton.setTitle("Fill it out".localized(), for: .normal)
     }
     
@@ -71,6 +72,7 @@ class InitialViewController: UIViewController {
         let sideMenu = SideMenuNavigationController(rootViewController: vc)
         
         sideMenu.leftSide = true
+        sideMenu.menuWidth = UIScreen.main.bounds.width * 0.4
         
         present(sideMenu, animated: true, completion: nil)
     }
@@ -107,6 +109,7 @@ class InitialViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = false
         tasks = localRealm.objects(LocationDocument.self).sorted(byKeyPath: "latestWrittenDate", ascending: false)
         
         emptyDataDelete(tasks: tasks, tableView: tableView, localRealm: localRealm)
@@ -183,13 +186,13 @@ extension InitialViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         header.titleLabel.text = "Place".localized()
-        header.titleLabel.font = UIFont().titleFontBlack
+        header.titleLabel.font = UIFont(name: "IBMPlexSansKR-Bold", size: 24)
         
         return header
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        return 50
     }
     
 }

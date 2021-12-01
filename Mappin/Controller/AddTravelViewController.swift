@@ -161,7 +161,7 @@ class AddTravelViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        navigationController?.navigationBar.isHidden = false
         self.titleTextField.becomeFirstResponder()
         
         tasks = localRealm.objects(LocationDocument.self)

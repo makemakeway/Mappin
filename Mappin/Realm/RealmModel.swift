@@ -39,6 +39,7 @@ class MemoryData: Object {
     @Persisted var memoryPicture: List<String>
     @Persisted var memoryContent: String
     @Persisted var memoryDescription: String
+    @Persisted var memoryCategory: String = "default"
     @Persisted(primaryKey: true) var _id: ObjectId
     
     convenience init(date: Date, picture: List<String>, content: String, description: String) {

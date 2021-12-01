@@ -1,5 +1,5 @@
 //
-//  SideMenuTableViewCell.swift
+//  DefaultTableViewCell.swift
 //  Mappin
 //
 //  Created by 박연배 on 2021/12/01.
@@ -7,15 +7,14 @@
 
 import UIKit
 
-class SideMenuTableViewCell: UITableViewCell {
+class DefaultTableViewCell: UITableViewCell {
+    
+    
+    static let identifier = "DefaultTableViewCell"
+    
+    @IBOutlet weak var defaultLabel: UILabel!
+    
 
-    static let identifier = "SideMenuTableViewCell"
-    
-    @IBOutlet weak var sideMenuLabel: UILabel!
-    
-    @IBOutlet weak var sideMenuIcon: UIImageView!
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

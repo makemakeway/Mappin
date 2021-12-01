@@ -37,8 +37,8 @@ class LicenseViewController: UIViewController {
     func tableViewConfig() {
         tableView.delegate = self
         tableView.dataSource = self
-        let nib = UINib(nibName: SideMenuTableViewCell.identifier, bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: SideMenuTableViewCell.identifier)
+        let nib = UINib(nibName: DefaultTableViewCell.identifier, bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: DefaultTableViewCell.identifier)
     }
     
     //MARK: LifeCycle
@@ -50,11 +50,11 @@ class LicenseViewController: UIViewController {
 
 extension LicenseViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: SideMenuTableViewCell.identifier, for: indexPath) as? SideMenuTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: DefaultTableViewCell.identifier, for: indexPath) as? DefaultTableViewCell else {
             return UITableViewCell()
         }
-        cell.sideMenuLabel.text = libraries[indexPath.row].name
-        cell.sideMenuLabel.font = UIFont().mainFontRegular
+        cell.defaultLabel.text = libraries[indexPath.row].name
+        cell.defaultLabel.font = UIFont().mainFontRegular
         
         return cell
     }
@@ -67,10 +67,11 @@ extension LicenseViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let sb = UIStoryboard(name: "Web", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
         vc.link = libraries[indexPath.row].link
-        
+        self.navigationItem.backButtonTitle = libraries[indexPath.row].name
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

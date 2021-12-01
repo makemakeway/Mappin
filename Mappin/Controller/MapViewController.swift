@@ -223,12 +223,6 @@ class MapViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.navigationBar.isHidden = false
-    }
-    
 
 }
 

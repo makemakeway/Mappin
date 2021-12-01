@@ -9,11 +9,9 @@
 	</array>
 	<key>UIAppFonts</key>
 	<array>
-		<string>CookieRunBlack.otf</string>
-		<string>SCDream3.otf</string>
-		<string>SCDream4.otf</string>
-		<string>SCDream6.otf</string>
-		<string>SCDream8.otf</string>
+		<string>IBMPlexSansKR-Regular.otf</string>
+		<string>IBMPlexSansKR-Bold.otf</string>
+		<string>IBMPlexSansKR-SemiBold.otf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
