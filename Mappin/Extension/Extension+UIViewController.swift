@@ -96,6 +96,13 @@ extension UIViewController {
         return df.string(from: date)
     }
     
+    func stringTodate(string: String) -> Date {
+        let df = DateFormatter()
+        df.dateFormat = "yyyy-MM-dd"
+        
+        return df.date(from: string)!
+    }
+    
     func setKeyboardObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)

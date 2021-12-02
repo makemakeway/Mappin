@@ -116,7 +116,9 @@ class AddPinViewController: UIViewController {
                     group.leave()
                 }
                 group.wait()
-                currentTask.memoryDate = datePicker.date
+                print("DEBUG: datepicker \(datePicker.date)")
+                print("DEBUG: dateTextField \(dateTextField.text!)")
+                currentTask.memoryDate = stringTodate(string: dateTextField.text!)
                 currentTask.memoryContent = contentTextView.text!
                 currentTask.memoryDescription = locationTextField.text!
                 
@@ -490,6 +492,22 @@ extension AddPinViewController: UICollectionViewDelegate, UICollectionViewDataSo
                     cell.container.addSubview(deleteButton)
                     cell.container.layer.cornerRadius = 10
                     deleteButton.translatesAutoresizingMaskIntoConstraints = false
+                    deleteButton.topAnchor.constraint(equalTo: cell.container.topAnchor, constant: -10).isActive = true
+                    deleteButton.trailingAnchor.constraint(equalTo: cell.container.trailingAnchor, constant: 10).isActive = true
+                    deleteButton.tag = indexPath.row
+                    deleteButton.addTarget(self, action: #selector(removePhoto(_:)), for: .touchUpInside)
+                } else {
+                    let deleteButton = UIButton()
+                    iOS13ButtonConfig(image: UIImage(systemName: "minus")!, button: deleteButton, backgroundColor: .red, foregroundColor: .white)
+                    let config = UIImage.SymbolConfiguration(scale: .large)
+                    deleteButton.setPreferredSymbolConfiguration(config, forImageIn: .normal)
+                    
+                    cell.container.addSubview(deleteButton)
+                    cell.container.layer.cornerRadius = 10
+                    
+                    deleteButton.translatesAutoresizingMaskIntoConstraints = false
+                    deleteButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
+                    deleteButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
                     deleteButton.topAnchor.constraint(equalTo: cell.container.topAnchor, constant: -10).isActive = true
                     deleteButton.trailingAnchor.constraint(equalTo: cell.container.trailingAnchor, constant: 10).isActive = true
                     deleteButton.tag = indexPath.row
