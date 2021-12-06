@@ -7,6 +7,7 @@
 
 import UIKit
 import GoogleMaps
+import GooglePlaces
 
 class SelectLocationViewController: UIViewController {
 
@@ -21,6 +22,18 @@ class SelectLocationViewController: UIViewController {
     @IBOutlet weak var mapView: GMSMapView!
     
     @IBOutlet weak var navBar: UINavigationBar!
+    
+    lazy var backButton: UIButton = {
+        let button = UIButton()
+        return button
+    }()
+    
+    lazy var addButton: UIButton = {
+        let button = UIButton()
+        return button
+    }()
+    
+    var resultViewController: GMSAutocompleteResultsViewController!
     
     //MARK: Method
     
@@ -39,6 +52,41 @@ class SelectLocationViewController: UIViewController {
             vc.pinLocation = mapView.camera.target
         }
         dismiss(animated: true, completion: nil)
+    }
+    
+    func searchBarConfig() {
+        resultViewController = GMSAutocompleteResultsViewController()
+        resultViewController.delegate = self
+        
+        let searchController = UISearchController(searchResultsController: resultViewController)
+        searchController.searchResultsUpdater = resultViewController
+        searchController.searchBar.autocapitalizationType = .none
+        searchController.searchBar.autocorrectionType = .no
+        searchController.searchBar.backgroundImage = UIImage()
+        searchController.searchBar.searchTextField.backgroundColor = .white
+        searchController.searchBar.searchTextField.borderStyle = .roundedRect
+        searchController.searchBar.searchTextField.textColor = .black
+        searchController.searchBar.delegate = self
+        
+        let subView = UIView()
+        
+        subView.addSubview(searchController.searchBar)
+        view.addSubview(subView)
+        
+        searchController.searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchController.searchBar.leadingAnchor.constraint(equalTo: subView.leadingAnchor, constant: 0).isActive = true
+        searchController.searchBar.trailingAnchor.constraint(equalTo: subView.trailingAnchor, constant: 0).isActive = true
+        searchController.searchBar.centerYAnchor.constraint(equalTo: subView.centerYAnchor, constant: 0).isActive = true
+        
+        subView.translatesAutoresizingMaskIntoConstraints = false
+        subView.centerYAnchor.constraint(equalTo: backButton.centerYAnchor, constant: 0).isActive = true
+        subView.leadingAnchor.constraint(equalTo: backButton.trailingAnchor, constant: 10).isActive = true
+        subView.trailingAnchor.constraint(equalTo: addButton.leadingAnchor, constant: -10).isActive = true
+        subView.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        
+        
+        searchController.hidesNavigationBarDuringPresentation = false
+        definesPresentationContext = true
     }
     
     func mapViewConfig(location: CLLocationCoordinate2D) {
@@ -66,7 +114,6 @@ class SelectLocationViewController: UIViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         
         if #available(iOS 15, *) {
-            let backButton = UIButton()
 
             iOS15ButtonConfig(image: UIImage(systemName: "xmark")!, button: backButton, backgroundColor: .white, foregroundColor: .darkGray)
             backButton.addTarget(self, action: #selector(dismissButtonClicked(_:)), for: .touchUpInside)
@@ -74,10 +121,9 @@ class SelectLocationViewController: UIViewController {
             view.addSubview(backButton)
 
             backButton.translatesAutoresizingMaskIntoConstraints = false
-            backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 44).isActive = true
+            backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 48).isActive = true
             backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
 
-            let addButton = UIButton()
 
             iOS15ButtonConfig(image: UIImage(systemName: "paperplane")!, button: addButton, backgroundColor: .white, foregroundColor: .darkGray)
             addButton.addTarget(self, action: #selector(completeButtonClicked(_:)), for: .touchUpInside)
@@ -85,11 +131,10 @@ class SelectLocationViewController: UIViewController {
             view.addSubview(addButton)
 
             addButton.translatesAutoresizingMaskIntoConstraints = false
-            addButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 44).isActive = true
+            addButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 48).isActive = true
             addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
 
         } else {
-            let backButton = UIButton()
 
             iOS13ButtonConfig(image: UIImage(systemName: "xmark")!, button: backButton, backgroundColor: .white, foregroundColor: .darkGray)
 
@@ -102,8 +147,6 @@ class SelectLocationViewController: UIViewController {
             backButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
 
             backButton.addTarget(self, action: #selector(dismissButtonClicked(_:)), for: .touchUpInside)
-
-            let addButton = UIButton()
 
             iOS13ButtonConfig(image: UIImage(systemName: "paperplane")!, button: addButton, backgroundColor: .white, foregroundColor: .darkGray)
 
@@ -124,14 +167,14 @@ class SelectLocationViewController: UIViewController {
         if #available(iOS 14, *) {
             switch LocationManager.shared.manager.authorizationStatus {
             case .denied:
-                authorizationHandling(title: "Request for access to the location", message: "You need to allow location access to use the app.")
+                authorizationHandling(title: "Request for access to the location", message: "Please allow access Location to use the app.")
             default:
                 print("ㅋㅋ")
             }
         } else {
             switch CLLocationManager.authorizationStatus() {
             case .denied:
-                authorizationHandling(title: "Request for access to the location", message: "You need to allow location access to use the app.")
+                authorizationHandling(title: "Request for access to the location", message: "Please allow access Location to use the app.")
             default:
                 print("ㅋㅋ")
             }
@@ -149,6 +192,8 @@ class SelectLocationViewController: UIViewController {
         } else  {
             mapViewConfig(location: LocationManager.shared.currentLocation)
         }
+        
+        searchBarConfig()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -176,5 +221,35 @@ extension SelectLocationViewController: GMSMapViewDelegate {
     func didTapMyLocationButton(for mapView: GMSMapView) -> Bool {
         checkAuthorization()
         return false
+    }
+    
+    func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
+        print("Move")
+        DispatchQueue.main.async { [weak self] in
+            UIView.animate(withDuration: 0.2) {
+                self?.view.endEditing(true)
+            }
+        }
+        
+    }
+}
+
+//MARK: GMSAutocompleteResultsViewControllerDelegate
+
+extension SelectLocationViewController: GMSAutocompleteResultsViewControllerDelegate {
+    func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didAutocompleteWith place: GMSPlace) {
+        print(place)
+        
+    }
+    
+    func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didFailAutocompleteWithError error: Error) {
+        print("kk")
+    }
+}
+
+//MARK: SearchBar Delegate
+extension SelectLocationViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
     }
 }

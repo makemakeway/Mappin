@@ -19,6 +19,7 @@ class LocationDocument: Object {
     @Persisted var latestWrittenDate: Date
     @Persisted var oldestWrittenDate: Date
     @Persisted var lastUpdated: Date
+    @Persisted var presentImage: String
     
     convenience init(title: String, memoryList: List<MemoryData>, location: List<Double>, nationalCode: String, latest: Date, oldest: Date, lastUpdated: Date) {
         self.init()

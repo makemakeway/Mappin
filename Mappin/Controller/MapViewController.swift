@@ -245,7 +245,7 @@ extension MapViewController: CLLocationManagerDelegate {
         LocationManager.shared.checkUsersLocationServicesAuthorization()
         switch manager.authorizationStatus {
         case .denied:
-            authorizationHandling(title: "Request for access to the location", message: "You need to allow location access to use the app.")
+            authorizationHandling(title: "Request for access to the location", message: "Please allow access Location to use the app.")
         default:
             print("DEBUG: ㅋㅋ")
         }
@@ -256,7 +256,7 @@ extension MapViewController: CLLocationManagerDelegate {
         LocationManager.shared.checkUsersLocationServicesAuthorization()
         switch status {
         case .denied:
-            authorizationHandling(title: "Request for access to the location", message: "You need to allow location access to use the app.")
+            authorizationHandling(title: "Request for access to the location", message: "Please allow access Location to use the app.")
         default:
             print("DEBUG: ㅋㅋ")
         }
@@ -269,7 +269,7 @@ extension MapViewController: GMSMapViewDelegate {
         if #available(iOS 14, *) {
             switch locationManager.authorizationStatus {
             case .denied:
-                authorizationHandling(title: "Request for access to the location", message: "You need to allow location access to use the app.")
+                authorizationHandling(title: "Request for access to the location", message: "Please allow access Location to use the app.")
                 return true
             default:
                 print("DEBUG: \(#function)")
@@ -278,7 +278,7 @@ extension MapViewController: GMSMapViewDelegate {
         } else {
             switch CLLocationManager.authorizationStatus() {
             case .denied:
-                authorizationHandling(title: "Request for access to the location", message: "You need to allow location access to use the app.")
+                authorizationHandling(title: "Request for access to the location", message: "Please allow access Location to use the app.")
                 return true
             default:
                 print("DEBUG: \(#function)")

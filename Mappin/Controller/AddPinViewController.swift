@@ -7,7 +7,7 @@
 
 import UIKit
 import RealmSwift
-import SwiftUI
+import Photos
 import TLPhotoPicker
 
 
@@ -356,6 +356,8 @@ class AddPinViewController: UIViewController {
         locationTextField.font = UIFont().mainFontRegular
         locationTextField.clearButtonMode = .whileEditing
         locationTextField.delegate = self
+        locationTextField.autocorrectionType = .no
+        locationTextField.autocapitalizationType = .none
         
         makeUnderLine(view: locationStackView)
     }
@@ -644,16 +646,17 @@ extension AddPinViewController: TLPhotosPickerViewControllerDelegate {
     
     func handleNoAlbumPermissions(picker: TLPhotosPickerViewController) {
         picker.dismiss(animated: true) { [weak self] in
-            self?.authorizationHandling(title: "Request for access to the photo", message: "You need to allow photo access to use the app.")
+            self?.authorizationHandling(title: "Request for access to the Photos", message: "Please allow access to Photos to use the app.")
         }
     }
     
     func handleNoCameraPermissions(picker: TLPhotosPickerViewController) {
         picker.dismiss(animated: true) { [weak self] in
-            self?.authorizationHandling(title: "Request for access to the camera", message: "You need to allow camera access to use the app.")
+            self?.authorizationHandling(title: "Request for access to the Camera", message: "Please allow access to Camera to use the app.")
         }
         
     }
+    
     
 }
 

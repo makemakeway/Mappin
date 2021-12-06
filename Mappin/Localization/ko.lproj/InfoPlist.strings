@@ -6,8 +6,8 @@
   
 */
 
-NSPhotoLibraryUsageDescription = "이 앱을 사용하려면 사진 라이브러리 접근 권한이 필요합니다.";
+NSPhotoLibraryUsageDescription = "사진을 추가하기 위해 사진 접근 권한이 필요합니다.";
 
-NSCameraUsageDescription = "이 앱을 사용하려면 카메라 접근 권한이 필요합니다.";
+NSCameraUsageDescription = "카메라를 사용해서 사진을 추가하기 위해 카메라 접근 권한이 필요합니다.";
 
-NSLocationWhenInUseUsageDescription = "이 앱을 사용하려면 위치 접근 권한이 필요합니다.";
+NSLocationWhenInUseUsageDescription = "현재 위치에 핀을 추가하려면 위치 접근 권한이 필요합니다.";

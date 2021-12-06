@@ -87,15 +87,15 @@
 
 "Request for access to the location" = "Request for access to the location";
 
-"You need to allow location access to use the app." = "You need to allow location access to use the app.";
+"Please allow access Location to use the app." = "Please allow access Location to use the app.";
 
 "Request for access to the photo" = "Request for access to the photo";
 
-"You need to allow photo access to use the app." = "You need to allow photo access to use the app.";
+"Please allow access to Photos to use the app." = "Please allow access to Photos to use the app.";
 
 "Request for access to the camera" = "Request for access to the camera";
 
-"You need to allow camera access to use the app." = "You need to allow camera access to use the app.";
+"Please allow access to Camera to use the app." = "Please allow access to Camera to use the app.";
 
 
 //MARK: TLPhotopicker (In Pods)

@@ -179,7 +179,7 @@ extension AddTravelViewController: CLLocationManagerDelegate {
         let auth = LocationManager.shared.manager.authorizationStatus
         switch manager.authorizationStatus {
         case .denied:
-            authorizationHandling(title: "Request for access to the location", message: "You need to allow location access to use the app.")
+            authorizationHandling(title: "Request for access to the location", message: "Please allow access Location to use the app.")
         case .notDetermined, .restricted:
             LocationManager.shared.checkCurrentLocationAutorization(status: auth)
         default:
@@ -194,7 +194,7 @@ extension AddTravelViewController: CLLocationManagerDelegate {
         let auth = CLLocationManager.authorizationStatus()
         switch status {
         case .denied:
-            authorizationHandling(title: "Request for access to the location", message: "You need to allow location access to use the app.")
+            authorizationHandling(title: "Request for access to the location", message: "Please allow access Location to use the app.")
         case .notDetermined, .restricted:
             LocationManager.shared.checkCurrentLocationAutorization(status: auth)
         default:
