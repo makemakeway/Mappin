@@ -16,6 +16,7 @@ class SelectLocationViewController: UIViewController {
     
     var location: CLLocationCoordinate2D?
     
+    var searchTimer: Timer?
     
     //MARK: UI
     
@@ -33,7 +34,11 @@ class SelectLocationViewController: UIViewController {
         return button
     }()
     
-    var resultViewController: GMSAutocompleteResultsViewController!
+    var tableView: UITableView!
+    
+    var dataSource: GMSAutocompleteTableDataSource!
+    
+    var searchBar: UISearchBar!
     
     //MARK: Method
     
@@ -54,39 +59,46 @@ class SelectLocationViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    func tableViewConfig() {
+        dataSource = GMSAutocompleteTableDataSource()
+        dataSource.delegate = self
+        
+        dataSource.tableCellBackgroundColor = .white
+        dataSource.primaryTextColor = .black
+        dataSource.primaryTextHighlightColor = .orange
+        
+        
+        tableView = UITableView(frame: CGRect(x: 20, y: 100, width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - 140))
+        tableView.delegate = dataSource
+        tableView.dataSource = dataSource
+        tableView.delegate = self
+        
+        tableView.backgroundColor = .clear
+        tableView.layer.cornerRadius = 10
+        view.addSubview(tableView)
+        tableView.isHidden = true
+        
+    }
+    
     func searchBarConfig() {
-        resultViewController = GMSAutocompleteResultsViewController()
-        resultViewController.delegate = self
+        searchBar = UISearchBar()
         
-        let searchController = UISearchController(searchResultsController: resultViewController)
-        searchController.searchResultsUpdater = resultViewController
-        searchController.searchBar.autocapitalizationType = .none
-        searchController.searchBar.autocorrectionType = .no
-        searchController.searchBar.backgroundImage = UIImage()
-        searchController.searchBar.searchTextField.backgroundColor = .white
-        searchController.searchBar.searchTextField.borderStyle = .roundedRect
-        searchController.searchBar.searchTextField.textColor = .black
-        searchController.searchBar.delegate = self
+        view.addSubview(searchBar)
         
-        let subView = UIView()
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.leadingAnchor.constraint(equalTo: backButton.trailingAnchor, constant: 10).isActive = true
+        searchBar.trailingAnchor.constraint(equalTo: addButton.leadingAnchor, constant: -10).isActive = true
+        searchBar.centerYAnchor.constraint(equalTo: backButton.centerYAnchor, constant: 0).isActive = true
+        searchBar.heightAnchor.constraint(equalToConstant: 44).isActive = true
+    
+        searchBar.searchTextField.textColor = .black
+        searchBar.autocorrectionType = .no
+        searchBar.autocapitalizationType = .none
+        searchBar.searchTextField.backgroundColor = .white
+        searchBar.backgroundImage = UIImage()
+        searchBar.searchTextField.placeholder = "Search".localized()
         
-        subView.addSubview(searchController.searchBar)
-        view.addSubview(subView)
-        
-        searchController.searchBar.translatesAutoresizingMaskIntoConstraints = false
-        searchController.searchBar.leadingAnchor.constraint(equalTo: subView.leadingAnchor, constant: 0).isActive = true
-        searchController.searchBar.trailingAnchor.constraint(equalTo: subView.trailingAnchor, constant: 0).isActive = true
-        searchController.searchBar.centerYAnchor.constraint(equalTo: subView.centerYAnchor, constant: 0).isActive = true
-        
-        subView.translatesAutoresizingMaskIntoConstraints = false
-        subView.centerYAnchor.constraint(equalTo: backButton.centerYAnchor, constant: 0).isActive = true
-        subView.leadingAnchor.constraint(equalTo: backButton.trailingAnchor, constant: 10).isActive = true
-        subView.trailingAnchor.constraint(equalTo: addButton.leadingAnchor, constant: -10).isActive = true
-        subView.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        
-        
-        searchController.hidesNavigationBarDuringPresentation = false
-        definesPresentationContext = true
+        searchBar.delegate = self
     }
     
     func mapViewConfig(location: CLLocationCoordinate2D) {
@@ -194,6 +206,7 @@ class SelectLocationViewController: UIViewController {
         }
         
         searchBarConfig()
+        tableViewConfig()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -236,20 +249,79 @@ extension SelectLocationViewController: GMSMapViewDelegate {
 
 //MARK: GMSAutocompleteResultsViewControllerDelegate
 
-extension SelectLocationViewController: GMSAutocompleteResultsViewControllerDelegate {
-    func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didAutocompleteWith place: GMSPlace) {
-        print(place)
+extension SelectLocationViewController: GMSAutocompleteTableDataSourceDelegate {
+    func tableDataSource(_ tableDataSource: GMSAutocompleteTableDataSource, didAutocompleteWith place: GMSPlace) {
+        
+        let camera = GMSCameraPosition(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude, zoom: 18)
+        
+        CATransaction.begin()
+        CATransaction.setValue(0.2, forKey: kCATransactionAnimationDuration)
+        mapView.animate(to: camera)
+        CATransaction.commit()
         
     }
     
-    func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didFailAutocompleteWithError error: Error) {
-        print("kk")
+    func tableDataSource(_ tableDataSource: GMSAutocompleteTableDataSource, didFailAutocompleteWithError error: Error) {
+        print("ERROR")
     }
+    
+    func tableDataSource(_ tableDataSource: GMSAutocompleteTableDataSource, didSelect prediction: GMSAutocompletePrediction) -> Bool {
+        tableView.isHidden = true
+        return true
+    }
+    
+    func didUpdateAutocompletePredictions(for tableDataSource: GMSAutocompleteTableDataSource) {
+        tableView.reloadData()
+    }
+    
+    func didRequestAutocompletePredictions(for tableDataSource: GMSAutocompleteTableDataSource) {
+        tableView.reloadData()
+    }
+    
 }
 
 //MARK: SearchBar Delegate
 extension SelectLocationViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
+        
+        if searchText.isEmpty {
+            tableView.isHidden = true
+        } else {
+            tableView.isHidden = false
+        }
+        
+        self.searchTimer?.invalidate()
+        self.searchTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { [weak self](_) in
+            self?.dataSource.sourceTextHasChanged(searchText)
+        })
+    }
+    
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        if !(searchBar.text!.isEmpty) {
+            tableView.isHidden = false
+            tableView.reloadData()
+        }
+        return true
+    }
+}
+
+extension SelectLocationViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print(scrollView.contentOffset.y)
+        if scrollView.contentOffset.y < -60 {
+            DispatchQueue.main.async { [weak self] in
+                UIView.animate(withDuration: 0.2) {
+                    self?.tableView.isHidden = true
+                    self?.view.endEditing(true)
+                }
+            }
+        }
+    }
+}
+
+extension SelectLocationViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
     }
 }
