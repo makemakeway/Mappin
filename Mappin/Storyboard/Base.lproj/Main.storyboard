@@ -84,11 +84,22 @@
                                     <action selector="floatingAddButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vyM-Yl-Vsv"/>
                                 </connections>
                             </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" translatesAutoresizingMaskIntoConstraints="NO" id="gxg-bE-62G">
+                                <rect key="frame" x="20" y="752.66666666666663" width="296" height="32"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <segments>
+                                    <segment title="업데이트 순"/>
+                                    <segment title="최신 순"/>
+                                    <segment title="오래된 순"/>
+                                    <segment title="국가별"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="EWm-Pz-bDz" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="8Ws-uI-2bk"/>
+                            <constraint firstItem="gxg-bE-62G" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="989-Rd-7Ft"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="RpT-Sk-Zsa" secondAttribute="bottom" id="Eqh-qK-M07"/>
                             <constraint firstItem="RpT-Sk-Zsa" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="LYG-gH-cxP"/>
                             <constraint firstAttribute="trailing" secondItem="RpT-Sk-Zsa" secondAttribute="trailing" id="NJG-lK-22K"/>
@@ -97,6 +108,8 @@
                             <constraint firstItem="EWm-Pz-bDz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="hxI-iS-PLu"/>
                             <constraint firstItem="EWm-Pz-bDz" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="mTZ-VL-dvs"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="EWm-Pz-bDz" secondAttribute="bottom" id="qTg-FL-GbC"/>
+                            <constraint firstItem="gxg-bE-62G" firstAttribute="centerY" secondItem="7Sb-OD-g5o" secondAttribute="centerY" id="wjK-L4-C1O"/>
+                            <constraint firstItem="7Sb-OD-g5o" firstAttribute="leading" secondItem="gxg-bE-62G" secondAttribute="trailing" constant="10" id="wlG-dK-XuB"/>
                             <constraint firstItem="RpT-Sk-Zsa" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="yL2-oZ-T7y"/>
                         </constraints>
                     </view>

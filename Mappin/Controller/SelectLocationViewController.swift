@@ -61,19 +61,18 @@ class SelectLocationViewController: UIViewController {
     
     func tableViewConfig() {
         dataSource = GMSAutocompleteTableDataSource()
-        dataSource.delegate = self
+        
         
         dataSource.tableCellBackgroundColor = .white
         dataSource.primaryTextColor = .black
         dataSource.primaryTextHighlightColor = .orange
         
-        
-        tableView = UITableView(frame: CGRect(x: 20, y: 100, width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - 140))
+        tableView = UITableView(frame: CGRect(x: 20, y: 100, width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - 140), style: .insetGrouped)
         tableView.delegate = dataSource
         tableView.dataSource = dataSource
-        tableView.delegate = self
         
-        tableView.backgroundColor = .clear
+        dataSource.delegate = self
+//        tableView.backgroundColor = .clear
         tableView.layer.cornerRadius = 10
         view.addSubview(tableView)
         tableView.isHidden = true
@@ -306,10 +305,12 @@ extension SelectLocationViewController: UISearchBarDelegate {
     }
 }
 
+
+//MARK: ScrollView Delegate
 extension SelectLocationViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         print(scrollView.contentOffset.y)
-        if scrollView.contentOffset.y < -60 {
+        if scrollView.contentOffset.y < -60 || scrollView.contentOffset.y > 60{
             DispatchQueue.main.async { [weak self] in
                 UIView.animate(withDuration: 0.2) {
                     self?.tableView.isHidden = true
@@ -321,7 +322,7 @@ extension SelectLocationViewController: UIScrollViewDelegate {
 }
 
 extension SelectLocationViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 50
+//    }
 }

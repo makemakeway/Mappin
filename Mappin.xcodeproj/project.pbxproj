@@ -51,6 +51,7 @@
 		C2715C78274CEEE9001D5286 /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2715C77274CEEE9001D5286 /* Detail.storyboard */; };
 		C2715C7B274CFD32001D5286 /* TravelDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2715C79274CFD32001D5286 /* TravelDetailCollectionViewCell.swift */; };
 		C2715C7C274CFD32001D5286 /* TravelDetailCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2715C7A274CFD32001D5286 /* TravelDetailCollectionViewCell.xib */; };
+		C271689A2760EA780072B167 /* Extension+GMSAutocompleteTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27168992760EA780072B167 /* Extension+GMSAutocompleteTableDataSource.swift */; };
 		C27A902927488F2700CDF3C9 /* CustomGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A902827488F2700CDF3C9 /* CustomGesture.swift */; };
 		C27A902F274A6F6B00CDF3C9 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A902E274A6F6B00CDF3C9 /* CustomTextField.swift */; };
 		C27A9031274A813A00CDF3C9 /* SelectLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A9030274A813A00CDF3C9 /* SelectLocationViewController.swift */; };
@@ -144,6 +145,7 @@
 		C2715C77274CEEE9001D5286 /* Detail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Detail.storyboard; sourceTree = "<group>"; };
 		C2715C79274CFD32001D5286 /* TravelDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		C2715C7A274CFD32001D5286 /* TravelDetailCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TravelDetailCollectionViewCell.xib; sourceTree = "<group>"; };
+		C27168992760EA780072B167 /* Extension+GMSAutocompleteTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+GMSAutocompleteTableDataSource.swift"; sourceTree = "<group>"; };
 		C27A902827488F2700CDF3C9 /* CustomGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGesture.swift; sourceTree = "<group>"; };
 		C27A902E274A6F6B00CDF3C9 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		C27A9030274A813A00CDF3C9 /* SelectLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationViewController.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 				C2715C69274BDE6F001D5286 /* Extension+UIColor.swift */,
 				C2A2C6A627537F38003E8DC2 /* Extension+UIFont.swift */,
 				C2A2C6C027553073003E8DC2 /* Extension+String.swift */,
+				C27168992760EA780072B167 /* Extension+GMSAutocompleteTableDataSource.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -740,6 +743,7 @@
 				C26A23F227465067005F42E2 /* AddTravelViewController.swift in Sources */,
 				C27A902927488F2700CDF3C9 /* CustomGesture.swift in Sources */,
 				C26D2E61275683AB0035D339 /* Library.swift in Sources */,
+				C271689A2760EA780072B167 /* Extension+GMSAutocompleteTableDataSource.swift in Sources */,
 				C2715C68274BADA2001D5286 /* InitialTableViewHeader.swift in Sources */,
 				C25FF50D2757548D00A83A40 /* AppInfoViewController.swift in Sources */,
 				C2A2C6A727537F38003E8DC2 /* Extension+UIFont.swift in Sources */,

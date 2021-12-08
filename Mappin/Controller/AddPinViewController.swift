@@ -292,10 +292,10 @@ class AddPinViewController: UIViewController {
             return false
         }
         
-        if photoImages.isEmpty {
-            presentOkAlert(message: "Please add a photo.".localized())
-            return false
-        }
+//        if photoImages.isEmpty {
+//            presentOkAlert(message: "Please add a photo.".localized())
+//            return false
+//        }
         
         guard let location = locationTextField.text, !(location.isEmpty) else {
             presentOkAlert(message: "Please enter the title of the story.".localized())
