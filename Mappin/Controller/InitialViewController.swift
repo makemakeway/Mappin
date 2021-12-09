@@ -145,6 +145,9 @@ extension InitialViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.dateLabel.text = dateToString(date: task.oldestWrittenDate)
             }
             
+            print("old: \(task.oldestWrittenDate)")
+            print("latest: \(task.latestWrittenDate)")
+            print(calendar.dateComponents([.day], from: task.oldestWrittenDate, to: task.latestWrittenDate).day!)
             
             cell.dateLabel.font = UIFont().smallFontBold
             

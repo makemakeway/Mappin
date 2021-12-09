@@ -8,6 +8,7 @@
 import UIKit
 import GoogleMaps
 import GooglePlaces
+import RealmSwift
 
 class SelectLocationViewController: UIViewController {
 
@@ -17,6 +18,12 @@ class SelectLocationViewController: UIViewController {
     var location: CLLocationCoordinate2D?
     
     var searchTimer: Timer?
+    
+    var placesClient: GMSPlacesClient!
+    
+    var searchResults = [SearchResult]()
+    
+    var searchText = ""
     
     //MARK: UI
     
@@ -35,8 +42,6 @@ class SelectLocationViewController: UIViewController {
     }()
     
     var tableView: UITableView!
-    
-    var dataSource: GMSAutocompleteTableDataSource!
     
     var searchBar: UISearchBar!
     
@@ -60,23 +65,18 @@ class SelectLocationViewController: UIViewController {
     }
     
     func tableViewConfig() {
-        dataSource = GMSAutocompleteTableDataSource()
-        
-        
-        dataSource.tableCellBackgroundColor = .white
-        dataSource.primaryTextColor = .black
-        dataSource.primaryTextHighlightColor = .orange
         
         tableView = UITableView(frame: CGRect(x: 20, y: 100, width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - 140), style: .insetGrouped)
-        tableView.delegate = dataSource
-        tableView.dataSource = dataSource
-        
-        dataSource.delegate = self
-//        tableView.backgroundColor = .clear
+        tableView.delegate = self
+        tableView.dataSource = self
+
+        tableView.backgroundColor = .clear
         tableView.layer.cornerRadius = 10
         view.addSubview(tableView)
         tableView.isHidden = true
         
+        let nib = UINib(nibName: LocationInfoTableViewCell.identifier, bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: LocationInfoTableViewCell.identifier)
     }
     
     func searchBarConfig() {
@@ -204,6 +204,8 @@ class SelectLocationViewController: UIViewController {
             mapViewConfig(location: LocationManager.shared.currentLocation)
         }
         
+        placesClient = GMSPlacesClient.shared()
+        
         searchBarConfig()
         tableViewConfig()
     }
@@ -283,6 +285,7 @@ extension SelectLocationViewController: GMSAutocompleteTableDataSourceDelegate {
 extension SelectLocationViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
+        self.searchText = searchText
         
         if searchText.isEmpty {
             tableView.isHidden = true
@@ -292,7 +295,57 @@ extension SelectLocationViewController: UISearchBarDelegate {
         
         self.searchTimer?.invalidate()
         self.searchTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { [weak self](_) in
-            self?.dataSource.sourceTextHasChanged(searchText)
+            LoadingIndicator.shared.showIndicator()
+            
+            self?.searchResults.removeAll()
+            
+            let token = GMSAutocompleteSessionToken()
+            let filter = GMSAutocompleteFilter()
+            filter.type = .establishment
+            
+            DispatchQueue.main.async {
+                self?.placesClient.findAutocompletePredictions(fromQuery: searchText,
+                                                               filter: filter,
+                                                               sessionToken: token) { results, error in
+                    if let error = error {
+                        print("ERROR: \(error)")
+                        LoadingIndicator.shared.hideIndicator()
+                        return
+                    }
+                    if let results = results {
+                        let group = DispatchGroup()
+                        
+                        for result in results {
+                            group.enter()
+                            let id = result.placeID
+                            let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
+                                                                      UInt(GMSPlaceField.coordinate.rawValue))
+                            
+                            self?.placesClient.fetchPlace(fromPlaceID: id,
+                                                          placeFields: fields,
+                                                          sessionToken: nil) { place, error in
+                                if let error = error {
+                                    print("fetch Place Error: \(error)")
+                                    return
+                                }
+                                if let place = place {
+                                    let result = SearchResult(primaryString: result.attributedPrimaryText,
+                                                              secondaryString: result.attributedSecondaryText ?? NSAttributedString(string: ""),
+                                                              coordinate: place.coordinate)
+                                    self?.searchResults.append(result)
+                                    group.leave()
+                                }
+                            }
+                        }
+                        group.notify(queue: DispatchQueue.main) {
+                            LoadingIndicator.shared.hideIndicator()
+                            self?.tableView.reloadData()
+                        }
+                    }
+                }
+            }
+            
+            
         })
     }
     
@@ -302,6 +355,10 @@ extension SelectLocationViewController: UISearchBarDelegate {
             tableView.reloadData()
         }
         return true
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
 }
 
@@ -321,8 +378,56 @@ extension SelectLocationViewController: UIScrollViewDelegate {
     }
 }
 
-extension SelectLocationViewController: UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 50
-//    }
+
+//MARK: TableView Delegate
+extension SelectLocationViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return searchResults.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: LocationInfoTableViewCell.identifier, for: indexPath) as? LocationInfoTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        let data = searchResults[indexPath.row]
+        
+        let title = data.primaryString.string
+        let attrTitle = NSMutableAttributedString(string: title)
+        attrTitle.addAttribute(.foregroundColor, value: UIColor.orange, range: (title as NSString).range(of: searchText))
+        
+        
+        cell.locationTitleLabel.textColor = .black
+        cell.locationTitleLabel.attributedText = attrTitle
+        cell.locationTitleLabel.font = UIFont().mainFontRegular
+        
+        
+        cell.locationAddressLabel.attributedText = data.secondaryString
+        cell.locationAddressLabel.font = UIFont().smallFontRegular
+        cell.locationAddressLabel.textColor = .darkGray
+        
+        cell.contentView.backgroundColor = .white
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        
+        let coordinate = searchResults[indexPath.row].coordinate
+        let camera = GMSCameraPosition(latitude: coordinate.latitude, longitude: coordinate.longitude, zoom: 18)
+        
+        CATransaction.begin()
+        CATransaction.setValue(0.2, forKey: kCATransactionAnimationDuration)
+        mapView.animate(to: camera)
+        CATransaction.commit()
+        
+        tableView.isHidden = true
+    }
 }
