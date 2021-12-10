@@ -399,7 +399,12 @@ extension SelectLocationViewController: UITableViewDelegate, UITableViewDataSour
         
         let title = data.primaryString.string
         let attrTitle = NSMutableAttributedString(string: title)
-        attrTitle.addAttribute(.foregroundColor, value: UIColor.orange, range: (title as NSString).range(of: searchText))
+        
+        
+        if title.uppercased().contains(searchText.uppercased()) {
+            attrTitle.addAttribute(.foregroundColor, value: UIColor.orange, range: (searchText as NSString).range(of: searchText))
+        }
+        
         
         
         cell.locationTitleLabel.textColor = .black

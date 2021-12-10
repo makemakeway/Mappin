@@ -151,7 +151,12 @@ extension InitialViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.dateLabel.font = UIFont().smallFontBold
             
-            cell.photoImageView.image = ImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(memory._id)_0.jpeg")
+            if memory.memoryPicture.isEmpty {
+                cell.photoImageView.image = UIImage(named: "placeholder1")
+            } else {
+                cell.photoImageView.image = ImageManager.shared.loadImageFromDocumentDirectory(imageName: "\(memory._id)_0.jpeg")
+            }
+            
             
             cell.photoImageView.contentMode = .scaleAspectFill
             
