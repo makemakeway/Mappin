@@ -15,6 +15,12 @@ class InitialViewController: UIViewController {
     
     let localRealm = try! Realm()
     
+    var countries = [String]() {
+        didSet {
+            tableView.reloadSections(IndexSet(0...), with: .automatic)
+        }
+    }
+    
     var tasks: Results<LocationDocument>! {
         didSet {
             if tasks.isEmpty || tasks.filter({ $0.memoryList.isEmpty == false }).isEmpty {
@@ -22,7 +28,6 @@ class InitialViewController: UIViewController {
                 self.emptyHandlingView.isHidden = false
             } else {
                 self.emptyHandlingView.isHidden = true
-                tableView.reloadSections(IndexSet(0...0), with: .automatic)
             }
         }
     }
@@ -41,6 +46,14 @@ class InitialViewController: UIViewController {
     @IBOutlet weak var emptyHandlingButton: UIButton!
     
     //MARK: Method
+    
+    func fetchCountryNameFromTasks(tasks: Results<LocationDocument>) {
+        for task in tasks {
+            if let name = (Locale.current as NSLocale).displayName(forKey: .countryCode, value: task.nationalCode) {
+                countries.append(name)
+            }
+        }
+    }
     
     func localizingText() {
         emptyHandlingLabel.text = "There is no record of writing 🥲".localized()
@@ -133,6 +146,12 @@ extension InitialViewController: UITableViewDelegate, UITableViewDataSource {
         cell.backgroundColor = .systemBackground
         cell.selectionStyle = .none
         
+        
+        if let name = (Locale.current as NSLocale).displayName(forKey: .countryCode, value: task.nationalCode) {
+            print("name is \(name)")
+        }
+        
+        
         if let memory = task.memoryList.sorted(byKeyPath: "memoryDate", ascending: true).first, !(task.memoryList.isEmpty) {
             cell.documentTitleLabel.text = task.documentTitle
             cell.documentTitleLabel.font = UIFont().titleFontBold
@@ -196,6 +215,8 @@ extension InitialViewController: UITableViewDelegate, UITableViewDataSource {
         header.titleLabel.text = "Place".localized()
         header.titleLabel.font = UIFont(name: "IBMPlexSansKR-Bold", size: 24)
         
+        
+        
         return header
     }
     
@@ -203,4 +224,7 @@ extension InitialViewController: UITableViewDelegate, UITableViewDataSource {
         return 50
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return countries.count == 0 ? 1 : countries.count
+    }
 }
