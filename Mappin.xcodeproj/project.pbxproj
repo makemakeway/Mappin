@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3409569BE6EC9DAB39372756 /* Pods_MappinTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C3D2C17A29D6BA849D1972D /* Pods_MappinTests.framework */; };
 		BD88EEB02F5B62ACD06C55AD /* Pods_Mappin_MappinUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5A79D76CC78A409BC6B2DC2 /* Pods_Mappin_MappinUITests.framework */; };
-		C24AE8972767573300C29C44 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C24AE8962767573300C29C44 /* GoogleService-Info.plist */; };
 		C25D072E27527C6400175D6C /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25D072D27527C6400175D6C /* LoadingIndicator.swift */; };
 		C25FF50727574FA900A83A40 /* IBMPlexSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C25FF50627574FA900A83A40 /* IBMPlexSansKR-Regular.otf */; };
 		C25FF509275750FB00A83A40 /* IBMPlexSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C25FF508275750FB00A83A40 /* IBMPlexSansKR-Bold.otf */; };
@@ -64,6 +63,7 @@
 		C27FE5572745218100F91946 /* InitialTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C27FE5552745218100F91946 /* InitialTableViewCell.xib */; };
 		C27FE559274523D500F91946 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27FE558274523D500F91946 /* MapViewController.swift */; };
 		C27FE55B274523EE00F91946 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C27FE55A274523EE00F91946 /* Map.storyboard */; };
+		C288CDD9276B704500F519CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C288CDD8276B704500F519CE /* GoogleService-Info.plist */; };
 		C2A2C6A727537F38003E8DC2 /* Extension+UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A2C6A627537F38003E8DC2 /* Extension+UIFont.swift */; };
 		C2A2C6C127553073003E8DC2 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A2C6C027553073003E8DC2 /* Extension+String.swift */; };
 		C2A2C6C427562832003E8DC2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C2A2C6C627562832003E8DC2 /* InfoPlist.strings */; };
@@ -103,7 +103,6 @@
 		6BDA8EBD40BB89F97753D75A /* Pods-MappinTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MappinTests.release.xcconfig"; path = "Target Support Files/Pods-MappinTests/Pods-MappinTests.release.xcconfig"; sourceTree = "<group>"; };
 		95B82A3A54DF9CD55A1D4029 /* Pods-Mappin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mappin.debug.xcconfig"; path = "Target Support Files/Pods-Mappin/Pods-Mappin.debug.xcconfig"; sourceTree = "<group>"; };
 		9C3D2C17A29D6BA849D1972D /* Pods_MappinTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MappinTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C24AE8962767573300C29C44 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C25D072D27527C6400175D6C /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		C25FF50627574FA900A83A40 /* IBMPlexSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSansKR-Regular.otf"; sourceTree = "<group>"; };
 		C25FF508275750FB00A83A40 /* IBMPlexSansKR-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSansKR-Bold.otf"; sourceTree = "<group>"; };
@@ -161,6 +160,7 @@
 		C27FE5552745218100F91946 /* InitialTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InitialTableViewCell.xib; sourceTree = "<group>"; };
 		C27FE558274523D500F91946 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		C27FE55A274523EE00F91946 /* Map.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
+		C288CDD8276B704500F519CE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C2A2C6A627537F38003E8DC2 /* Extension+UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIFont.swift"; sourceTree = "<group>"; };
 		C2A2C6C027553073003E8DC2 /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
 		C2A2C6C527562832003E8DC2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -342,7 +342,7 @@
 				C2CC526B27427B0800090891 /* Storyboard */,
 				C2CC526A27427B0000090891 /* Controller */,
 				C2CC524827427AAD00090891 /* Info.plist */,
-				C24AE8962767573300C29C44 /* GoogleService-Info.plist */,
+				C288CDD8276B704500F519CE /* GoogleService-Info.plist */,
 			);
 			path = Mappin;
 			sourceTree = "<group>";
@@ -438,6 +438,7 @@
 				C2CC523527427AAB00090891 /* Resources */,
 				7F484647F0B8E696C87A8407 /* [CP] Copy Pods Resources */,
 				7A563C0D3E8FE0CC2DA61016 /* [CP] Embed Pods Frameworks */,
+				C288CDD5276B641D00F519CE /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -550,7 +551,7 @@
 				C25FF509275750FB00A83A40 /* IBMPlexSansKR-Bold.otf in Resources */,
 				C2A2C6C427562832003E8DC2 /* InfoPlist.strings in Resources */,
 				C2A80B21274A8D54002E29C9 /* SelectLocation.storyboard in Resources */,
-				C24AE8972767573300C29C44 /* GoogleService-Info.plist in Resources */,
+				C288CDD9276B704500F519CE /* GoogleService-Info.plist in Resources */,
 				C2CC524427427AAD00090891 /* Assets.xcassets in Resources */,
 				C25FF50727574FA900A83A40 /* IBMPlexSansKR-Regular.otf in Resources */,
 				C25FFA06274F4E9200B0C41B /* MarkerInfo.storyboard in Resources */,
@@ -718,6 +719,25 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Mappin/Pods-Mappin-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		C288CDD5276B641D00F519CE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -965,6 +985,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 7;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = H3V637RY5A;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Mappin/Info.plist;

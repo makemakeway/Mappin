@@ -118,6 +118,18 @@ class InitialViewController: UIViewController {
         floatingAddButtonConfig(button: floatingAddButton, image: "square.and.pencil", backgroundColor: .darkGray, tintColor: .white)
         navBarConfig()
         localizingText()
+        
+        let button = UIButton(type: .roundedRect)
+        button.frame = CGRect(x: 20, y: 120, width: 100, height: 30)
+        button.setTitle("Crash", for: [])
+        button.addTarget(self, action: #selector(self.crashButtonTapped(_:)), for: .touchUpInside)
+        view.addSubview(button)
+
+        
+    }
+    
+    @IBAction func crashButtonTapped(_ sender: AnyObject) {
+        fatalError()
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -8,6 +8,7 @@
 import UIKit
 import GoogleMaps
 import GooglePlaces
+import Firebase
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -25,6 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let fontAttr = [NSAttributedString.Key.font: UIFont().mainFontBold]
         UINavigationBar.appearance().titleTextAttributes = fontAttr
 //        UINavigationBar.appearance().isTranslucent = false
+        
+        FirebaseApp.configure()
         
         return true
     }

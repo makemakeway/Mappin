@@ -16,7 +16,8 @@ pod 'RealmSwift', '~>10'
 pod 'ImageSlideshow', '~> 1.9.0'
 pod "TLPhotoPicker"
 pod 'SideMenu'
-
+pod 'Firebase/Analytics'
+pod 'Firebase/Crashlytics'
 
   target 'MappinTests' do
     inherit! :search_paths

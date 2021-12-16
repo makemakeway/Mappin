@@ -77,6 +77,9 @@ class SelectLocationViewController: UIViewController {
         
         let nib = UINib(nibName: LocationInfoTableViewCell.identifier, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: LocationInfoTableViewCell.identifier)
+        
+        let nib2 = UINib(nibName: DefaultTableViewCell.identifier, bundle: nil)
+        tableView.register(nib2, forCellReuseIdentifier: DefaultTableViewCell.identifier)
     }
     
     func searchBarConfig() {
@@ -382,7 +385,7 @@ extension SelectLocationViewController: UIScrollViewDelegate {
 //MARK: TableView Delegate
 extension SelectLocationViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchResults.count
+        return searchResults.count == 0 ? 1 : searchResults.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -393,6 +396,17 @@ extension SelectLocationViewController: UITableViewDelegate, UITableViewDataSour
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: LocationInfoTableViewCell.identifier, for: indexPath) as? LocationInfoTableViewCell else {
             return UITableViewCell()
+        }
+        
+        guard let errorCell = tableView.dequeueReusableCell(withIdentifier: DefaultTableViewCell.identifier, for: indexPath) as? DefaultTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        if searchResults.isEmpty {
+            errorCell.defaultLabel.text = "검색 결과가 없거나\n네트워크에 연결되어 있지 않습니다."
+            errorCell.defaultLabel.font = UIFont().mainFontBold
+            
+            return errorCell
         }
         
         let data = searchResults[indexPath.row]
