@@ -63,7 +63,7 @@
 		C27FE5572745218100F91946 /* InitialTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C27FE5552745218100F91946 /* InitialTableViewCell.xib */; };
 		C27FE559274523D500F91946 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27FE558274523D500F91946 /* MapViewController.swift */; };
 		C27FE55B274523EE00F91946 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C27FE55A274523EE00F91946 /* Map.storyboard */; };
-		C288CDD9276B704500F519CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C288CDD8276B704500F519CE /* GoogleService-Info.plist */; };
+		C288CDDB276C41D500F519CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C288CDDA276C41D500F519CE /* GoogleService-Info.plist */; };
 		C2A2C6A727537F38003E8DC2 /* Extension+UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A2C6A627537F38003E8DC2 /* Extension+UIFont.swift */; };
 		C2A2C6C127553073003E8DC2 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A2C6C027553073003E8DC2 /* Extension+String.swift */; };
 		C2A2C6C427562832003E8DC2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C2A2C6C627562832003E8DC2 /* InfoPlist.strings */; };
@@ -160,7 +160,7 @@
 		C27FE5552745218100F91946 /* InitialTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InitialTableViewCell.xib; sourceTree = "<group>"; };
 		C27FE558274523D500F91946 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		C27FE55A274523EE00F91946 /* Map.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
-		C288CDD8276B704500F519CE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C288CDDA276C41D500F519CE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C2A2C6A627537F38003E8DC2 /* Extension+UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIFont.swift"; sourceTree = "<group>"; };
 		C2A2C6C027553073003E8DC2 /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
 		C2A2C6C527562832003E8DC2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -342,7 +342,7 @@
 				C2CC526B27427B0800090891 /* Storyboard */,
 				C2CC526A27427B0000090891 /* Controller */,
 				C2CC524827427AAD00090891 /* Info.plist */,
-				C288CDD8276B704500F519CE /* GoogleService-Info.plist */,
+				C288CDDA276C41D500F519CE /* GoogleService-Info.plist */,
 			);
 			path = Mappin;
 			sourceTree = "<group>";
@@ -438,7 +438,7 @@
 				C2CC523527427AAB00090891 /* Resources */,
 				7F484647F0B8E696C87A8407 /* [CP] Copy Pods Resources */,
 				7A563C0D3E8FE0CC2DA61016 /* [CP] Embed Pods Frameworks */,
-				C288CDD5276B641D00F519CE /* ShellScript */,
+				C288CDD5276B641D00F519CE /* Firebase crashlytics */,
 			);
 			buildRules = (
 			);
@@ -551,7 +551,7 @@
 				C25FF509275750FB00A83A40 /* IBMPlexSansKR-Bold.otf in Resources */,
 				C2A2C6C427562832003E8DC2 /* InfoPlist.strings in Resources */,
 				C2A80B21274A8D54002E29C9 /* SelectLocation.storyboard in Resources */,
-				C288CDD9276B704500F519CE /* GoogleService-Info.plist in Resources */,
+				C288CDDB276C41D500F519CE /* GoogleService-Info.plist in Resources */,
 				C2CC524427427AAD00090891 /* Assets.xcassets in Resources */,
 				C25FF50727574FA900A83A40 /* IBMPlexSansKR-Regular.otf in Resources */,
 				C25FFA06274F4E9200B0C41B /* MarkerInfo.storyboard in Resources */,
@@ -720,7 +720,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Mappin/Pods-Mappin-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C288CDD5276B641D00F519CE /* ShellScript */ = {
+		C288CDD5276B641D00F519CE /* Firebase crashlytics */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -731,13 +731,14 @@
 				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
 				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
 			);
+			name = "Firebase crashlytics";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

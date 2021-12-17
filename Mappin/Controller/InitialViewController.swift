@@ -121,7 +121,7 @@ class InitialViewController: UIViewController {
         
         let button = UIButton(type: .roundedRect)
         button.frame = CGRect(x: 20, y: 120, width: 100, height: 30)
-        button.setTitle("Crash", for: [])
+        button.setTitle("Test Crash", for: [])
         button.addTarget(self, action: #selector(self.crashButtonTapped(_:)), for: .touchUpInside)
         view.addSubview(button)
 
@@ -129,7 +129,8 @@ class InitialViewController: UIViewController {
     }
     
     @IBAction func crashButtonTapped(_ sender: AnyObject) {
-        fatalError()
+        let numbers = [0]
+        let _ = numbers[1]
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -153,7 +154,7 @@ extension InitialViewController: UITableViewDelegate, UITableViewDataSource {
        
         
         let task = tasks[indexPath.row]
-        print(task)
+//        print(task)
         
         cell.backgroundColor = .systemBackground
         cell.selectionStyle = .none
