@@ -114,6 +114,7 @@ PODS:
     - Realm (= 10.20.0)
   - SideMenu (6.5.0)
   - TLPhotoPicker (2.1.6)
+  - Toast-Swift (5.0.1)
 
 DEPENDENCIES:
   - Firebase/Analytics
@@ -125,6 +126,7 @@ DEPENDENCIES:
   - RealmSwift (~> 10)
   - SideMenu
   - TLPhotoPicker
+  - Toast-Swift (~> 5.0.1)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -147,6 +149,7 @@ SPEC REPOS:
     - RealmSwift
     - SideMenu
     - TLPhotoPicker
+    - Toast-Swift
 
 SPEC CHECKSUMS:
   Firebase: fb5114cd2bf96e2ff7bcb01d0d9a156cf5fd2f07
@@ -168,7 +171,8 @@ SPEC CHECKSUMS:
   RealmSwift: c95eec6a712924870b2e36c4c081d63ec07e5414
   SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
   TLPhotoPicker: 57ad6b54a9cf8c9ec60107be0864d42f3dbe7175
+  Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 3bfd6f2c6ce959e7bdb62e68182c955294bd1da9
+PODFILE CHECKSUM: 2813e74668a8144302ea839b8315d4a1b8e87034
 
 COCOAPODS: 1.11.2

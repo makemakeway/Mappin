@@ -11,6 +11,9 @@
 "OK" = "예";
 "Confirm" = "확인";
 "Done" = "완료";
+"Search" = "검색";
+"Please check the network connection status." = "네트워크 연결 상태를 확인해주세요.";
+"There are no search results." = "검색 결과가 없습니다.";
 
 //MARK: InitialViewController
 "There is no record of writing 🥲" = "아직 작성한 기록이 없어요 🥲";

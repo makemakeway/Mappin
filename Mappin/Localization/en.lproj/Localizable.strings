@@ -11,6 +11,9 @@
 "OK" = "OK";
 "Confirm" = "Confirm";
 "Done" = "Done";
+"Search" = "Search";
+"Please check the network connection status." = "Please check the network connection status.";
+"There are no search results." = "There are no search results.";
 
 //MARK: InitialViewController
 "There is no record of writing 🥲" = "There is no record of writing 🥲";

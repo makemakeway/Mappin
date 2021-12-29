@@ -9,6 +9,7 @@ import UIKit
 import GoogleMaps
 import GooglePlaces
 import RealmSwift
+import Toast_Swift
 
 class SelectLocationViewController: UIViewController {
 
@@ -66,7 +67,7 @@ class SelectLocationViewController: UIViewController {
     
     func tableViewConfig() {
         
-        tableView = UITableView(frame: CGRect(x: 20, y: 100, width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - 140), style: .insetGrouped)
+        tableView = UITableView(frame: CGRect(x: 20, y: 100, width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - 140), style: .plain)
         tableView.delegate = self
         tableView.dataSource = self
 
@@ -291,9 +292,7 @@ extension SelectLocationViewController: UISearchBarDelegate {
         self.searchText = searchText
         
         if searchText.isEmpty {
-            tableView.isHidden = true
-        } else {
-            tableView.isHidden = false
+            return
         }
         
         self.searchTimer?.invalidate()
@@ -312,6 +311,13 @@ extension SelectLocationViewController: UISearchBarDelegate {
                                                                sessionToken: token) { results, error in
                     if let error = error {
                         print("ERROR: \(error)")
+                        self?.view.makeToast("Please check the network connection status.".localized(),
+                                             duration: 3.0,
+                                             point: CGPoint(x: self?.view.center.x ?? 0, y: 120),
+                                             title: nil,
+                                             image: nil,
+                                             style: .init(),
+                                             completion: nil)
                         LoadingIndicator.shared.hideIndicator()
                         return
                     }
@@ -329,12 +335,12 @@ extension SelectLocationViewController: UISearchBarDelegate {
                                                           sessionToken: nil) { place, error in
                                 if let error = error {
                                     print("fetch Place Error: \(error)")
-                                    return
                                 }
                                 if let place = place {
                                     let result = SearchResult(primaryString: result.attributedPrimaryText,
                                                               secondaryString: result.attributedSecondaryText ?? NSAttributedString(string: ""),
                                                               coordinate: place.coordinate)
+                                    print("DEBUG: \(result)")
                                     self?.searchResults.append(result)
                                     group.leave()
                                 }
@@ -344,6 +350,18 @@ extension SelectLocationViewController: UISearchBarDelegate {
                             LoadingIndicator.shared.hideIndicator()
                             self?.tableView.reloadData()
                         }
+                    }
+                    if let results = results, results.isEmpty {
+                        print("여기에 비어있을 때 처리하면 됨")
+                        self?.searchResults.removeAll()
+                        self?.tableView.reloadData()
+                        self?.view.makeToast("There are no search results.".localized(),
+                                             duration: 3.0,
+                                             point: CGPoint(x: self?.view.center.x ?? 0, y: 120),
+                                             title: nil,
+                                             image: nil,
+                                             style: .init(),
+                                             completion: nil)
                     }
                 }
             }
@@ -398,41 +416,38 @@ extension SelectLocationViewController: UITableViewDelegate, UITableViewDataSour
             return UITableViewCell()
         }
         
-        guard let errorCell = tableView.dequeueReusableCell(withIdentifier: DefaultTableViewCell.identifier, for: indexPath) as? DefaultTableViewCell else {
+        print("COUNT: \(searchResults.count)")
+        
+        if searchResults.count == 0 {
+            tableView.isHidden = true
+            tableView.isUserInteractionEnabled = false
             return UITableViewCell()
-        }
-        
-        if searchResults.isEmpty {
-            errorCell.defaultLabel.text = "검색 결과가 없거나\n네트워크에 연결되어 있지 않습니다."
-            errorCell.defaultLabel.font = UIFont().mainFontBold
+        } else {
+            tableView.isHidden = false
+            tableView.isUserInteractionEnabled = true
+            let data = searchResults[indexPath.row]
             
-            return errorCell
+            let title = data.primaryString.string
+            let attrTitle = NSMutableAttributedString(string: title)
+            
+            
+            if title.uppercased().contains(searchText.uppercased()) {
+                attrTitle.addAttribute(.foregroundColor, value: UIColor.orange, range: (searchText as NSString).range(of: searchText))
+            }
+            
+            cell.locationTitleLabel.textColor = .black
+            cell.locationTitleLabel.attributedText = attrTitle
+            cell.locationTitleLabel.font = UIFont().mainFontRegular
+            
+            
+            cell.locationAddressLabel.attributedText = data.secondaryString
+            cell.locationAddressLabel.font = UIFont().smallFontRegular
+            cell.locationAddressLabel.textColor = .darkGray
+            
+            cell.contentView.backgroundColor = .white
+            
+            return cell
         }
-        
-        let data = searchResults[indexPath.row]
-        
-        let title = data.primaryString.string
-        let attrTitle = NSMutableAttributedString(string: title)
-        
-        
-        if title.uppercased().contains(searchText.uppercased()) {
-            attrTitle.addAttribute(.foregroundColor, value: UIColor.orange, range: (searchText as NSString).range(of: searchText))
-        }
-        
-        
-        
-        cell.locationTitleLabel.textColor = .black
-        cell.locationTitleLabel.attributedText = attrTitle
-        cell.locationTitleLabel.font = UIFont().mainFontRegular
-        
-        
-        cell.locationAddressLabel.attributedText = data.secondaryString
-        cell.locationAddressLabel.font = UIFont().smallFontRegular
-        cell.locationAddressLabel.textColor = .darkGray
-        
-        cell.contentView.backgroundColor = .white
-        
-        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
