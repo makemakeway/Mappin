@@ -25,7 +25,9 @@ class LicenseViewController: UIViewController {
             Library(name: "SideMenu",
                     link: "https://github.com/jonkykong/SideMenu/blob/master/LICENSE"),
             Library(name: "TLPhotoPicker",
-                    link: "https://github.com/tilltue/TLPhotoPicker/blob/master/LICENSE")
+                    link: "https://github.com/tilltue/TLPhotoPicker/blob/master/LICENSE"),
+            Library(name: "Toast-Swift",
+                    link: "https://github.com/scalessec/Toast-Swift/blob/master/LICENSE")
         ],
         [
             Library(name: "Icons made by Freepik from www.flaticon.com",

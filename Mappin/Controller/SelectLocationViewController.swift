@@ -67,12 +67,11 @@ class SelectLocationViewController: UIViewController {
     
     func tableViewConfig() {
         
-        tableView = UITableView(frame: CGRect(x: 20, y: 100, width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - 140), style: .plain)
+        tableView = UITableView(frame: CGRect(x: 20, y: 80, width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - 140), style: .insetGrouped)
         tableView.delegate = self
         tableView.dataSource = self
 
         tableView.backgroundColor = .clear
-        tableView.layer.cornerRadius = 10
         view.addSubview(tableView)
         tableView.isHidden = true
         
@@ -291,7 +290,8 @@ extension SelectLocationViewController: UISearchBarDelegate {
         
         self.searchText = searchText
         
-        if searchText.isEmpty {
+        if searchBar.text!.isEmpty {
+            self.searchTimer?.invalidate()
             return
         }
         
