@@ -74,11 +74,9 @@ class AddPinViewController: UIViewController {
     //MARK: Method
     @objc func removePhoto(_ sender: UIButton) {
         photoImages.remove(at: sender.tag)
-        print("DEBUG: \(sender.tag)번째 지움")
     }
     
     @objc func addPin(_ sender: UIBarButtonItem) {
-        print("DEBUG: 핀 추가")
         if editMode {
             updateDataToRealm()
             self.navigationController?.popViewController(animated: true)

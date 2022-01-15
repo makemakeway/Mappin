@@ -6,9 +6,9 @@
   
 */
 
-NSPhotoLibraryUsageDescription = "Please allow access to Photos in order to import photos.";
+NSPhotoLibraryUsageDescription = "Please allow access to Photos in order to import photos for add Story.";
 
-NSCameraUsageDescription = "Please allow access to Camera in order to import photos.";
+NSCameraUsageDescription = "Please allow access to Camera in order to import photos for add Story.";
 
 NSLocationWhenInUseUsageDescription = "Please allow access Location in order to add pin at current location.";
 

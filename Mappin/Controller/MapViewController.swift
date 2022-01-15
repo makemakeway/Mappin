@@ -15,7 +15,6 @@ class MapViewController: UIViewController {
     //MARK: Properties
     var currentLocation: CLLocationCoordinate2D = LocationManager.shared.currentLocation {
         didSet {
-            print("DEBUG: 현재 위치 = \(currentLocation)")
             if !locationUpdated {
                 loadMap(location: currentLocation)
             }
@@ -111,7 +110,6 @@ class MapViewController: UIViewController {
         let sheet = UIAlertController(title: "Add a story".localized(), message: nil, preferredStyle: .actionSheet)
         
         let newlyTravel = UIAlertAction(title: "Add a story to a new place".localized(), style: .default) { _ in
-            print("DEBUG: 새로운 장소 추가 씬으로")
             let sb = UIStoryboard(name: "AddTravel", bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "AddTravelViewController") as! AddTravelViewController
             
@@ -119,7 +117,6 @@ class MapViewController: UIViewController {
         }
         
         let existingTravel = UIAlertAction(title: "Add a story to the existing place".localized(), style: .default) { [weak self](_) in
-            print("DEBUG: 기록 추가 씬으로")
             if self!.tasks.isEmpty {
                 self?.presentOkAlert(message: "The existing place does not exist. Please create a new place.".localized())
                 return

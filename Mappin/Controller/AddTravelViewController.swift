@@ -44,11 +44,7 @@ class AddTravelViewController: UIViewController {
     //MARK: Method
     
     @objc func forwardButtonClicked(_ sender: UIBarButtonItem) {
-        print("DEBUG: forwardButtonClicked")
-        
         if checkTitleIsValid() {
-            print("DEBUG: 유효한 타이틀")
-            
             let location = List<Double>()
             location.append(pinLocation.latitude)
             location.append(pinLocation.longitude)
@@ -120,7 +116,6 @@ class AddTravelViewController: UIViewController {
         
         
         if !(tasks.filter("documentTitle = '\(title)'").isEmpty) {
-            print("쭝복임!")
             presentOkAlert(message: "It's already been recorded.\n Please enter another place.".localized())
             return false
         }
@@ -198,7 +193,6 @@ extension AddTravelViewController: CLLocationManagerDelegate {
         case .notDetermined, .restricted:
             LocationManager.shared.checkCurrentLocationAutorization(status: auth)
         default:
-            print("DEBUG: ㅋㅋ")
             pinLocation = LocationManager.shared.currentLocation
         }
     }

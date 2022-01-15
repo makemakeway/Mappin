@@ -13,7 +13,6 @@ class AppInfoViewController: UIViewController {
     //MARK: Properties
     
     let items = [
-        "Contact".localized(),
         "Open source license".localized(),
         "Personal information policy".localized()
     ]
@@ -61,15 +60,10 @@ extension AppInfoViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.row {
         case 0:
-            let sb = UIStoryboard(name: "Web", bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
-            vc.link = "https://github.com/makemakeway"
-            self.navigationController?.pushViewController(vc, animated: true)
-        case 1:
             let sb = UIStoryboard(name: "License", bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "LicenseViewController") as! LicenseViewController
             self.navigationController?.pushViewController(vc, animated: true)
-        case 2:
+        case 1:
             let sb = UIStoryboard(name: "Web", bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
             vc.link = "https://goldenrod-zinnia-987.notion.site/00a9e4b629f0435da8370d1d43b0f328"
@@ -80,6 +74,6 @@ extension AppInfoViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 40
+        return 44
     }
 }
