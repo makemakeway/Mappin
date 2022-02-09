@@ -10,7 +10,7 @@ import RealmSwift
 import GoogleMaps
 import CoreLocation
 
-class AddTravelViewController: UIViewController {
+final class AddTravelViewController: UIViewController {
 
     
     //MARK: Properties

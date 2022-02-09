@@ -11,7 +11,7 @@ import Photos
 import TLPhotoPicker
 
 
-class AddPinViewController: UIViewController {
+final class AddPinViewController: UIViewController {
 
     
     //MARK: Properties

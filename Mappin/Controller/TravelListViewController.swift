@@ -8,7 +8,7 @@
 import UIKit
 import RealmSwift
 
-class TravelListViewController: UIViewController {
+final class TravelListViewController: UIViewController {
 
     //MARK: Properties
     var travelDocument: LocationDocument? = nil {

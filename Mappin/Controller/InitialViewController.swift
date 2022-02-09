@@ -9,7 +9,7 @@ import UIKit
 import RealmSwift
 import SideMenu
 
-class InitialViewController: UIViewController {
+final class InitialViewController: UIViewController {
 
     //MARK: Properties
     
@@ -78,7 +78,6 @@ class InitialViewController: UIViewController {
     }
     
     @IBAction func sideMenuButtonClicked(_ sender: UIBarButtonItem) {
-        
         let sb = UIStoryboard(name: "SideMenu", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "SideMenuViewController")
         
@@ -137,8 +136,6 @@ extension InitialViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: InitialTableViewCell.identifier, for: indexPath) as? InitialTableViewCell else {
             return UITableViewCell()
         }
-        
-       
         
         let task = tasks[indexPath.row]
         

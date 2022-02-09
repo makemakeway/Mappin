@@ -8,7 +8,7 @@
 import UIKit
 import PanModal
 
-class MarkerInfoViewController: UIViewController {
+final class MarkerInfoViewController: UIViewController {
 
     
     //MARK: Properties

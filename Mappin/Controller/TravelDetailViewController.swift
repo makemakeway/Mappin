@@ -10,7 +10,7 @@ import PanModal
 import ImageSlideshow
 import RealmSwift
 
-class TravelDetailViewController: UIViewController {
+final class TravelDetailViewController: UIViewController {
 
     
     //MARK: Properties

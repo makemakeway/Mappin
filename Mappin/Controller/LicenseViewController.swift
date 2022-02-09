@@ -8,7 +8,7 @@
 import UIKit
 import GoogleMaps
 
-class LicenseViewController: UIViewController {
+final class LicenseViewController: UIViewController {
 
     
     //MARK: Properties

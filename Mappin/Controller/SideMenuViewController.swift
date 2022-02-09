@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SideMenuViewController: UIViewController {
+final class SideMenuViewController: UIViewController {
 
     
     //MARK: Properties

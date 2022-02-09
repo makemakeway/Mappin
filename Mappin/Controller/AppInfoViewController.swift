@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AppInfoViewController: UIViewController {
+final class AppInfoViewController: UIViewController {
 
     
     //MARK: Properties

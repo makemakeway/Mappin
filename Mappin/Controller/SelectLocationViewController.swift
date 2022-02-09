@@ -11,7 +11,7 @@ import GooglePlaces
 import RealmSwift
 import Toast_Swift
 
-class SelectLocationViewController: UIViewController {
+final class SelectLocationViewController: UIViewController {
 
     
     //MARK: Properties

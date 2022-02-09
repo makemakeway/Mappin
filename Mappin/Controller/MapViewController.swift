@@ -10,7 +10,7 @@ import CoreLocation
 import GoogleMaps
 import RealmSwift
 
-class MapViewController: UIViewController {
+final class MapViewController: UIViewController {
 
     //MARK: Properties
     var currentLocation: CLLocationCoordinate2D = LocationManager.shared.currentLocation {
